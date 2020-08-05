@@ -11,6 +11,12 @@ Use this template button is left to the About panel
 
 ## Usage example
 
+Commit template setting:
+
+```sh
+git config --global commit.template ./.gitmessage.txt
+```
+
 To be added...
 
 ## Meta
