@@ -19,6 +19,7 @@ git config --global commit.template ./.gitmessage.txt
 
 To be added...
 
-## Meta
+## Contact
 
+Plase contact this email if you want to ask devloper...
 BeomJunKim – wka8963@gmail.com
