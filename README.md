@@ -14,6 +14,7 @@ Use this template button is left to the About panel
 Commit template setting:
 
 ```sh
+cd (your repositry directory)
 git config --global commit.template ./.gitmessage.txt
 ```
 
