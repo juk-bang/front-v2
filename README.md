@@ -15,7 +15,7 @@ Commit template setting:
 
 ```sh
 cd (your repositry directory)
-git config --global commit.template ./.gitmessage.txt
+git config commit.template ./.gitmessage.txt
 rm ./.gitmessage.txt
 ```
 
