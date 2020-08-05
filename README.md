@@ -9,7 +9,7 @@ Just click Use this template button!
 
 Use this template button is left to the About panel
 
-## Usage example
+## Development setup
 
 Commit template setting:
 
@@ -17,6 +17,10 @@ Commit template setting:
 cd (your repositry directory)
 git config commit.template ./.github/.gitmessage.txt
 ```
+
+## Usage example
+
+To be added...
 
 ## Contact
 
