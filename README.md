@@ -19,8 +19,6 @@ git config --global commit.template ./.gitmessage.txt
 rm ./.gitmessage.txt
 ```
 
-To be added...
-
 ## Contact
 
 Plase contact this email if you want to ask to devloper...
