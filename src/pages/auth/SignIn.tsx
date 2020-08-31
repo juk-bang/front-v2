@@ -2,10 +2,11 @@ import React, { useContext, useState } from "react";
 import { Link, withRouter } from "react-router-dom";
 import set_auth_token, { request_auth } from "../Api/Api";
 import { type_check } from "./Api/commonFunc";
+import { LoginContext } from "../../components/Context";
 
 //메인 함수
 const SignIn = ({ history }: any) => {
-  const { login, _signout, _signin }: any = useContext(MyContext);
+  const { login, _signout, _signin }: any = useContext(LoginContext);
   const [load, setLoad] = useState(true);
   /**
    * login_check(userid, userpassword) : 로그인 값 형식 체크하기 위한 함수
@@ -24,7 +25,7 @@ const SignIn = ({ history }: any) => {
       .then((response: any) => {
         setLoad(false);
         _signin(response);
-        history.push("/");
+        history.push("/home");
       })
       .catch((err: Error) => {
         console.log(err.message);
