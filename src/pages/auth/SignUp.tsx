@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
 import { withRouter } from "react-router-dom";
-import { LoginContext } from "../../components/Context";
-import { check_overlap } from "./Api/Api";
+import { check_overlap, request_join } from "./Api/Api";
 import { type_check } from "./Api/commonFunc";
+import { LoginContext } from "../../components/Context";
 
 function SignUp({ history }: any) {
   const { _signin }: any = useContext(LoginContext);
@@ -35,7 +35,7 @@ function SignUp({ history }: any) {
     userrole: string
   ) => {
     let univ = Number.parseInt(univid);
-    request_join(userid, userpassword, univ, userrole).then((response a : any) => {
+    request_join(userid, userpassword, univ, userrole).then((response: any) => {
       _signin(response);
       history.push("/home");
     });

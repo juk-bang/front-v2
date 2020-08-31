@@ -1,4 +1,5 @@
 import axios from "axios";
+import { Token } from "./commonFunc";
 
 //Base Url
 const allApi = axios.create({
@@ -69,5 +70,25 @@ export const refresh_auth = async () => {
   } catch (error) {
     alert("토큰이 만료되어 로그아웃 됩니다");
     document.location.href = "/auth/signin";
+  }
+};
+
+//회원가입 요청
+export const request_join = async (
+  userid: string,
+  userpassword: string,
+  useruniv: number,
+  userrole: string
+) => {
+  let response = await allApi.post(`/auth/signup`, {
+    id: userid,
+    password: userpassword,
+    univId: useruniv,
+    role: userrole,
+  });
+
+  if (response.status === 200) {
+    let user_token: Token = response.data;
+    return user_token;
   }
 };
