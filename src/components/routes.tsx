@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { roomUrl } from "./urls";
+import { roomUrl, authUrl } from "./urls";
 import roomListContainer from "../pages/room/roomList/roomListContainer";
 
 const routes: React.FunctionComponent = () => {
@@ -8,6 +8,7 @@ const routes: React.FunctionComponent = () => {
     <Router>
       <Switch>
         <Route path={roomUrl.home} exact component={roomListContainer} />
+        <Route path={authUrl.signIn} exact component={SignIn} />
       </Switch>
     </Router>
   );
