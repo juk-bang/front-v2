@@ -13,6 +13,7 @@
     "@types/react-dom": "^16.9.8",
     "@types/react-router-dom": "^5.1.5",
     "comfortable-google-map-react-types": "^1.1.0",
+    "jwt-decode": "^2.2.0",
     "node-sass": "^4.14.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",

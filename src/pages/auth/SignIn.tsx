@@ -1,8 +1,8 @@
 import React, { useContext, useState } from "react";
 import { Link, withRouter } from "react-router-dom";
-import set_auth_token, { request_auth } from "../Api/Api";
 import { type_check } from "./Api/commonFunc";
 import { LoginContext } from "../../components/Context";
+import { request_auth } from "./Api/Api";
 
 //메인 함수
 const SignIn = ({ history }: any) => {
