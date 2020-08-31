@@ -1,9 +1,9 @@
 import React, { Props, useState, useEffect, Component } from "react";
-import "../sass/navbar.sass";
 import { get_role, get_id } from "../pages/auth/Api/commonFunc";
 import set_auth_token from "../pages/auth/Api/Api";
-import Routes from "./Routes";
+
 import NavBar from "./NavBar";
+import Routes from "./routes";
 
 //페이지에서 로그인 정보를 참조할 수 있도록 컨테스트 설정
 export const LoginContext = React.createContext({});
