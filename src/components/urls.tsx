@@ -13,3 +13,12 @@ export const adminUrl = {
   adminHome,
   adminReport,
 };
+
+//auth
+const signIn = "/auth/signin";
+const signUp = "/auth/signup";
+
+export const authUrl = {
+  signIn,
+  signUp,
+};
