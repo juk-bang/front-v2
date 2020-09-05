@@ -1,10 +1,13 @@
+import { RouteComponentProps } from "react-router-dom";
 import jwt from "jwt-decode";
-
-//토큰 타입
-export type Token = {
-  accessToken?: string;
-  refreshToken?: string;
-};
+import { auth_state, sign_out, sign_in } from "../../../store/modules/auth";
+import { DispatchProp } from "react-redux";
+import {
+  auth_cookie_type,
+  init_auth,
+  set_auth,
+  remove_auth,
+} from "../../../store/modules/auth_cookie";
 
 //토큰 추출 정보
 type dec_token = {
@@ -12,35 +15,78 @@ type dec_token = {
   roles: string; //권한
 };
 
+//토큰 타입
+export type Token = {
+  accessToken: string;
+  refreshToken: string;
+};
+
+//auth전역변수 인터페이스
+export interface auth_state_props {
+  auth: auth_state;
+  auth_cookie: auth_cookie_type;
+}
+
+//모든 auth전역변수, dispatch 인터페이스
+export interface auth_props_noroute {
+  auth: auth_state;
+  auth_cookie: auth_cookie_type;
+  sign_in: CallableFunction;
+  sign_out: CallableFunction;
+  init_auth: CallableFunction;
+  set_auth: CallableFunction;
+  remove_auth: CallableFunction;
+}
+
+//모든 auth전역변수, dispatch 인터페이스
+export interface auth_props extends RouteComponentProps, auth_props_noroute {}
+
+// auth전역변수 참조시 전달할 props
+export const map_auth_state = ({ auth, auth_cookie }: auth_state_props) => ({
+  auth: auth,
+  auth_cookie: auth_cookie,
+});
+
+export const map_auth_dispatch = (dispatch: any) => ({
+  sign_in: (token: Token): DispatchProp => dispatch(sign_in(token)),
+  sign_out: (): DispatchProp => dispatch(sign_out()),
+  init_auth: (cookie: auth_cookie_type): DispatchProp =>
+    dispatch(init_auth(cookie)),
+  set_auth: (token: Token): DispatchProp => dispatch(set_auth(token)),
+  remove_auth: (): DispatchProp => dispatch(remove_auth()),
+});
+
+export const is_session_exist = (cookie: Token) => {
+  if (Object.keys(cookie).length == 0) return false;
+  else return true;
+};
 /**
- * get_role() : 권한정보 가져오는 함수
+ * get_role(token) : 권한정보 가져오는 함수
  */
-export const get_role = () => {
-  let token = localStorage.getItem("access_token");
+export const get_role = (token: Token) => {
   let decoded: dec_token;
 
-  if (token !== null) {
-    decoded = jwt(token);
+  if (token.accessToken != undefined) {
+    decoded = jwt(token.accessToken);
     let { roles } = decoded;
     return roles[0];
   }
-  return null;
+  return undefined;
 };
 
 /**
- * get_id() : 로그인한 아이디 정보 가져오는 함수
+ * get_id(token) : 로그인한 아이디 정보 가져오는 함수
  */
-export const get_id = () => {
-  let token = localStorage.getItem("access_token");
+export const get_id = (token: Token) => {
   let decoded: dec_token;
 
-  if (token !== null) {
-    decoded = jwt(token);
+  if (token.accessToken !== undefined) {
+    decoded = jwt(token.accessToken);
     let { sub } = decoded;
 
     return sub;
   }
-  return null;
+  return undefined;
 };
 
 /**
