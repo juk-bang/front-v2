@@ -1,0 +1,137 @@
+//방향 변수
+$direct : ["left","right","top","bottom"]
+//색 변수 - 원하는 색 있으면 추가할 것.  ["색이름" : 색코드]
+$colors : ("white": #fff, "orange": #d9503e, "deep-pink": #fd9bbb, "mint":#4de0c2, "green":rgba(198, 248, 198, 0.692)) !global
+
+
+//글자색 설정 ex) font-white 
+@mixin font-color($name, $color)
+    .font-#{$name}
+        color : $color
+
+
+//배경색 설정 ex) background-mint 
+@mixin background-color($name,$color)
+    .background-#{$name}
+        background-color : $color
+
+//경계색 설정 ex) border-mint 
+@mixin border-color($name, $color)
+    .border-#{$name}
+        border : 2px solid $color
+        border-radius : 20px
+
+
+//기본버튼설정(앞 색깔 : 배경색, 뒤 : 폰트색)  ex) font-mint-white
+@mixin button($name,$color, $name2,$color2)
+    .button-#{$name}-#{$name2}
+        background-color : $color
+        color : $color2     
+        @if($name = "white")
+            border : 2px solid $color2    
+        border-radius : 4px
+        text-decoration : none
+        padding : 7px
+        cursor : pointer
+        &:hover
+            background-color : $color2
+            color : $color
+            @if($name2 = "white")
+                border : 1px solid $color
+
+//패딩주기 ex) padding-5px padding-10 
+@mixin padding($padding, $px:false)
+    @if $px == true
+        .padding-#{$padding}px
+            padding : $padding+px
+    @else
+        .padding-#{$padding}
+            padding : $padding*1%
+
+//방향별로 패딩주기 ex) padding-bottom-5
+@mixin padding-direct($direct, $padding, $px:false)
+    @if $px == true
+        .padding-#{$direct}-#{$padding}px
+            padding-#{$direct} : $padding+px
+    @else
+        .padding-#{$direct}-#{$padding}
+            padding-#{$direct} : $padding*1%
+
+//마진주기 margin-5px margin-10 
+@mixin margin($margin, $px:false)
+    @if $px == true
+        .margin-#{$margin}px
+            margin : $margin+px
+    @else
+        .margin-#{$margin}
+            margin : $margin*1%
+      
+//방향별로 마진주기  ex) margin-bottom-5
+@mixin margin-direct($direct, $margin, $px:false)
+    @if $px == true
+         .margin-#{$direct}-#{$margin}px
+            margin-#{$direct} : $margin+px
+    @else
+        .margin-#{$direct}-#{$margin}
+            margin-#{$direct} : $margin*1%
+    
+
+//플랙스 컨테이너 ex)flex-column-container  혹은 flex-row-container  
+@mixin flex-container($direct)
+    .flex-#{$direct}-container
+        display : flex
+        flex-direction : $direct
+        item
+            flex-grow : 1
+        
+//일반 컨테이너    
+.container
+    height : 100%
+
+//중간값
+.mid
+    margin : 0 auto    
+
+//기본설정
+html, body
+    margin : 0
+    padding : 0
+
+form 
+    label
+        font-size : 18px 
+ 
+    .radio-label
+        width: 100%
+        font-size : 12px  
+        input
+            width: /3
+    button
+        width: 30%
+
+/*------------------------------*/
+@include flex-container(column)
+@include flex-container(row)
+
+@each $name, $color in $colors
+    @include border-color($name, $color) 
+    @include background-color($name,$color)
+    @include font-color($name, $color)
+    
+@each $name, $color in $colors
+    @each $name2, $color2 in $colors
+        @include button($name, $color, $name2, $color2)
+
+@for $i from 1 through 100
+    @include padding($i) 
+    @include margin($i)
+    @include padding($i,true) 
+    @include margin($i,true)
+
+@each $d in $direct
+    @for $i from 1 through 100
+        @include padding-direct($d, $i)
+        @include margin-direct($d, $i) 
+        @include padding-direct($d, $i, true)
+        @include margin-direct($d, $i, true) 
+
