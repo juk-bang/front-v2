@@ -1,11 +1,15 @@
 import React from "react";
 import dotenv from "dotenv";
 import GoogleMap from "comfortable-google-map-react-types";
+import store from "../../../store";
+import NavBar from "../../../components/NavBar";
 
 const RoomListPresenter: React.FunctionComponent = () => {
   dotenv.config();
+
   return (
     <div>
+      <NavBar></NavBar>
       <GoogleMap
         APIKEY={String(process.env.REACT_APP_GOOGLE_MAP_KEY)}
         width={900}
