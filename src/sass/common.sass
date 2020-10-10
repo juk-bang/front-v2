@@ -1,14 +1,12 @@
 //방향 변수
 $direct : ["left","right","top","bottom"]
 //색 변수 - 원하는 색 있으면 추가할 것.  ["색이름" : 색코드]
-$colors : ("white": #fff, "orange": #d9503e, "deep-pink": #fd9bbb, "mint":#4de0c2, "green":rgba(198, 248, 198, 0.692)) !global
-
+$colors : ("white": #fff, "orange": #d9503e, "deep-pink": #fd9bbb, "mint":#4de0c2, "green":rgba(198, 248, 198, 0.692), "light-green":#86ff97) !global
 
 //글자색 설정 ex) font-white 
 @mixin font-color($name, $color)
     .font-#{$name}
         color : $color
-
 
 //배경색 설정 ex) background-mint 
 @mixin background-color($name,$color)
@@ -20,7 +18,6 @@ $colors : ("white": #fff, "orange": #d9503e, "deep-pink": #fd9bbb, "mint":#4de0c
     .border-#{$name}
         border : 2px solid $color
         border-radius : 20px
-
 
 //기본버튼설정(앞 색깔 : 배경색, 뒤 : 폰트색)  ex) font-mint-white
 @mixin button($name,$color, $name2,$color2)
@@ -65,16 +62,15 @@ $colors : ("white": #fff, "orange": #d9503e, "deep-pink": #fd9bbb, "mint":#4de0c
     @else
         .margin-#{$margin}
             margin : $margin*1%
-      
+
 //방향별로 마진주기  ex) margin-bottom-5
 @mixin margin-direct($direct, $margin, $px:false)
     @if $px == true
-         .margin-#{$direct}-#{$margin}px
+        .margin-#{$direct}-#{$margin}px
             margin-#{$direct} : $margin+px
     @else
         .margin-#{$direct}-#{$margin}
             margin-#{$direct} : $margin*1%
-    
 
 //플랙스 컨테이너 ex)flex-column-container  혹은 flex-row-container  
 @mixin flex-container($direct)
@@ -83,7 +79,7 @@ $colors : ("white": #fff, "orange": #d9503e, "deep-pink": #fd9bbb, "mint":#4de0c
         flex-direction : $direct
         item
             flex-grow : 1
-        
+
 //일반 컨테이너    
 .container
     height : 100%
@@ -97,10 +93,10 @@ html, body
     margin : 0
     padding : 0
 
-form 
+form
     label
         font-size : 18px 
- 
+
     .radio-label
         width: 100%
         font-size : 12px  
@@ -114,24 +110,23 @@ form
 @include flex-container(row)
 
 @each $name, $color in $colors
-    @include border-color($name, $color) 
+    @include border-color($name, $color)
     @include background-color($name,$color)
     @include font-color($name, $color)
-    
+
 @each $name, $color in $colors
     @each $name2, $color2 in $colors
         @include button($name, $color, $name2, $color2)
 
 @for $i from 1 through 100
-    @include padding($i) 
+    @include padding($i)
     @include margin($i)
-    @include padding($i,true) 
+    @include padding($i,true)
     @include margin($i,true)
 
 @each $d in $direct
     @for $i from 1 through 100
         @include padding-direct($d, $i)
-        @include margin-direct($d, $i) 
+        @include margin-direct($d, $i)
         @include padding-direct($d, $i, true)
-        @include margin-direct($d, $i, true) 
-
+        @include margin-direct($d, $i, true)

@@ -7,7 +7,7 @@ import SignUp from "../pages/auth/SignUp";
 import SignOut from "../pages/auth/SignOut";
 import UserProfile from "../pages/user/Profile/UserProfile";
 
-const Routes = () => {
+const Routes: React.FunctionComponent = () => {
   return (
     <Router>
       <Switch>

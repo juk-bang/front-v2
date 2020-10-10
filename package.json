@@ -14,10 +14,13 @@
     "@types/react-redux": "^7.1.9",
     "@types/react-router-dom": "^5.1.5",
     "@types/redux-actions": "^2.6.1",
-    "comfortable-google-map-react-types": "^1.1.0",
+    "axios": "^0.20.0",
+    "comfortable-google-map-react-types": "^1.2.1",
     "jwt-decode": "^2.2.0",
     "node-sass": "^4.14.1",
+    "query-string": "^6.13.1",
     "react": "^16.13.1",
+    "react-cookie": "^4.0.3",
     "react-dom": "^16.13.1",
     "react-redux": "^7.2.1",
     "react-router-dom": "^5.2.0",
@@ -30,6 +33,7 @@
     "typescript": "^3.7.5"
   },
   "scripts": {
+    "build:tailwind": "tailwindcss build src/sass/tailwind.css -o src/sass/tailwind.output.css",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -51,6 +55,7 @@
     ]
   },
   "devDependencies": {
-    "dotenv": "^8.2.0"
+    "dotenv": "^8.2.0",
+    "tailwindcss": "^1.8.3"
   }
 }
