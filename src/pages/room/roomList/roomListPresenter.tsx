@@ -6,6 +6,7 @@ import "../../../sass/tailwind.output.css";
 import RoomCard from "./components/RoomCard";
 import { IRoom } from "../interface";
 import { roomUrl } from "../../../components/urls";
+import { Link } from "react-router-dom";
 
 interface IProps {
   rooms: Array<IRoom>;
@@ -40,9 +41,9 @@ const RoomListPresenter: React.FunctionComponent<IProps> = (props) => {
               {props.rooms.map((room) => {
                 return (
                   <div className="w-1/3" key={room.roomId}>
-                    <a href={roomUrl.roomDetail(room.roomId)}>
+                    <Link to={roomUrl.roomDetail(room.roomId)}>
                       <RoomCard room={room} />
-                    </a>
+                    </Link>
                   </div>
                 );
               })}
