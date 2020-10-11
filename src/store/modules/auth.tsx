@@ -1,12 +1,13 @@
-import { Token, get_role, get_id } from "../../pages/auth/Api/commonFunc";
+import jwt from "jwt-decode";
+import { get_token, Token } from "../../API/auth";
 
 const SIGN_IN = "auth/SIGN_IN"; // 로그인처리
 const SIGN_OUT = "auth/SIGN_OUT"; // 로그아웃처리
 
 //인증 state 인터페이스
 export interface auth_state {
-  login: Boolean;
-  role: String;
+  login: boolean;
+  role: string;
   id: string;
 }
 
@@ -19,20 +20,16 @@ const initialState: auth_state = {
 
 export interface signin_action {
   type: typeof SIGN_IN;
-  payload: { token: Token };
 }
-
 export interface signout_action {
   type: typeof SIGN_OUT;
 }
 
-export const sign_in = (token: Token): signin_action => {
+export const sign_in = (): signin_action => {
   return {
     type: SIGN_IN,
-    payload: { token },
   };
 };
-
 export const sign_out = (): signout_action => {
   return {
     type: SIGN_OUT,
@@ -47,8 +44,10 @@ export default function auth(
 ) {
   switch (action.type) {
     case SIGN_IN:
-      const { token } = action.payload;
-
+      const token : Token | null = get_token();
+      if(token === null){
+        return { login: false, role: "", id: "" };
+      }
       return {
         login: true,
         role: get_role(token),
@@ -60,3 +59,38 @@ export default function auth(
       return state;
   }
 }
+
+/*-------------토큰 정보로 회원정보 조회할 때 쓰이는 모듈------------*/
+interface dec_token {
+  sub: string;
+  roles: string;
+}
+
+/**
+ * get_role(token) : 권한정보 가져오는 함수
+ */
+const get_role = (token: Token) : string => {
+  let decoded: dec_token;
+
+  if (token.accessToken !== undefined) {
+    decoded = jwt(token.accessToken);
+    let { roles } = decoded;
+    return roles[0];
+  }
+  return "";
+};
+
+/**
+ * get_id(token) : 로그인한 아이디 정보 가져오는 함수
+ */
+const get_id = (token: Token) => {
+  let decoded: dec_token;
+
+  if (token.accessToken !== undefined) {
+    decoded = jwt(token.accessToken);
+    let { sub } = decoded;
+
+    return sub;
+  }
+  return "";
+};

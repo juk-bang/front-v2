@@ -5,7 +5,7 @@ import roomListContainer from "../pages/room/roomList/roomListContainer";
 import SignIn from "../pages/auth/SignIn";
 import SignUp from "../pages/auth/SignUp";
 import SignOut from "../pages/auth/SignOut";
-import UserProfile from "../pages/user/Profile/UserProfile";
+import UserInfo from "../pages/user/UserInfo";
 
 const Routes: React.FunctionComponent = () => {
   return (
@@ -15,7 +15,7 @@ const Routes: React.FunctionComponent = () => {
         <Route path={authUrl.signIn} exact component={SignIn} />
         <Route path={authUrl.signUp} exact component={SignUp} />
         <Route path={authUrl.signOut} exact component={SignOut} />
-        <Route path={userUrl.userProfile} exact component={UserProfile} />
+        <Route path={userUrl.userInfo} exact component={UserInfo} />
       </Switch>
     </Router>
   );

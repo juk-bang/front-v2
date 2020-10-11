@@ -1,16 +1,12 @@
-import React, { useState } from "react";
-import {
-  type_check,
-  auth_props,
-  map_auth_state,
-  map_auth_dispatch,
-  Token,
-} from "./Api/commonFunc";
-import { check_overlap, request_join } from "./Api/Api";
-import { connect } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { check_overlap, request_join } from "./Api";
 import NavBar from "../../components/NavBar";
+import { get_login, log_in, setting_info, Token, type_check } from "../../API/auth";
+import { roomUrl } from "../../components/urls";
+import { AxiosError } from "axios";
+import { RouteComponentProps, withRouter } from "react-router-dom";
 
-const SignUp: React.SFC<auth_props> = (props) => {
+const SignUp = ({history}:RouteComponentProps) => {
   const [user, set_user] = useState({
     userid: "",
     userpassword: "",
@@ -18,6 +14,13 @@ const SignUp: React.SFC<auth_props> = (props) => {
     userrole: "",
   });
 
+  //로그인 상태에서 회원가입 방지
+  useEffect(()=>{
+    setting_info();
+    if(get_login() === true){
+      history.push(roomUrl.home)
+    }
+  },[history]);
   /**
    * join_check() : 회원가입 값 형식 체크하기 위한 함수
    */
@@ -35,19 +38,18 @@ const SignUp: React.SFC<auth_props> = (props) => {
   };
 
   /**
-   * get_token() : 서버에 회원가입 요청하기 위한 함수
+   * get_access() : 서버에 회원가입 요청하기 위한 함수
    */
-  const get_token = () => {
+  const get_access = () => {
     let univ = Number.parseInt(user.useruniv);
     const { userid, userpassword, userrole } = user;
 
     request_join(userid, userpassword, univ, userrole)
       .then((response: Token) => {
-        props.sign_in(response);
-        props.set_auth(response);
-        props.history.push("/home");
+        log_in(response);
+        history.push(roomUrl.home);
       })
-      .catch(() => {
+      .catch((err: AxiosError) => {
         alert("회원가입에 실패하였습니다");
       });
   };
@@ -66,9 +68,9 @@ const SignUp: React.SFC<auth_props> = (props) => {
 
       check_overlap(user.userid)
         .then(() => {
-          get_token();
+          get_access();
         })
-        .catch(() => {
+        .catch((err:AxiosError) => {
           alert("아이디가 이미 존재합니다");
         });
     } catch (error) {
@@ -106,7 +108,7 @@ const SignUp: React.SFC<auth_props> = (props) => {
         ...user,
         userpassword: value,
       });
-    else {
+    else if(name === "userrole"){
       set_user({
         ...user,
         userrole: value,
@@ -197,4 +199,4 @@ const SignUp: React.SFC<auth_props> = (props) => {
   );
 };
 
-export default connect(map_auth_state, map_auth_dispatch)(SignUp);
+export default withRouter(SignUp);

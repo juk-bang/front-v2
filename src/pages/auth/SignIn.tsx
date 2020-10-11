@@ -1,22 +1,21 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import {
-  type_check,
-  auth_props,
-  map_auth_state,
-  map_auth_dispatch,
-  is_session_exist,
-  Token,
-} from "./Api/commonFunc";
-import { request_auth } from "./Api/Api";
-import { connect } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { Link, RouteComponentProps, withRouter } from "react-router-dom";
+import { request_auth } from "./Api";
 import NavBar from "../../components/NavBar";
-import { useCookies } from "react-cookie";
+import { authUrl, roomUrl } from "../../components/urls";
+import { AxiosError } from "axios";
+import { get_login, log_in, setting_info, Token, type_check } from "../../API/auth";
 
-const SignIn: React.SFC<auth_props> = (props) => {
-  const [cookie] = useCookies(["auth"]);
-  const cookie_curr = is_session_exist(cookie as Token);
+const SignIn = ({history} :RouteComponentProps) => {
   const [user, set_user] = useState({ userid: "", userpassword: "" });
+
+  //로그인 상태에서 새 로그인 방지
+  useEffect(() => {
+    setting_info();
+    if(get_login() === true){
+      alert('이미 로그인되어있습니다');
+      history.push(roomUrl.home);
+    }},[history]);
 
   /**
    * login_check() : 로그인 값 형식 체크하기 위한 함수
@@ -32,12 +31,11 @@ const SignIn: React.SFC<auth_props> = (props) => {
    */
   const get_auth = () => {
     request_auth(user.userid, user.userpassword)
-      .then((response) => {
-        props.sign_in(response);
-        props.set_auth(response);
-        props.history.push("/home");
+      .then((response : Token) => {
+        log_in(response);
+        history.push(roomUrl.home);
       })
-      .catch((err) => {
+      .catch((err :AxiosError) => {
         console.log(err.message);
         alert("회원정보가 존재하지 않습니다");
       });
@@ -50,10 +48,7 @@ const SignIn: React.SFC<auth_props> = (props) => {
   const login_submit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const { userid, userpassword } = event.currentTarget;
-    if (cookie_curr) {
-      alert("이미 로그인되어있습니다");
-      props.history.push("/home");
-    }
+
     try {
       login_check();
       get_auth();
@@ -116,7 +111,7 @@ const SignIn: React.SFC<auth_props> = (props) => {
               <Link
                 className="mid border-white padding-7 padding-top-9px font-deep-pink background-pink"
                 type="submit"
-                to={`/auth/signup`}
+                to={authUrl.signUp}
               >
                 회원가입
               </Link>
@@ -128,4 +123,4 @@ const SignIn: React.SFC<auth_props> = (props) => {
   );
 };
 
-export default connect(map_auth_state, map_auth_dispatch)(SignIn);
+export default withRouter(SignIn);
