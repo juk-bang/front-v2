@@ -28,8 +28,26 @@ export const authUrl = {
 };
 
 //user
-const userProfile = "/user/profile";
+const userInfo = "/userinfo";
 
 export const userUrl = {
-  userProfile,
+  userInfo,
 };
+
+//landlord
+const landlordUpload = "/landlord/upload";
+const landlordRooms = "/landlord/rooms";
+
+export const landlordUrl = {
+  landlordUpload,
+  landlordRooms
+}
+
+//location
+const locationInput = "/location/input";
+const locationGet = "/lcoation/get";
+
+export const locationUrl = {
+  locationInput,
+  locationGet
+}

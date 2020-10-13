@@ -1,4 +1,4 @@
-import axios, { AxiosResponse, AxiosInstance, AxiosError } from "axios";
+import { AxiosResponse, AxiosError } from "axios";
 import baseApi from "./baseApi";
 
 export const getRoomList = (univId: number) =>
@@ -13,3 +13,4 @@ export const getRoomThumbnail = (roomId: number) =>
     .catch((error: AxiosError) => {
       return "error";
     });
+  

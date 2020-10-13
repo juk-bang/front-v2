@@ -1,22 +1,16 @@
 import React, { useEffect } from "react";
-import {
-  auth_props,
-  map_auth_state,
-  map_auth_dispatch,
-} from "./Api/commonFunc";
-import { connect } from "react-redux";
-import { useCookies } from "react-cookie";
+import { RouteComponentProps, withRouter } from "react-router-dom";
+import { log_out } from "../../API/auth";
+import { roomUrl } from "../../components/urls";
 
-const SignOut: React.FC<auth_props> = (props) => {
+const SignOut = ({history}:RouteComponentProps) => {
   //로그아웃 처리
   useEffect(() => {
-    props.sign_out();
-    props.remove_auth();
-
-    props.history.push("/home");
-  }, []);
+    log_out();
+    history.push(roomUrl.home);
+  }, [history]);
 
   return <></>;
 };
 
-export default connect(map_auth_state, map_auth_dispatch)(SignOut);
+export default withRouter(SignOut);

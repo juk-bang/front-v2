@@ -1,55 +1,24 @@
-import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
-import "../sass/navbar.sass";
+import React, { useEffect, useState } from "react";
+import { Link, withRouter } from "react-router-dom";
 import icon from "../img/logo_title.png";
-//전역변수참조
-import { connect } from "react-redux";
-import {
-  map_auth_state,
-  map_auth_dispatch,
-  auth_props_noroute,
-  is_session_exist,
-  Token,
-} from "../pages/auth/Api/commonFunc";
+import "../sass/navbar.sass";
 
-import { useCookies } from "react-cookie";
+import { adminUrl, authUrl, landlordUrl, roomUrl, userUrl } from "./urls";
+import {get_login, get_role, position, setting_info } from "../API/auth";
 
-const NavBar = (props: auth_props_noroute) => {
-  const {
-    auth,
-    auth_cookie: { cookies: auth_cookie },
-  } = props;
-
-  const [cookie] = useCookies(["auth"]);
-
-  const cookie_curr = is_session_exist(cookie as Token);
-  const cookie_mine = is_session_exist(auth_cookie);
+const NavBar = () => {
+  const [state, set_state] = useState({role:"", login:false});
 
   useEffect(() => {
-    //로그인,로그아웃상태 맞추기
-    if (cookie.accessToken !== undefined) {
-      if (cookie_curr !== cookie_mine) {
-        props.set_auth(cookie);
-      }
-    }
-
-    if (cookie_curr) {
-      if (cookie.accessToken !== undefined && !auth.login) {
-        props.sign_in(cookie);
-      }
-    } else {
-      if (auth.login === true) {
-        props.sign_out();
-      }
-    }
+    setting_info();
+    set_state({role : get_role(), login : get_login()});
   }, []);
 
   return (
     <div>
-      {3 > 1 ? (
         <nav className="navigation-bar">
           <div className="left-nav">
-            <Link className="logo" to="/home">
+            <Link className="logo" to={roomUrl.home}>
               <img
                 className="padding-top-7px"
                 src={icon}
@@ -59,40 +28,39 @@ const NavBar = (props: auth_props_noroute) => {
             </Link>
           </div>
           <div className="right-nav">
-            {auth.role === "ROLE_ADMIN" ? (
-              <Link className="nav-item" to={`/home`}>
+            {state.role === position.ADMIN ? (
+              <Link className="nav-item" to={adminUrl.adminHome}>
                 관리자페이지
               </Link>
-            ) : auth.role === "ROLE_LANDLORD" ? (
-              <Link className="nav-item" to={`/home`}>
+            ) : state.role === position.LANDLORD ? (
+              <Link className="nav-item" to={landlordUrl.landlordRooms}>
                 판매자페이지
               </Link>
             ) : undefined}
-            <Link className="nav-item" to={`/home`}>
+            <Link className="nav-item" to={roomUrl.home}>
               방 리스트
             </Link>
-            <Link className="nav-item" to={`/user/profile`}>
+            <Link className="nav-item" to={roomUrl.home}>
               커뮤니티
             </Link>
-            {auth.login === false ? (
-              <Link className="nav-item" to={`/auth/signin`}>
+            {state.login === false ? (
+              <Link className="nav-item" to={authUrl.signIn}>
                 로그인
               </Link>
             ) : (
               <>
-                <Link className="nav-item" to={`/user/profile`}>
+                <Link className="nav-item" to={userUrl.userInfo}>
                   프로필
                 </Link>
-                <Link className="nav-item" to={`/auth/signout`}>
+                <Link className="nav-item" to={authUrl.signOut}>
                   로그아웃
                 </Link>
               </>
             )}
           </div>
         </nav>
-      ) : undefined}
     </div>
   );
 };
 
-export default connect(map_auth_state, map_auth_dispatch)(NavBar);
+export default withRouter(NavBar);

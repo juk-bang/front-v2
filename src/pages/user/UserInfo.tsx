@@ -1,12 +1,21 @@
-import React, { useState, useEffect } from "react";
-import NavBar from "../../../components/NavBar";
-import icon from "../../../img/person.png";
-import { Link } from "react-router-dom";
-import { map_auth_state, auth_state_props } from "../../auth/Api/commonFunc";
+import React, { useEffect, useState } from "react";
+import NavBar from "../../components/NavBar";
+import icon from "../../img/person.png";
+import { Link, RouteComponentProps, withRouter } from "react-router-dom";
+import { get_id, get_login, get_role, position, setting_info} from "../../API/auth";
+import { roomUrl } from "../../components/urls";
 
-import { connect } from "react-redux";
-const UserProfile: React.SFC<auth_state_props> = (props) => {
-  const { id, role } = props.auth;
+const UserInfo = ({history}:RouteComponentProps) => {
+  const [state, set_state] = useState({id:"", role:""});
+
+  useEffect(() => {
+    setting_info();
+    if(get_login() === false){
+      history.push(roomUrl.home);
+    }
+    set_state({id:get_id(), role:get_role()});
+  },[history]);
+
   return (
     <div>
       <NavBar></NavBar>
@@ -16,36 +25,36 @@ const UserProfile: React.SFC<auth_state_props> = (props) => {
             프로필
           </h1>
           <img
-            className="padding-left-30"
+            className="padding-left-20"
             src={icon}
             alt="logo"
-            width="100"
+            width="50%"
           ></img>
-          <h3 className="margin-left-30 padding-top-5">{id}</h3>
+          <h3 className="margin-left-30 padding-top-5">{state.id}</h3>
           <div className="flex-column-container padding-left-2">
             <div className="flex-row-container padding-left-15 padding-top-15">
-              <Link className="button-mint-white " to={`/user/profile/edit`}>
+              <Link className="button-mint-white " to={``}>
                 정보수정
               </Link>
-              <Link className="button-mint-white margin-left-5" to={`/`}>
+              <Link className="button-mint-white margin-left-5" to={``}>
                 채팅하기
               </Link>
             </div>
 
             <div className="flex-row-container padding-left-15 padding-top-2">
-              {role === "ROLE_ADMIN" ? (
+              {state.role === position.ADMIN ? (
                 <Link className="button-mint-white " to={``}>
                   관리하기
                 </Link>
-              ) : role === "ROLE_LANDLORD" ? (
+              ) : state.role === position.LANDLORD ? (
                 <Link className="button-mint-white " to={``}>
                   방올리기
                 </Link>
-              ) : (
+              ) : state.role === position.STUDENT ? (
                 <Link className="button-mint-white " to={``}>
                   찜리스트
                 </Link>
-              )}
+              ): undefined}
               <Link className="button-mint-white margin-left-5" to={``}>
                 내게시글
               </Link>
@@ -56,4 +65,4 @@ const UserProfile: React.SFC<auth_state_props> = (props) => {
     </div>
   );
 };
-export default connect(map_auth_state)(UserProfile);
+export default withRouter(UserInfo);
