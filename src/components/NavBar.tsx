@@ -4,7 +4,7 @@ import icon from "../img/logo_title.png";
 import "../sass/navbar.sass";
 
 import { adminUrl, authUrl, landlordUrl, roomUrl, userUrl } from "./urls";
-import { ADMIN, get_login, get_role, LANDLORD, setting_info } from "../API/auth";
+import {get_login, get_role, position, setting_info } from "../API/auth";
 
 const NavBar = () => {
   const [state, set_state] = useState({role:"", login:false});
@@ -28,11 +28,11 @@ const NavBar = () => {
             </Link>
           </div>
           <div className="right-nav">
-            {state.role === ADMIN ? (
+            {state.role === position.ADMIN ? (
               <Link className="nav-item" to={adminUrl.adminHome}>
                 관리자페이지
               </Link>
-            ) : state.role === LANDLORD ? (
+            ) : state.role === position.LANDLORD ? (
               <Link className="nav-item" to={landlordUrl.landlordRooms}>
                 판매자페이지
               </Link>

@@ -6,9 +6,11 @@ import { auth_state, sign_in, sign_out } from "../store/modules/auth";
 import { get_cookie, remove_cookie, set_cookie } from "./cookie";
 
 //권한 상수
-export const ADMIN = "ROLE_ADMIN";
-export const LANDLORD = "ROLE_LANDLORD";
-export const STUDENT= "ROLE_STUDENT";
+export const position = {
+  ADMIN : "ROLE_ADMIN",
+  LANDLORD : "ROLE_LANDLORD",
+  STUDENT : "ROLE_STUDENT"
+}
 
 //토큰 타입
 export interface Token{

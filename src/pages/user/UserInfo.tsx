@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import NavBar from "../../components/NavBar";
 import icon from "../../img/person.png";
 import { Link, RouteComponentProps, withRouter } from "react-router-dom";
-import { ADMIN, get_id, get_login, get_role, LANDLORD, setting_info, STUDENT } from "../../API/auth";
+import { get_id, get_login, get_role, position, setting_info} from "../../API/auth";
 import { roomUrl } from "../../components/urls";
 
 const UserInfo = ({history}:RouteComponentProps) => {
@@ -42,15 +42,15 @@ const UserInfo = ({history}:RouteComponentProps) => {
             </div>
 
             <div className="flex-row-container padding-left-15 padding-top-2">
-              {state.role === ADMIN ? (
+              {state.role === position.ADMIN ? (
                 <Link className="button-mint-white " to={``}>
                   관리하기
                 </Link>
-              ) : state.role === LANDLORD ? (
+              ) : state.role === position.LANDLORD ? (
                 <Link className="button-mint-white " to={``}>
                   방올리기
                 </Link>
-              ) : state.role === STUDENT ? (
+              ) : state.role === position.STUDENT ? (
                 <Link className="button-mint-white " to={``}>
                   찜리스트
                 </Link>
