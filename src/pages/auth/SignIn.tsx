@@ -5,6 +5,7 @@ import NavBar from "../../components/NavBar";
 import { authUrl, roomUrl } from "../../components/urls";
 import { AxiosError } from "axios";
 import { get_login, log_in, setting_info, Token, type_check } from "../../API/auth";
+import "../../sass/tailwind.output.css"
 
 const SignIn = ({history} :RouteComponentProps) => {
   const [user, set_user] = useState({ userid: "", userpassword: "" });
@@ -84,17 +85,18 @@ const SignIn = ({history} :RouteComponentProps) => {
   return (
     <div>
       <NavBar></NavBar>
-      <div className="container margin-left-30 margin-right-30 padding-top-20">
-        <div className="flex-column-container margin : 10 padding-10 border-deep-pink">
-          <h2 className="mid font-deep-pink">로그인</h2>
+      <div className="min-h-screen px-4 py-12 flex items-center justify-center sm:px-6 lg:px-8">
+        <div className="max-w-md w-full border-deep-pink">
+          <h2 className="mt-6 text-3xl text-center font-deep-pink">로그인</h2>
           <form name="form" onSubmit={login_submit}>
-            <div className="flex-column-container padding-top-5 padding-left-5px padding-right-5">
+            <div className="flex-column-container pl-5 pr-5">
               <label className="userid">아이디</label>
-              <input name="userid" onChange={handle_change} />
+              <input className = "border border-gray-300 rounded-md" name="userid" onChange={handle_change} />
             </div>
-            <div className="flex-column-container padding-top-5 padding-bottom-5px padding-left-5px padding-right-5">
+            <span className = ""></span>
+            <div className="flex-column-container p-5">
               <label className="userpassword">비밀번호</label>
-              <input
+              <input className = "border border-gray-300 rounded-md"
                 name="userpassword"
                 type="password"
                 onChange={handle_change}

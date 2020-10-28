@@ -4,6 +4,7 @@ import icon from "../../img/person.png";
 import { Link, RouteComponentProps, withRouter } from "react-router-dom";
 import { get_id, get_login, get_role, position, setting_info} from "../../API/auth";
 import { roomUrl } from "../../components/urls";
+import "../../sass/tailwind.output.css"
 
 const UserInfo = ({history}:RouteComponentProps) => {
   const [state, set_state] = useState({id:"", role:""});
@@ -19,46 +20,46 @@ const UserInfo = ({history}:RouteComponentProps) => {
   return (
     <div>
       <NavBar></NavBar>
-      <div className="container margin-left-30 margin-right-30 padding-top-8">
-        <div className="flex-column-container margin-5 padding-20 padding-left-20 padding-top-10 border-green">
-          <h1 className="margin-left-30 font-deep-pink padding-bottom-20">
+      <div className="min-h-screen flex items-center justify-center sm:px-6 lg:px-8">
+        <div className="max-w-md w-full border-green">
+          <h1 className="mt-10 mb-6 text-3xl text-center font-deep-pink">
             프로필
           </h1>
           <img
-            className="padding-left-20"
+            className="mid w-24 h-24"
             src={icon}
             alt="logo"
             width="50%"
           ></img>
-          <h3 className="margin-left-30 padding-top-5">{state.id}</h3>
-          <div className="flex-column-container padding-left-2">
-            <div className="flex-row-container padding-left-15 padding-top-15">
-              <Link className="button-mint-white " to={``}>
+          <h3 className="padding-top-5 text-center ">{state.id}</h3>
+          <div className="mt-5 mb-10 flex-column-container ">
+            <span className="mid flex w-full rounded-md shadow-sm sm:w-auto">
+              <Link className="text-center button-mint-white w-full" to={``}>
                 정보수정
               </Link>
-              <Link className="button-mint-white margin-left-5" to={``}>
+              <Link className="text-center button-mint-white w-full" to={``}>
                 채팅하기
               </Link>
-            </div>
+            </span>
 
-            <div className="flex-row-container padding-left-15 padding-top-2">
+            <span className="mid flex w-full rounded-md shadow-sm sm:ml-3 sm:w-auto">
               {state.role === position.ADMIN ? (
-                <Link className="button-mint-white " to={``}>
+                <Link className="text-center button-mint-white w-full" to={``}>
                   관리하기
                 </Link>
               ) : state.role === position.LANDLORD ? (
-                <Link className="button-mint-white " to={``}>
+                <Link className="text-center button-mint-white w-full" to={``}>
                   방올리기
                 </Link>
               ) : state.role === position.STUDENT ? (
-                <Link className="button-mint-white " to={``}>
+                <Link className="text-center button-mint-white w-full" to={``}>
                   찜리스트
                 </Link>
               ): undefined}
-              <Link className="button-mint-white margin-left-5" to={``}>
+              <Link className="text-center button-mint-white w-full" to={``}>
                 내게시글
               </Link>
-            </div>
+            </span>
           </div>
         </div>
       </div>
