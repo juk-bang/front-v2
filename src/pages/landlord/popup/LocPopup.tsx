@@ -4,7 +4,7 @@ import { withRouter } from "react-router-dom";
 import "../../../sass/locpopup.sass"
 
 //주소정보 가져올때 필요정보 인터페이스
-interface Ipage {
+interface page {
   countPerPage: number;
   totalCount: number;
   currentPage: number;
@@ -96,7 +96,7 @@ function LocPopup({ inputYn }: any) {
   };
 
   //주소검색 리스트 생성
-  const make_list = (info: { common: Ipage; juso: [] }) => {
+  const make_list = (info: { common: page; juso: [] }) => {
     const { common, juso } = info;
     loc.juso = juso;
     const list = document.getElementById("list");
@@ -121,7 +121,7 @@ function LocPopup({ inputYn }: any) {
   };
 
   //페이지 번호 이동을 위한 함수
-  function show_page(page: Ipage) {
+  function show_page(page: page) {
     const { totalCount, currentPage, countPerPage } = page;
     const total_page = Math.ceil(totalCount / countPerPage); //총 페이지수
     let rem = currentPage % loc.countPerPage;
