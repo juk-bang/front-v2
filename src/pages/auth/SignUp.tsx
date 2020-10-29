@@ -5,6 +5,7 @@ import { get_login, log_in, setting_info, Token, type_check } from "../../API/au
 import { roomUrl } from "../../components/urls";
 import { AxiosError } from "axios";
 import { RouteComponentProps, withRouter } from "react-router-dom";
+import "../../sass/tailwind.output.css"
 
 const SignUp = ({history}:RouteComponentProps) => {
   const [user, set_user] = useState({
@@ -131,24 +132,24 @@ const SignUp = ({history}:RouteComponentProps) => {
   return (
     <div>
       <NavBar></NavBar>
-      <div className="container margin-left-30 margin-right-30 padding-top-15 margin-bottom-20">
-        <div className="flex-column-container margin : 10 padding-10 border-deep-pink">
-          <h2 className="mid font-deep-pink">회원가입</h2>
+      <div className="min-h-screen flex items-center justify-center sm:px-8 lg:px-12">
+        <div className="max-w-md w-full border-deep-pink padding-5">
+          <h2 className="font-deep-pink text-3xl text-center">회원가입</h2>
           <form name="form" onSubmit={join_submit}>
-            <div className="flex-column-container padding-top-5 padding-left-5 padding-right-5">
+            <div className="flex-column-container margin-top-5">
               <label className="userid ">아이디</label>
-              <input name="userid" onChange={handle_change} />
+              <input className = "border border-gray-300 rounded-md" name="userid" onChange={handle_change} />
             </div>
 
-            <div className="flex-column-container padding-top-5 padding-left-5 padding-right-5">
+            <div className="flex-column-container">
               <label className="userpassword">비밀번호</label>
-              <input
+              <input className = "border border-gray-300 rounded-md"
                 type="password"
                 name="userpassword"
                 onChange={handle_change}
               />
             </div>
-            <div className="flex-column-container padding-top-5 padding-left-5 padding-right-5">
+            <div className="flex-column-container margin-top-5">
               <label className="useruniv">학교</label>
               <select name="useruniv" onChange={handle_select}>
                 <option value="0"> - </option>
@@ -156,7 +157,7 @@ const SignUp = ({history}:RouteComponentProps) => {
               </select>
             </div>
 
-            <div className="flex-column-container padding-top-5 padding-left-5 ">
+            <div className="flex-column-container margin-top-5">
               <label>계정유형</label>
               <div className="margin-bottom-10">
                 <label className="radio-label">
