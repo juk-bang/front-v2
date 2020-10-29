@@ -9,6 +9,16 @@ import { landlord_upload, room_info } from "../../API/landlord";
 import "../../sass/tailwind.output.css"
 import {FiUpload} from "react-icons/fi"
 
+
+//층수 배열리턴
+export const floors = (): number[] => {
+  let floor = [];
+  for (let i = 0; i < 31; i++) {
+    floor.push(i);
+  }
+  return floor;
+};
+
 const LandlordUpload = ({history}:RouteComponentProps) => {
   //주소정보 state로써 저장
   const [room, set_room] = useState({
@@ -34,16 +44,9 @@ const LandlordUpload = ({history}:RouteComponentProps) => {
     }
   },[history]);
 
-
-  //층수 배열리턴
-  const floors = (): number[] => {
-    let floor = [];
-    for (let i = 0; i < 31; i++) {
-      floor.push(i);
-    }
-    return floor;
-  };
-
+  /**
+   * submit_room(event) : 입력정보를 바탕으로 서버에 매물 등록 요청
+   */
   const submit_room = (event: FormEvent<HTMLButtonElement>) => {
     event.preventDefault();
 
@@ -108,9 +111,13 @@ const LandlordUpload = ({history}:RouteComponentProps) => {
     });
   };
 
+   /**
+   * img_handle(event) : 이미지 정보 저장 및 클라이언트 화면에 표시
+   */
   const img_handle = (event: FormEvent<HTMLInputElement>) => {
-    var match = ["image/jpeg", "image/png", "image/jpg"];
-    var files = event.currentTarget.files;
+    const match = ["image/jpeg", "image/png", "image/jpg"];
+    var photos = document.getElementById("photos");
+    const files = event.currentTarget.files;
     const arr = img;
     var count = counter;
 
@@ -148,7 +155,6 @@ const LandlordUpload = ({history}:RouteComponentProps) => {
             if(files !== null)
               arr.push({file:files[i],id:new_photo.id, use : true});
             
-            var photos = document.getElementById("photos");
             if (photos != null) photos.appendChild(new_photo); 
             
             count++;
@@ -161,7 +167,7 @@ const LandlordUpload = ({history}:RouteComponentProps) => {
     set_img(arr);
   };
 
-    /**
+  /**
    * handle_change(event) : 회원정보 입력하는 동안 user상태를 저장하기 위함
    */
   const handle_change = (event: React.FormEvent<HTMLInputElement>) => {
@@ -229,6 +235,9 @@ const LandlordUpload = ({history}:RouteComponentProps) => {
     });
   };
 
+  /**
+   * handle_option(event) : 옵션정보 데이터 저장  
+   * */
   const handle_option = (event: React.FormEvent<HTMLInputElement>) => {
     event.preventDefault();
     const {name} = event.currentTarget;
@@ -241,6 +250,7 @@ const LandlordUpload = ({history}:RouteComponentProps) => {
         options : update_option
     });
   };
+
   return (
     <div>
       <NavBar></NavBar>
