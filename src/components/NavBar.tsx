@@ -10,7 +10,10 @@ const NavBar = () => {
   const [state, set_state] = useState({role:"", login:false});
 
   useEffect(() => {
-    setting_info();
+    const res = setting_info();
+    if(res === false){
+      alert('세션이 종료되었습니다. 다시 로그인해주세요');
+    }
     set_state({role : get_role(), login : get_login()});
   }, []);
 

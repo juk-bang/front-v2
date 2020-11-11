@@ -67,7 +67,6 @@ export const refresh_request = (refreshToken : string) : boolean => {
     return true;
   }).catch((err : AxiosError) => {
     //에러처리
-    alert('세션이 종료되었습니다. 다시 로그인해주세요');
     log_out();
     return false;
   })
@@ -80,7 +79,7 @@ export const refresh_request = (refreshToken : string) : boolean => {
 * 엑세스 토큰이 존재하지 않으면 리프레시 토큰으로 갱신
 * 반환값 : Token 타입 
 */
-export const get_token = () : Token | null=> {
+export const get_token = () : Token | null | boolean=> {
   const accessToken = get_cookie("accessToken");
   const refreshToken = get_cookie("refreshToken");
   let token: Token;
@@ -90,7 +89,7 @@ export const get_token = () : Token | null=> {
     return token;
   }else if(accessToken === null && refreshToken !== null){
     if(refresh_request(refreshToken) === false){
-      return null;
+      return false;
     }
     const new_access = get_cookie("accessToken");
     if(new_access !== null){
@@ -104,17 +103,20 @@ export const get_token = () : Token | null=> {
 /**
 * setting_info() : 토큰과 로그인 상태 맞추기, 전역변수 auth와 쿠키상태를 동일하게 맞춘다
 */
-export const setting_info = ()  : void =>{
+export const setting_info = ()  : void | boolean=>{
     const auth : auth_state = store.getState().auth;
     const token = get_token();
 
-    if (token !== null) {
+    if (token !== null && token !== false) {
       if (auth.login === false) {
         store.dispatch(sign_in());
       }
     } else {
       if (auth.login === true) {
         store.dispatch(sign_out());
+      }
+      if(token === false){
+        return false;
       }
     }
 }
