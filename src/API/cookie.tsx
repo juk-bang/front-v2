@@ -1,5 +1,5 @@
-//쿠키 시간 지정안하면 기본 1000분.. 1분 단위로 입력가능
-export const set_cookie = (name: string, val: string, exp : number = 1000): void => {
+//쿠키 시간 지정안하면 기본 1주일.. 1분 단위로 입력가능
+export const set_cookie = (name: string, val: string, exp : number = 60 * 24 * 7): void => {
     const expires = new Date();
     expires.setTime(expires.getTime() + 1000 * 60 * exp);
   
