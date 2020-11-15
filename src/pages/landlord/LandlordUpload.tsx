@@ -1,23 +1,14 @@
-import React, { useState, FormEvent, useEffect } from "react";
-import NavBar from "../../components/NavBar";
-import { landlordUrl, roomUrl } from "../../components/urls";
-import { AxiosError } from "axios";
-import { RouteComponentProps, withRouter } from "react-router-dom";
-import { get_role, position } from "../../API/auth";
-import LocInput from "./popup/LocInput";
-import { landlord_upload, room_info } from "../../API/landlord";
-import "../../sass/tailwind.output.css"
+import React, { useState, FormEvent, useEffect } from "react"
+import NavBar from "../../components/NavBar"
+import { landlordUrl, roomUrl } from "../../components/urls"
+import { RouteComponentProps, withRouter } from "react-router-dom"
+import { get_role, position } from "../../API/auth"
+import LocInput from "./popup/LocInput"
+import { landlord_upload, room_info } from "../../API/landlord"
+import {getArr, postRoomImage} from "../../API/room"
 import {FiUpload} from "react-icons/fi"
-
-
-//층수 배열리턴
-export const floors = (): number[] => {
-  let floor = [];
-  for (let i = 0; i < 31; i++) {
-    floor.push(i);
-  }
-  return floor;
-};
+import "../../sass/tailwind.output.css"
+import proj4 from "proj4";
 
 const LandlordUpload = ({history}:RouteComponentProps) => {
   //주소정보 state로써 저장
@@ -26,23 +17,25 @@ const LandlordUpload = ({history}:RouteComponentProps) => {
     room_scale: 0,
     monthly_price: 0,
     admin_price : 0,
-    deposit_price :0,
-    room_floor : -2,
+    deposit_price : 0,
+    room_floor : -1,
     room_layout : 1,
     room_description  : ""
   });
 
   const [counter, set_counter] = useState(0);
   const [location, set_location] = useState({location:"",x:0,y:0});
-  const [option, set_option] = useState({options: [false,false,false,false,false,false,false,false]});
+  const [option, set_option] = useState([false,false,false,false,false,false,false,false]);
   const [img, set_img] = useState(new Array());
+  const [toggle, set_toggle] = useState("1");
 
   //접근 제어
   useEffect(() => {
     if (get_role() !== position.LANDLORD) {
       history.push(roomUrl.home);
     }
-  },[history]);
+
+  },[history,toggle,img]);
 
   /**
    * submit_room(event) : 입력정보를 바탕으로 서버에 매물 등록 요청
@@ -56,7 +49,7 @@ const LandlordUpload = ({history}:RouteComponentProps) => {
       room[0].focus();
       return;
     }
-    if(room.deposit_price <= 0 ||
+    if(room.deposit_price < 0 ||
       room.admin_price <= 0 ||
       room.monthly_price <= 0 ||
       room.room_scale <= 0){
@@ -69,31 +62,39 @@ const LandlordUpload = ({history}:RouteComponentProps) => {
       room[0].focus();
       return;
     }
-    const {options} = option;
+    if(img.filter(val => val.use === true).length === 0){
+      alert('사진을 하나이상 입력해주세요');
+    }
+
+    if(toggle === "2"){
+      room.deposit_price = room.monthly_price;
+      room.monthly_price = 0;
+    }
+
     const param : room_info = {
         univId : 1,
         roomInfo : {
             roomName : room.room_name,
-            scale : room.room_scale,
+            scale : parseFloat(room.room_scale.toFixed(2)),
             floor : room.room_floor,
             layout :room.room_layout
         }
         ,
         price :{
-          monthlyLease :room.monthly_price,
-          adminExpenses :room.admin_price,
-          deposit : room.deposit_price
+          monthlyLease : Math.floor(room.monthly_price),
+          adminExpenses : Math.floor(room.admin_price),
+          deposit : Math.floor(room.deposit_price)
         }
       ,
       option:{
-        elevator : options[0],
-        park :options[1],
-        cctv :options[2],
-        autoDoor : options[3],
-        washingMachine :options[4],
-        gasrange : options[5],
-        refrigerator :options[6],
-        airconditioner :options[7]
+        elevator : option[0],
+        park :option[1],
+        cctv :option[2],
+        autoDoor : option[3],
+        washingMachine :option[4],
+        gasrange : option[5],
+        refrigerator :option[6],
+        airconditioner :option[7]
       }
       ,
       location : {
@@ -103,21 +104,43 @@ const LandlordUpload = ({history}:RouteComponentProps) => {
       },
       description : room.room_description
     };
+    
+    var grs80 = "+proj=tmerc +lat_0=38 +lon_0=127.5 +k=0.9996 +x_0=1000000 +y_0=2000000 +ellps=GRS80 +units=m +no_defs";
+    var wgs84 = "+proj=longlat+ellps=WGS84+datum=WGS84+no_defs"; //to
+   
+    var p = proj4(grs80, wgs84, [param.location.lng, param.location.lat]);
+    
+    param.location.lng = p[0];
+    param.location.lat = p[1];
 
-    landlord_upload(param).then(()=>{
+    upload(param);
+  }
+
+  const upload = (param:room_info)=>{
+    landlord_upload(param).then((roomId:number)=>{
+      const useImg = img.filter(val => val.use === true);
+      postRoomImage(roomId, 1, useImg[0].file);
+
+      useImg.forEach((img, i)=>{
+        postRoomImage(roomId, i+2, img.file);
+      });
+
       history.push(landlordUrl.landlordRooms);
-    }).catch((err : AxiosError)=>{
-      alert('매물을 올리는데 실패하였습니다.');
+    }).catch((err)=>{
+      alert('매물 올리기 실패했습니다');
     });
-  };
-
+  }
    /**
    * img_handle(event) : 이미지 정보 저장 및 클라이언트 화면에 표시
    */
   const img_handle = (event: FormEvent<HTMLInputElement>) => {
     const match = ["image/jpeg", "image/png", "image/jpg"];
     var photos = document.getElementById("photos");
+   
     const files = event.currentTarget.files;
+
+    const maxHeight = 400*6; //정하기
+    const maxWidth = 890*6; //정하기
     const arr = img;
     var count = counter;
 
@@ -130,13 +153,23 @@ const LandlordUpload = ({history}:RouteComponentProps) => {
         ) {
           console.log("유효하지 않은 형식입니다");
         } else {
-          let reader = new FileReader();
+          const reader = new FileReader();
+          reader.onload = (e : any)=>{ 
+            var imgRef = new Image();
+            imgRef.src = reader.result as string;    
+            const res = e.target.result;
 
-          reader.onload = (e : any)=>{
+            imgRef.onload = (e:any) =>{
+            /* 해상도 제한 
+               if(imgRef.naturalWidth > maxWidth ||
+                imgRef.naturalHeight > maxHeight ){
+                  return ;
+                }    
+            */
             var new_photo = document.createElement("img");
             new_photo.setAttribute("width", "110");  
             new_photo.setAttribute("id",  String(count));
-            new_photo.setAttribute("src", e.target.result);
+            new_photo.setAttribute("src", res);
             new_photo.setAttribute("class", "cursor-pointer hover:opacity-25");
             new_photo.addEventListener("click",()=>{
               const it = img.findIndex((item)=> item.id === new_photo.id);
@@ -160,7 +193,8 @@ const LandlordUpload = ({history}:RouteComponentProps) => {
             count++;
             set_counter(count);
           }
-          reader.readAsDataURL(files[i]);
+        }
+          reader.readAsDataURL(files[i]);       
         }
       }
     }
@@ -242,13 +276,34 @@ const LandlordUpload = ({history}:RouteComponentProps) => {
     event.preventDefault();
     const {name} = event.currentTarget;
     let index = parseInt(name);
-    let update_option = option.options;
+    let update_option = option;
     
     update_option[index] =  !update_option[index]; 
     
-    set_option({
-        options : update_option
-    });
+    set_option(
+        update_option
+    );
+  };
+
+  /**
+   * handle_toggle(event) : 월세/전세 구분하기 위한 함수  
+   * */
+  const handle_toggle = (event: React.FormEvent<HTMLSelectElement>) => {
+    event.preventDefault();
+    const {value} = event.currentTarget;
+
+    const tog = document.getElementById("deposit");
+
+    if(value === "1"){
+      if(tog !== null){
+        tog.removeAttribute('disabled');
+      }
+    }else{
+      if(tog !== null){
+        tog.setAttribute('disabled', 'disabled');     
+      }
+    }
+    set_toggle(value);
   };
 
   return (
@@ -265,13 +320,18 @@ const LandlordUpload = ({history}:RouteComponentProps) => {
             <div className = "col-span-2">
               <input className = "text-right" name="room_scale" type="number" onChange={handle_change}></input>m<sup>2</sup>
             </div>
-            <div className="col-span-1 mid">월세</div>
+            <div className = "col-span-1 mid">
+              <select id = "toggle" onChange={handle_toggle}>
+                <option value = "1" >월세</option>
+                <option value = "2" >전세</option>
+              </select>
+            </div>
             <div className = "col-span-2">
               <input className = "text-right" name="monthly_price" type="number" onChange={handle_change}></input>만원
             </div>
             <div className="col-span-1 mid">보증금</div>
             <div className = "col-span-2">
-              <input className = "text-right" name="deposit_price" type="number" onChange={handle_change}></input>만원
+              <input id = "deposit" className = "text-right" name="deposit_price" type="number" onChange={handle_change}></input>만원
             </div>
             <div className="col-span-1 mid">관리비</div>
             <div className = "col-span-2">
@@ -280,9 +340,9 @@ const LandlordUpload = ({history}:RouteComponentProps) => {
             <div className="col-span-1 mid">층수</div>
             <div className = "col-span-2">
               <select name="room_floor" onClick={handle_select}> 
-                <option value = "-2">지하</option>
-                <option value = "-1">반지하</option>
-                {floors().map((i) => {
+                <option value = "-1">지하</option>
+                <option value = "0">반지하</option>
+                {getArr(1,10).map((i) => {
                   return <option value = {i} key={i}> {i}</option>;
                 })}
               </select>
@@ -299,41 +359,56 @@ const LandlordUpload = ({history}:RouteComponentProps) => {
             <h2 className="font-deep-pink margin-top-10 text-2xl">옵션</h2>
             <div className="margin-5 padding-3 background-deep-pink">
             <div className = "flex">
+              <div className = "flex-1">
                 <label className="radio-label">
-                    <input type="checkbox" name="0"onInput= {handle_option} />
+                    <input className = "w-100" type="checkbox" name="0"onInput= {handle_option} />
                      엘레베이터
                 </label>
+              </div>
+              <div className="flex-1">
                 <label className="radio-label">
                      <input type="checkbox" name="1"onInput=  {handle_option}/>
                       주차장
                 </label>
-          
+              </div>
+              <div className="flex-1">
                 <label className="radio-label">
                     <input type="checkbox" name="2" onInput=  {handle_option}/>
                      cctv
                 </label>
+              </div>  
+              <div className="flex-1">
                 <label className="radio-label">
                     <input type="checkbox" name="3"  onInput=  {handle_option}/>
                      자동문
                 </label>
               </div>  
+              </div>  
               <div className = "flex">
+              <div className="flex-1">
                 <label className="radio-label">
                     <input type="checkbox" name="4" onInput=  {handle_option}/>
                     세탁기
                 </label>
+              </div>
+              <div className="flex-1">  
                 <label className="radio-label">
                     <input type="checkbox" name="5" onInput=  {handle_option}/>
                     가스레인지
                 </label>
+              </div>  
+              <div className="flex-1">
                 <label className="radio-label">
                     <input type="checkbox" name="6" onInput= {handle_option}/>
                     냉장고
                 </label>
+              </div>
+              <div className="flex-1">  
                 <label className="radio-label">
                     <input type="checkbox" name="7" onInput=  {handle_option}/>
                     에어컨
                 </label>
+              </div>  
               </div>
             </div>
             <div>

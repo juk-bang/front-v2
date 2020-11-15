@@ -4,16 +4,14 @@ import icon from "../img/logo_title.png";
 import "../sass/navbar.sass";
 
 import { adminUrl, authUrl, landlordUrl, roomUrl, userUrl } from "./urls";
-import {get_login, get_role, position, setting_info } from "../API/auth";
+import {get_login, get_role, position, refresh_request, setting_info } from "../API/auth";
+import { basic_time, get_cookie } from "../API/cookie";
 
 const NavBar = () => {
   const [state, set_state] = useState({role:"", login:false});
 
   useEffect(() => {
-    const res = setting_info();
-    if(res === false){
-      alert('세션이 종료되었습니다. 다시 로그인해주세요');
-    }
+    setting_info();
     set_state({role : get_role(), login : get_login()});
   }, []);
 

@@ -30,7 +30,7 @@ export interface RefreshToken{
 */
 export const set_token = (token: Token) : void =>{
   set_cookie("accessToken", token.accessToken); //10분
-  set_cookie("refreshToken", token.refreshToken,60*24*7); //일주일
+  set_cookie("refreshToken", token.refreshToken,60*24*7, true); //일주일
 }
 
 /**
@@ -64,14 +64,14 @@ export const refresh_request = (refreshToken : string) : boolean => {
   refresh_auth(refreshToken).then((response :string) => {
     remove_cookie("accessToken");
     set_cookie("accessToken", response);
-    return true;
+
   }).catch((err : AxiosError) => {
     //에러처리
     log_out();
     return false;
   })
 
-  return false;
+  return true;
 };
 
 /**
