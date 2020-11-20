@@ -12,6 +12,7 @@ const HomeContainer:React.FC<IProps> = (props) => {
         if(targetValue !== 0){
             props.history.push(`/home?univId=${targetValue}`)
         }
+        localStorage.setItem("univid", targetValue.toString());
     }
 
     return <HomePresenter handleChangeUnivValue={handleChangeUnivValue}/>;
