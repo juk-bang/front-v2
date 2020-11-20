@@ -1,4 +1,5 @@
-import { AxiosError } from "axios";
+import { AxiosError, AxiosResponse } from "axios";
+import { RSA_NO_PADDING } from "constants";
 import baseApi from "./baseApi";
 
 export interface room_info {
@@ -35,11 +36,10 @@ location : {
 description : string
 };
 
-export const landlord_upload= async (param:room_info) => {
-
-  await baseApi.post(`/landlord/rooms`, 
+export const landlord_upload = async(param:room_info) => {
+  const response = await baseApi.post(`/landlord/rooms`, 
     param
-  ).catch((err : AxiosError)=>{
-    console.log(err.message)
-  });
+  )
+  const {roomId} = response.data; 
+  return roomId;
 };

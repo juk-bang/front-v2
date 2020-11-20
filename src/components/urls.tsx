@@ -1,10 +1,12 @@
 // room
 const home = "/home";
 const roomDetail = (roomId: number) => `/rooms/${roomId}`;
+const room ="/rooms/:roomid";
 
 export const roomUrl = {
   home,
   roomDetail,
+  room,
 };
 
 // admin

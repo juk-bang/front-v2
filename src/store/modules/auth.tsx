@@ -44,15 +44,16 @@ export default function auth(
 ) {
   switch (action.type) {
     case SIGN_IN:
-      const token : Token | null = get_token();
-      if(token === null){
+      const token = get_token();
+      if(token === null || token === false || token === true){
         return { login: false, role: "", id: "" };
+      }else {
+        return {
+          login: true,
+          role: get_role(token),
+          id: get_id(token),
+        };
       }
-      return {
-        login: true,
-        role: get_role(token),
-        id: get_id(token),
-      };
     case SIGN_OUT:
       return { login: false, role: "", id: "" };
     default:

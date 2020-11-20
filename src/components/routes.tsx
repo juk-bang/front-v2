@@ -9,12 +9,14 @@ import UserInfo from "../pages/user/UserInfo";
 import LandlordUpload from "../pages/landlord/LandlordUpload";
 import LocPopup from "../pages/landlord/popup/LocPopup";
 import LocInput from "../pages/landlord/popup/LocInput";
+import RoomDetail from "../pages/room/roomDetail/RoomDetail";
 
 const Routes: React.FunctionComponent = () => {
   return (
     <Router>
       <Switch>
         <Route path={roomUrl.home} exact component={roomListContainer} />
+        <Route path={roomUrl.room} exact component={RoomDetail} />
         <Route path={authUrl.signIn} exact component={SignIn} />
         <Route path={authUrl.signUp} exact component={SignUp} />
         <Route path={authUrl.signOut} exact component={SignOut} />

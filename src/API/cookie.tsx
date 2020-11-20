@@ -1,8 +1,19 @@
-//쿠키 시간 지정안하면 기본 1000분.. 1분 단위로 입력가능
-export const set_cookie = (name: string, val: string, exp : number = 1000): void => {
+import {refresh_request, setting_info} from "./auth";
+
+export const basic_time = 10;
+
+//쿠키 시간 지정안하면 기본 10분.. 
+export const set_cookie = (name: string, val: string, exp : number = basic_time, update : boolean = false): void => {
     const expires = new Date();
     expires.setTime(expires.getTime() + 1000 * 60 * exp);
-  
+    if(update === true){
+      setTimeout(()=>{
+        let res = setting_info();
+        if(res === false){
+          alert('세션이 종료되었습니다. 다시 로그인해주세요');
+        }
+      }, 1002 * 60 * basic_time);   
+    }
     document.cookie =
       name + "=" + val + "; expires=" + expires.toUTCString() + "; path=/";
 };

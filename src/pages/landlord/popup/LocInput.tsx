@@ -64,10 +64,10 @@ function LocInput({ onChange }: any) {
       if(juso === null){
         alert(res.data.results.common.errorMessage);
         return;
-      }
+      }        
       const x :number= parseFloat(juso.entX);
       const y :number= parseFloat(juso.entY);
-
+          
       onChange({ location: loc_xy.jibunjuso, x: x, y: y });
     });
   };

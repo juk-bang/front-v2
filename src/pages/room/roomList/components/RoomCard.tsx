@@ -4,19 +4,26 @@ import { getRoomThumbnail } from "../../../../API/room";
 import { AxiosPromise, AxiosResponse } from "axios";
 import defaultThumbnail from "../../../../img/defaultThumbnail.jpg";
 import "../../../../sass/tailwind.output.css";
+import { isStringLiteral } from "typescript";
 
 interface IProps {
   room: IRoom;
 }
 
 const RoomCard: React.FunctionComponent<IProps> = (props) => {
-  const [thumbnail, setThumbnail] = useState<AxiosResponse | string | null>(
-    null
+  const [thumbnail, setThumbnail] = useState<string>(
+    ""
   );
 
   const roomThumbnail = async (roomId: number) => {
-    const thumbnail = await getRoomThumbnail(roomId);
-    setThumbnail(thumbnail);
+    getRoomThumbnail(roomId).then((res)=>{
+    
+    const url = URL.createObjectURL(res);
+    setThumbnail(url);
+    
+   }).catch((err)=>{
+      setThumbnail("error");
+   });
   };
 
   useEffect(() => {
@@ -25,11 +32,9 @@ const RoomCard: React.FunctionComponent<IProps> = (props) => {
 
   return (
     <div>
-      <img
-        src={thumbnail === "error" ? defaultThumbnail : "정상url"}
-        alt="thumbnail"
-        className="w-full"
-      ></img>
+      <img style={{overflow:'hidden', height : '200px', width : '100%'}} 
+      alt = "thumbnail" src = {thumbnail==="error"? defaultThumbnail:thumbnail}></img>
+      
       <div className="bg-gray-500">{props.room.roomInfo.layout}</div>
       <div className="bg-gray-500">{props.room.grade}점</div>
       <div className="bg-gray-500">{Math.round(props.room.distance)}m</div>
