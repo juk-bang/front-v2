@@ -53,3 +53,6 @@ export const locationUrl = {
   locationInput,
   locationGet
 }
+
+// home
+export const mainHome = "/";
