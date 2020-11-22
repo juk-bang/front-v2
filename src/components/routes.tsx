@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { roomUrl, authUrl, userUrl, landlordUrl, locationUrl } from "./urls";
+import { roomUrl, authUrl, userUrl, landlordUrl, locationUrl, mainHome } from "./urls";
 import roomListContainer from "../pages/room/roomList/roomListContainer";
 import SignIn from "../pages/auth/SignIn";
 import SignUp from "../pages/auth/SignUp";
@@ -10,11 +10,13 @@ import LandlordUpload from "../pages/landlord/LandlordUpload";
 import LocPopup from "../pages/landlord/popup/LocPopup";
 import LocInput from "../pages/landlord/popup/LocInput";
 import RoomDetail from "../pages/room/roomDetail/RoomDetail";
+import HomeContainer from "../pages/home/homeContainer";
 
 const Routes: React.FunctionComponent = () => {
   return (
     <Router>
       <Switch>
+        <Route path={mainHome} exact component={HomeContainer} />
         <Route path={roomUrl.home} exact component={roomListContainer} />
         <Route path={roomUrl.room} exact component={RoomDetail} />
         <Route path={authUrl.signIn} exact component={SignIn} />
