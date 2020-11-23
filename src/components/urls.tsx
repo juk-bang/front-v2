@@ -56,3 +56,24 @@ export const locationUrl = {
 
 // home
 export const mainHome = "/";
+
+// community
+const communityPostList = "/community/:univId"
+const getCommunityPostList = (univId:number) => `/community/${univId}`
+const communityDetail = "/community/detail/:univId/:postId"
+const getCommunityDetail = (univId:number, postId:number) => `/community/detail/${univId}/${postId}`
+const editCommunityPost = "/community/edit/:postId"
+const getEditCommunityPost = (univId:number, postId:number) => `/community/edit/${univId}/${postId}`
+const newCommunityPost = "/community/new/:univId"
+const getNewCommunityPost = (univId:number) => `/community/new/${univId}`
+
+export const communityUrl = {
+  communityPostList,
+  getCommunityPostList,
+  communityDetail,
+  getCommunityDetail,
+  newCommunityPost,
+  getNewCommunityPost,
+  editCommunityPost,
+  getEditCommunityPost,
+}

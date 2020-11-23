@@ -3,7 +3,7 @@ import { Link, withRouter } from "react-router-dom";
 import icon from "../img/logo_title.png";
 import "../sass/navbar.sass";
 
-import { adminUrl, authUrl, landlordUrl, roomUrl, userUrl } from "./urls";
+import { adminUrl, authUrl, landlordUrl, roomUrl, userUrl, communityUrl } from "./urls";
 import {get_login, get_role, position, refresh_request, setting_info } from "../API/auth";
 import { basic_time, get_cookie } from "../API/cookie";
 
@@ -14,6 +14,11 @@ const NavBar = () => {
     setting_info();
     set_state({role : get_role(), login : get_login()});
   }, []);
+
+  const currentUnivid = localStorage.getItem("univid");
+  let communityListUrl = "";
+  if(currentUnivid)
+   communityListUrl = communityUrl.getCommunityPostList(parseInt(currentUnivid));
 
   return (
     <div>
@@ -41,7 +46,7 @@ const NavBar = () => {
             <Link className="nav-item" to={roomUrl.home}>
               방 리스트
             </Link>
-            <Link className="nav-item" to={roomUrl.home}>
+            <Link className="nav-item" to={communityListUrl}>
               커뮤니티
             </Link>
             {state.login === false ? (
