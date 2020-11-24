@@ -11,7 +11,7 @@ const PostCard: React.FC<IProps> = ({id, post}) => {
     const currentUnivid = localStorage.getItem("univid");
 
     return <Link to={currentUnivid ? communityUrl.getCommunityDetail(parseInt(currentUnivid), post.postId) : ""} 
-                className="w-full h-full bg-gray-200 flex items-center justify-start pl-10 border-solid border-4 border-gray-600">
+                className="w-full h-20 bg-gray-200 flex items-center justify-start pl-10 border-solid border-4 border-gray-600 mt-px">
         <div className="ml-8">
             {post.views}
         </div>
