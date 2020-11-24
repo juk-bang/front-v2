@@ -12,6 +12,8 @@ import LocInput from "../pages/landlord/popup/LocInput";
 import RoomDetail from "../pages/room/roomDetail/RoomDetail";
 import HomeContainer from "../pages/home/homeContainer";
 import postListContainer from "../pages/community/postList/postListContainer"
+import UserEdit from "../pages/user/UserEdit";
+import UserDelete from "../pages/user/UserDelete";
 
 const Routes: React.FunctionComponent = () => {
   return (
@@ -24,6 +26,8 @@ const Routes: React.FunctionComponent = () => {
         <Route path={authUrl.signUp} exact component={SignUp} />
         <Route path={authUrl.signOut} exact component={SignOut} />
         <Route path={userUrl.userInfo} exact component={UserInfo} />
+        <Route path={userUrl.userEdit} exact component={UserEdit} />
+        <Route path={userUrl.userDelete} exact component={UserDelete} />
         <Route path={landlordUrl.landlordUpload} exact component={LandlordUpload} />
         <Route path={locationUrl.locationGet} exact component={LocPopup} />
         <Route path={locationUrl.locationInput} exact component={LocInput} />
