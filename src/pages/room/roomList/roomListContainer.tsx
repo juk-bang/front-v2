@@ -11,18 +11,27 @@ interface IProps extends RouteComponentProps {}
 interface IState {
   rooms: Array<IRoom>;
   markers: Array<IMarker>;
+  error: boolean;
 }
 
 class RoomListContainer extends React.Component<IProps, IState> {
   state = {
     rooms: [],
     markers: [],
+    error:false,
   };
 
   componentDidMount = async () => {
     const { univId } = queryString.parse(this.props.location.search);
     if (univId) {
       const { data } = await getRoomList(parseInt(univId.toString()));
+      if(!data._embedded){
+        this.setState({
+          ...this.state,
+          error:true
+        })
+        return;
+      }
       this.setState({
         ...this.state,
         rooms: data._embedded.rooms,
@@ -47,6 +56,7 @@ class RoomListContainer extends React.Component<IProps, IState> {
       <RoomListPresenter
         rooms={this.state.rooms}
         markers={this.state.markers}
+        error={this.state.error}
       />
     );
   };
