@@ -14,6 +14,7 @@ import HomeContainer from "../pages/home/homeContainer";
 import postListContainer from "../pages/community/postList/postListContainer"
 import UserEdit from "../pages/user/UserEdit";
 import UserDelete from "../pages/user/UserDelete";
+import NewPostContainer from "../pages/community/newPost/newPostContainer";
 
 const Routes: React.FunctionComponent = () => {
   return (
@@ -32,6 +33,7 @@ const Routes: React.FunctionComponent = () => {
         <Route path={locationUrl.locationGet} exact component={LocPopup} />
         <Route path={locationUrl.locationInput} exact component={LocInput} />
         <Route path={communityUrl.communityPostList} exact component={postListContainer} />
+        <Route path={communityUrl.newCommunityPost} exact component={NewPostContainer} />
       </Switch>
     </Router>
   );

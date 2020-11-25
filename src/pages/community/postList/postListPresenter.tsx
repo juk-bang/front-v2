@@ -42,12 +42,11 @@ const PostListPresenter:React.FC<IProps> = ({postList}) => {
                     날짜
                 </div>
             </div>
-            <div className="w-2/3 h-12 mt-8 flex items-center justify-end">
+            <div className="w-2/3 h-screen mt-8 flex items-center justify-start flex-col">
                 {
                     postList ?
                     postList.map((post:any) => <PostCard id={post.postId} post={post}/>) : ""
                 }
-                
             </div>
         </div>
     </>
