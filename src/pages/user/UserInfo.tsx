@@ -3,7 +3,7 @@ import NavBar from "../../components/NavBar";
 import icon from "../../img/person.png";
 import { Link, RouteComponentProps, withRouter } from "react-router-dom";
 import { get_id, get_login, get_role, position, setting_info} from "../../API/auth";
-import { roomUrl } from "../../components/urls";
+import { roomUrl, userUrl } from "../../components/urls";
 import "../../sass/tailwind.output.css"
 
 const UserInfo = ({history}:RouteComponentProps) => {
@@ -34,7 +34,7 @@ const UserInfo = ({history}:RouteComponentProps) => {
           <h3 className="padding-top-5 text-center ">{state.id}</h3>
           <div className="mt-5 mb-10 flex-column-container ">
             <span className="mid flex w-full rounded-md shadow-sm sm:w-auto">
-              <Link className="text-center button-mint-white w-full" to={``}>
+              <Link className="text-center button-mint-white w-full" to={userUrl.userEdit}>
                 정보수정
               </Link>
               <Link className="text-center button-mint-white w-full" to={``}>

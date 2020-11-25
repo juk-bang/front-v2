@@ -31,9 +31,11 @@ export const authUrl = {
 
 //user
 const userInfo = "/userinfo";
+const userEdit = "/userinfo/edit";
+const userDelete = "/userinfo/delete";
 
 export const userUrl = {
-  userInfo,
+  userInfo, userEdit, userDelete
 };
 
 //landlord
