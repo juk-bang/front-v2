@@ -119,13 +119,14 @@ const LandlordUpload = ({history}:RouteComponentProps) => {
   const upload = (param:room_info)=>{
     landlord_upload(param).then((roomId:number)=>{
       const useImg = img.filter(val => val.use === true);
-      postRoomImage(roomId, 1, useImg[0].file);
-
+      postRoomImage(roomId, 1, useImg[0].file).then(()=>{
+          
       useImg.forEach((img, i)=>{
         postRoomImage(roomId, i+2, img.file);
       });
 
       history.push(landlordUrl.landlordRooms);
+      });
     }).catch((err)=>{
       alert('매물 올리기 실패했습니다');
     });

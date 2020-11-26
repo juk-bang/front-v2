@@ -31,11 +31,11 @@ export const getRoomImage = async(roomId:number, imgId:number) =>{
 
 }
 
-export const postRoomImage = (roomId:number, imgId:number, file:File) =>{
+export const postRoomImage = async(roomId:number, imgId:number, file:File) =>{
   const formData = new FormData();
   formData.append("image", file);
 
-  baseApi
+  await baseApi
   .post(`/rooms/${roomId}/images/${imgId}`, formData, 
     {headers: {
       'Content-Type': 'multipart/form-data'
