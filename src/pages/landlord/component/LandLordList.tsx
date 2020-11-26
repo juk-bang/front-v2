@@ -1,11 +1,7 @@
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
-import dotenv from "dotenv";
-import GoogleMap, { IMarker } from "comfortable-google-map-react-types";
 import "../../../sass/tailwind.output.css";
 import { Link, RouteComponentProps } from "react-router-dom";
-import { IRoom } from "../../room/interface";
-import NavBar from "../../../components/NavBar";
-import { landlord_list } from "../../../API/landlord";
+import { landlord_delete, landlord_list } from "../../../API/landlord";
 import { roomUrl } from "../../../components/urls";
 import RoomCard from "./RoomCard";
 import { ILandlordRoom } from "../interface";
@@ -35,10 +31,35 @@ const LandlordList = (props:IProps) => {
 
     useEffect(()=>{}, [rooms]);
 
+    const delete_room = (roomId : number) =>{
+        const num = rooms.length;
+        let page = props.page;
+
+        landlord_delete(roomId).then(()=>{
+            if(num === 1){
+                if(props.page > 0){
+                    props.set_page(props.page-1);
+                    page = props.page-1;
+                }
+            }
+            landlord_list(page).then((list:IList)=>{
+                if(list._embedded !== undefined){
+                    set_rooms(list._embedded.rooms) 
+                }else{
+                    set_rooms(new Array<ILandlordRoom>());
+                }    
+            }).catch((err)=>{
+                console.log("get room list error");
+            })
+        }).catch((err)=>{
+            console.log("room delete error");
+        })
+    }
+
     return<div className="p-10 mt-5">
             <div className = "grid grid-cols-5 w-full gap-y-5 sm:grid-cols-2 lg:grid-cols-5"> 
                 {rooms.length !== 0 ? 
-                rooms.map((room) => {
+                rooms.map((room : ILandlordRoom) => {
                 return (
                     <div key={room.roomId}>
                     <Link to={roomUrl.roomDetail(room.roomId)}>
@@ -47,7 +68,7 @@ const LandlordList = (props:IProps) => {
                     <div className="mt-3 flex items-center justify-center">
                         <button className="btn-primary transition duration-300 ease-in-out focus:outline-none focus:shadow-outline bg-purple-700 hover:bg-purple-900 text-white font-normal py-2 px-4 mr-1 rounded"
                         >수정</button>
-                        <button className="btn-outline-primary transition duration-300 ease-in-out focus:outline-none focus:shadow-outline border bg-black-100 border-purple-700 hover:bg-purple-700 text-purple-700 hover:text-white font-normal py-2 px-4 rounded"
+                        <button onClick = {()=>delete_room(room.roomId)} className="btn-outline-primary transition duration-300 ease-in-out focus:outline-none focus:shadow-outline border bg-black-100 border-purple-700 hover:bg-purple-700 text-purple-700 hover:text-white font-normal py-2 px-4 rounded"
                         >삭제</button>
                     </div>  
                     </div>

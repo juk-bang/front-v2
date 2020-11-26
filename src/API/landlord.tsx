@@ -53,3 +53,7 @@ export const landlord_list= async(page:number)=>{
   const list = await baseApi.get(`/landlord/rooms?page=${page}&size=10`);
   return list.data;
 }
+
+export const landlord_delete = async(roomId: number)=>{
+  await baseApi.delete(`/landlord/rooms/${roomId}`);
+}
