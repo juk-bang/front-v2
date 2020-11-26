@@ -1,5 +1,6 @@
 import { AxiosError, AxiosResponse } from "axios";
 import { RSA_NO_PADDING } from "constants";
+import { ILandlordRoom } from "../pages/landlord/interface";
 import baseApi from "./baseApi";
 
 export interface room_info {
@@ -43,3 +44,16 @@ export const landlord_upload = async(param:room_info) => {
   const {roomId} = response.data; 
   return roomId;
 };
+
+export const landlord_update = (roomId : number, param:room_info)=>{
+  baseApi.put(`/landlord/rooms/${roomId}`, param);
+}
+
+export const landlord_list= async(page:number)=>{
+  const list = await baseApi.get(`/landlord/rooms?page=${page}&size=10`);
+  return list.data;
+}
+
+export const landlord_delete = async(roomId: number)=>{
+  await baseApi.delete(`/landlord/rooms/${roomId}`);
+}

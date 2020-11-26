@@ -105,7 +105,7 @@ const get_room = async(room_id : number) => {
               <div> <b>{room.price.adminExpenses}</b>만원 </div>
             </div>
           </div>
-          <div className = "bg-green-200 w-1/4 p-5">        
+          <div className = "green-200 w-1/4 p-5">        
             <div className = "flex-col">
               <div className = "text-xl font-bold"> 방평수 </div>
                 <div> <b>{room.roomInfo.scale}</b>m<sup>2</sup> </div>
