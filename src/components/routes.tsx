@@ -13,6 +13,7 @@ import RoomDetail from "../pages/room/roomDetail/RoomDetail";
 import HomeContainer from "../pages/home/homeContainer";
 import postListContainer from "../pages/community/postList/postListContainer"
 import NewPostContainer from "../pages/community/newPost/newPostContainer";
+import EditPostContainer from "../pages/community/editPost/editPostContainer";
 import UserEdit from "../pages/user/UserEdit";
 import UserDelete from "../pages/user/UserDelete";
 import LandlordRooms from "../pages/landlord/LandlordRooms";
@@ -38,6 +39,7 @@ const Routes: React.FunctionComponent = () => {
         <Route path={locationUrl.locationInput} exact component={LocInput} />
         <Route path={communityUrl.communityPostList} exact component={postListContainer} />
         <Route path={communityUrl.newCommunityPost} exact component={NewPostContainer} />
+        <Route path={communityUrl.editCommunityPost} exact component={EditPostContainer} />
       </Switch>
     </Router>
   );
