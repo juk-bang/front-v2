@@ -31,10 +31,10 @@ export const getRoomImage = async(roomId:number, imgId:number) =>{
 
 }
 
-export const postRoomImage = async(roomId:number, imgId:number, file:File) =>{
-  const formData = new FormData();
-  formData.append("image", file);
-
+export const postRoomImage = async(roomId:number, imgId:number, file:File|Blob) =>{
+  let formData = new FormData();
+  formData.append("image", file);  
+  
   await baseApi
   .post(`/rooms/${roomId}/images/${imgId}`, formData, 
     {headers: {
@@ -45,6 +45,10 @@ export const postRoomImage = async(roomId:number, imgId:number, file:File) =>{
   }).catch((err:AxiosError)=>{
     return "error";
   });
+}
+
+export const deleteRoomImage = async (roomId :number, imgId:number)=>{
+  await baseApi.delete(`/rooms/${roomId}/images/${imgId}`); 
 }
 
 export const getRoomDetail = (roomId: number) =>
