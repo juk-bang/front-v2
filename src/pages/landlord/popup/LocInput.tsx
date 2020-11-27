@@ -2,8 +2,9 @@ import React, { FormEvent, useState } from "react";
 import { withRouter } from "react-router-dom";
 import axios from "axios";
 import { locationUrl } from "../../../components/urls";
+import proj4 from "proj4";
 
-function LocInput({ onChange }: any) {
+function LocInput({ onChange, address }: any) {
   //좌표API기본 state설정
   const [loc_xy] = useState({
     confmKey: "devU01TX0FVVEgyMDIwMTAwOTIzMzMyODExMDI3NDA=",
@@ -65,10 +66,16 @@ function LocInput({ onChange }: any) {
         alert(res.data.results.common.errorMessage);
         return;
       }        
-      const x :number= parseFloat(juso.entX);
-      const y :number= parseFloat(juso.entY);
-          
-      onChange({ location: loc_xy.jibunjuso, x: x, y: y });
+      let x :number= parseFloat(juso.entX);
+      let y :number= parseFloat(juso.entY);
+      var grs80 = "+proj=tmerc +lat_0=38 +lon_0=127.5 +k=0.9996 +x_0=1000000 +y_0=2000000 +ellps=GRS80 +units=m +no_defs";
+      var wgs84 = "+proj=longlat+ellps=WGS84+datum=WGS84+no_defs"; //to
+   
+      var p = proj4(grs80, wgs84, [x, y]);
+    
+      x = p[0];
+      y = p[1];    
+      onChange({ address: loc_xy.jibunjuso, lng : x, lat : y });
     });
   };
 
@@ -82,6 +89,7 @@ function LocInput({ onChange }: any) {
           type="text"
           id="roadAddrPart1"
           onFocus={update_info}
+          defaultValue = {address}
           readOnly
         />
         <input  name = "room_search"
