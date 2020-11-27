@@ -66,3 +66,11 @@ export interface IReview{
   grade : number,
   modifiedDate : string
 }
+
+export const reportType = {
+  falseRoom : 0,
+  exaggerate : 1,
+  notEqual : 2,
+  destroy : 3,
+  etc : 4
+}

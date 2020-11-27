@@ -16,6 +16,7 @@ import NewPostContainer from "../pages/community/newPost/newPostContainer";
 import UserEdit from "../pages/user/UserEdit";
 import UserDelete from "../pages/user/UserDelete";
 import LandlordRooms from "../pages/landlord/LandlordRooms";
+import RoomReport from "../pages/room/roomDetail/RoomReport";
 
 const Routes: React.FunctionComponent = () => {
   return (
@@ -24,6 +25,7 @@ const Routes: React.FunctionComponent = () => {
         <Route path={mainHome} exact component={HomeContainer} />
         <Route path={roomUrl.home} exact component={roomListContainer} />
         <Route path={roomUrl.room} exact component={RoomDetail} />
+        <Route path={roomUrl.roomReport} exact component={RoomReport} />
         <Route path={authUrl.signIn} exact component={SignIn} />
         <Route path={authUrl.signUp} exact component={SignUp} />
         <Route path={authUrl.signOut} exact component={SignOut} />

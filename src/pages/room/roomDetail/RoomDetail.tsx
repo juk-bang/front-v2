@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { RouteComponentProps, withRouter } from "react-router-dom";
+import { Link, RouteComponentProps, withRouter } from "react-router-dom";
 import NavBar from "../../../components/NavBar";
-import "../../../sass/tailwind.output.css";
 import {getRoomDetail} from "../../../API/room";
 import { IRoomDetail } from "../interface";
 
@@ -76,9 +75,9 @@ const get_room = async(room_id : number) => {
       <NavBar></NavBar>
       <div className="min-h-screen flex flex-col items-center justify-center py-12 px-4 sm:px-8 lg:px-20">
         <div className = "mt-20 flex justify-end space-x-2">        
-          <button className="button-mint-white" >
+          <Link className="button-mint-white" to ={"/rooms/"+room_id+"/report"}>
             신고하기
-          </button>
+          </Link>
           <button className="button-light-green-white" >
             문의하기
           </button>
