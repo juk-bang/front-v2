@@ -1,8 +1,8 @@
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import "../../../sass/tailwind.output.css";
-import { Link, RouteComponentProps } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { landlord_delete, landlord_list } from "../../../API/landlord";
-import { roomUrl } from "../../../components/urls";
+import { landlordUrl, roomUrl } from "../../../components/urls";
 import RoomCard from "./RoomCard";
 import { ILandlordRoom } from "../interface";
 
@@ -66,8 +66,8 @@ const LandlordList = (props:IProps) => {
                         <RoomCard room={room} />
                     </Link>
                     <div className="mt-3 flex items-center justify-center">
-                        <button className="btn-primary transition duration-300 ease-in-out focus:outline-none focus:shadow-outline bg-purple-700 hover:bg-purple-900 text-white font-normal py-2 px-4 mr-1 rounded"
-                        >수정</button>
+                        <Link to = {landlordUrl.landlordUpload+'?roomid='+room.roomId} className="btn-primary transition duration-300 ease-in-out focus:outline-none focus:shadow-outline bg-purple-700 hover:bg-purple-900 text-white font-normal py-2 px-4 mr-1 rounded"
+                        >수정</Link>
                         <button onClick = {()=>delete_room(room.roomId)} className="btn-outline-primary transition duration-300 ease-in-out focus:outline-none focus:shadow-outline border bg-black-100 border-purple-700 hover:bg-purple-700 text-purple-700 hover:text-white font-normal py-2 px-4 rounded"
                         >삭제</button>
                     </div>  
