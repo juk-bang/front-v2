@@ -71,6 +71,12 @@ export const editReview = (reviewId: number, message : string, grade : number) =
 export const deleteReview = (reviewId: number) =>
   baseApi.delete(`/review/${reviewId}`);   
 
+//신고
+export const reportRoom = (roomId: number, type : number, detail : string) =>
+  baseApi.post(`/rooms/${roomId}/report`, {
+    type, detail  
+  });   
+
 //배열리턴
 export const getArr = (start : number, end : number): number[] => {
   let floor = [];
