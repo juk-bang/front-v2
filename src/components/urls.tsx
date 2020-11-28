@@ -69,6 +69,8 @@ const editCommunityPost = "/community/edit/:univId/:postId"
 const getEditCommunityPost = (univId:string, postId:string) => `/community/edit/${univId}/${postId}`
 const newCommunityPost = "/community/new/:univId"
 const getNewCommunityPost = (univId:number) => `/community/new/${univId}`
+const communityReport = "/community/report/:univId/:postId"
+const getCommunityReport = (univId:string, postId:string) => `/community/report/${univId}/${postId}`
 
 export const communityUrl = {
   communityPostList,
@@ -79,4 +81,6 @@ export const communityUrl = {
   getNewCommunityPost,
   editCommunityPost,
   getEditCommunityPost,
+  communityReport,
+  getCommunityReport
 }

@@ -15,9 +15,18 @@ baseApi.get(`/community/all/${univId}/${postId}/comments`);
 export const postCommunityPostComments = (univId: number, postId:number, body:string) =>
 baseApi.post(`/community/all/${univId}/${postId}/comments`, {body});
 
+export const putCommunityPostComment = (univId: number, postId:number, commentId:number, body:string) =>
+baseApi.put(`/community/all/${univId}/${postId}/comments/${commentId}`, {body});
+
+export const deleteCommunityPostComment = (univId: number, postId:number, commentId:number) =>
+baseApi.delete(`/community/all/${univId}/${postId}/comments/${commentId}`);
+
 export const deleteCommunityPost = (univId: number, postId:number) =>
 baseApi.delete(`/community/all/${univId}/${postId}`);
 
 export const putCommunityPost = (univId: number, postId:number, title:string, body:string) =>
   baseApi.put(`/community/all/${univId}/${postId}`, {title, body});
+
+export const postReportCommunityPost = (univId: number, postId:number, type:number, detail:string) =>
+  baseApi.post(`/community/${univId}/${postId}/report`, {type, detail});
 
