@@ -3,6 +3,7 @@ import { Link, withRouter,  RouteComponentProps} from "react-router-dom";
 import NavBar from "../../../components/NavBar";
 import {communityUrl} from "../../../components/urls";
 import CommentsCard from "./components/commentsCard"
+import {get_id} from ".././../../API/auth"
 
 interface MatchParams {
     univId: string;
@@ -26,12 +27,15 @@ const PostDetailPresenter:React.FC<IProps> = ({newComment, handleClickSubmitComm
         <div className="pt-20 flex items-center justify-center flex-col">
             <div className="flex items-center justify-between w-2/3">
                 <div className="flex items-center justify-center">
-                    <Link to={communityUrl.getEditCommunityPost(params.univId, params.postId)} className="w-24 h-12 bg-blue-200 flex items-center justify-center mr-8">
+                    {
+                        postData ? get_id() == postData.writer ? <><Link to={communityUrl.getEditCommunityPost(params.univId, params.postId)} className="w-24 h-12 bg-blue-200 flex items-center justify-center mr-8">
                         수정
                     </Link>
                     <div className="w-24 h-12 bg-blue-200 flex items-center justify-center" onClick={deletePost}>
                         삭제
-                    </div>
+                    </div></> : "" : ""
+                    }
+                    
                 </div>
                 <div className="flex items-center justify-center">
                     <Link to={communityUrl.getCommunityPostList(parseInt(params.univId))} className="w-24 h-12 bg-blue-200 flex items-center justify-center mr-8">
