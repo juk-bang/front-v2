@@ -1,5 +1,4 @@
 import { AxiosResponse, AxiosError } from "axios";
-import { RSA_NO_PADDING } from "constants";
 import baseApi from "./baseApi";
 
 export const getRoomList = (univId: number) =>
