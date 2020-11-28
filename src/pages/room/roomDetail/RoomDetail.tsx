@@ -15,6 +15,7 @@ import LocationPresenter from "./components/LocationPresenter";
 import RoomPicture from "./components/RoomPicture";
 import RoomReview from "./components/RoomReview";
 import ScoreItem from "./components/ScoreItem";
+import { AxiosError } from "axios";
 
 const RoomDetail = ({history}:RouteComponentProps) => {
   const [room_id, set_room_id] = useState(0);
@@ -73,8 +74,13 @@ const get_room = async(room_id : number) => {
 const favorite = () => {
   postFavorite(room.roomId).then(()=>{
     alert('찜하였습니다. 찜리스트에서 해당 방을 찾으실 수 있습니다.');
-  }).catch((err)=>{
-    alert("찜하기에 실패했습니다.");
+  }).catch((err:AxiosError)=>{
+    if(err.response?.data.message !== undefined)
+    {
+      alert(err.response.data.message);
+    }else{
+      alert("찜하기에 실패했습니다.");
+    }
   })
 }
 
