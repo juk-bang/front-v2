@@ -52,7 +52,7 @@ const UserInfo = ({history}:RouteComponentProps) => {
                   방올리기
                 </Link>
               ) : state.role === position.STUDENT ? (
-                <Link className="text-center button-mint-white w-full" to={``}>
+                <Link className="text-center button-mint-white w-full" to={userUrl.userFavorite}>
                   찜리스트
                 </Link>
               ): undefined}

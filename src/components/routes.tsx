@@ -18,6 +18,7 @@ import UserEdit from "../pages/user/UserEdit";
 import UserDelete from "../pages/user/UserDelete";
 import LandlordRooms from "../pages/landlord/LandlordRooms";
 import RoomReport from "../pages/room/roomDetail/RoomReport";
+import UserFavorite from "../pages/user/UserFavorite";
 
 const Routes: React.FunctionComponent = () => {
   return (
@@ -33,6 +34,7 @@ const Routes: React.FunctionComponent = () => {
         <Route path={userUrl.userInfo} exact component={UserInfo} />
         <Route path={userUrl.userEdit} exact component={UserEdit} />
         <Route path={userUrl.userDelete} exact component={UserDelete} />
+        <Route path={userUrl.userFavorite} exact component={UserFavorite} />
         <Route path={landlordUrl.landlordUpload} exact component={LandlordUpload} />
         <Route path={landlordUrl.landlordRooms} exact component={LandlordRooms} />
         <Route path={locationUrl.locationGet} exact component={LocPopup} />

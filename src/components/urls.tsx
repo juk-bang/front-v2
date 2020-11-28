@@ -34,9 +34,9 @@ export const authUrl = {
 const userInfo = "/userinfo";
 const userEdit = "/userinfo/edit";
 const userDelete = "/userinfo/delete";
-
+const userFavorite = "/userinfo/favorites";
 export const userUrl = {
-  userInfo, userEdit, userDelete
+  userInfo, userEdit, userDelete, userFavorite
 };
 
 //landlord
