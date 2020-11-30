@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, RouteComponentProps, withRouter } from "react-router-dom";
 import NavBar from "../../../components/NavBar";
-import {getRoomDetail} from "../../../API/room";
+import {getRoomDetail, postFavorite} from "../../../API/room";
 import { IRoomDetail } from "../interface";
 
 import {MdSubway} from "react-icons/md";
@@ -15,6 +15,7 @@ import LocationPresenter from "./components/LocationPresenter";
 import RoomPicture from "./components/RoomPicture";
 import RoomReview from "./components/RoomReview";
 import ScoreItem from "./components/ScoreItem";
+import { AxiosError } from "axios";
 
 const RoomDetail = ({history}:RouteComponentProps) => {
   const [room_id, set_room_id] = useState(0);
@@ -70,6 +71,19 @@ const get_room = async(room_id : number) => {
   set_room(roomInfo.data);
 }
 
+const favorite = () => {
+  postFavorite(room.roomId).then(()=>{
+    alert('찜하였습니다. 찜리스트에서 해당 방을 찾으실 수 있습니다.');
+  }).catch((err:AxiosError)=>{
+    if(err.response?.data.message !== undefined)
+    {
+      alert(err.response.data.message);
+    }else{
+      alert("찜하기에 실패했습니다.");
+    }
+  })
+}
+
   return (
     <div>
       <NavBar></NavBar>
@@ -81,7 +95,7 @@ const get_room = async(room_id : number) => {
           <button className="button-light-green-white" >
             문의하기
           </button>
-          <button className="button-mint-white" >
+          <button className="button-mint-white" onClick = {favorite}>
             찜하기
           </button>
         </div>

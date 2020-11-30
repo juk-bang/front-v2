@@ -77,6 +77,20 @@ export const reportRoom = (roomId: number, type : number, detail : string) =>
     type, detail  
   });   
 
+//찜
+export const getFavoriteList = async () => {
+    const res = await baseApi.get(`/user/favorites`);
+    return res.data;
+}
+
+export const postFavorite = async (roomId : number) => {
+  await baseApi.post(`/user/favorites/${roomId}`);
+}
+
+export const deleteFvorite = async (roomId : number) => {
+  await baseApi.delete(`/user/favorites/${roomId}`);
+}
+  
 //배열리턴
 export const getArr = (start : number, end : number): number[] => {
   let floor = [];
