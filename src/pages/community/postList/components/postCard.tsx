@@ -5,12 +5,13 @@ import {communityUrl} from "../../../../components/urls";
 interface IProps{
     id: any;
     post: any;
+    role:any;
 }
 
-const PostCard: React.FC<IProps> = ({id, post}) => {
+const PostCard: React.FC<IProps> = ({id, post, role}) => {
     const currentUnivid = localStorage.getItem("univid");
 
-    return <Link to={currentUnivid ? communityUrl.getCommunityDetail(parseInt(currentUnivid), post.postId) : ""} 
+    return <Link to={currentUnivid ? role=="all" ? communityUrl.getCommunityDetailAll(parseInt(currentUnivid), post.postId) : communityUrl.getCommunityDetailStudent(parseInt(currentUnivid), post.postId) : ""} 
                 className="w-full h-20 bg-gray-200 flex items-center justify-start pl-10 border-solid border-4 border-gray-600 mt-px">
         <div className="ml-8">
             {post.views}

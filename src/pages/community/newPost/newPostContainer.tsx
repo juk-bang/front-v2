@@ -4,9 +4,13 @@ import {postCommunityPost} from "../../../API/community"
 import { withRouter, RouteComponentProps } from "react-router-dom";
 import { communityUrl } from "../../../components/urls";
 
-interface IProps extends RouteComponentProps{}
+interface IParams{
+    role:any;
+}
 
-const NewPostContainer:React.FunctionComponent<IProps> = ({history}) => {
+interface IProps extends RouteComponentProps<IParams>{}
+
+const NewPostContainer:React.FunctionComponent<IProps> = ({history, match:{params:{role}}}) => {
     const [title, setTitle] = useState("");
     const [body, setBody] = useState("");
 
@@ -17,7 +21,7 @@ const NewPostContainer:React.FunctionComponent<IProps> = ({history}) => {
     const onSubmit = () => {
         const currentUnivid = localStorage.getItem("univid");
         if(currentUnivid){
-            postCommunityPost(parseInt(currentUnivid), title, body);
+            postCommunityPost(parseInt(currentUnivid), title, body, role);
             let communityListUrl = "";
             if(currentUnivid)
                 communityListUrl = communityUrl.getCommunityPostList(parseInt(currentUnivid));

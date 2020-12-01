@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { roomUrl, authUrl, userUrl, landlordUrl, locationUrl, mainHome, communityUrl } from "./urls";
+import { roomUrl, authUrl, userUrl, landlordUrl, locationUrl, mainHome, communityUrl, adminUrl } from "./urls";
 import roomListContainer from "../pages/room/roomList/roomListContainer";
 import SignIn from "../pages/auth/SignIn";
 import SignUp from "../pages/auth/SignUp";
@@ -15,11 +15,16 @@ import postListContainer from "../pages/community/postList/postListContainer"
 import NewPostContainer from "../pages/community/newPost/newPostContainer";
 import EditPostContainer from "../pages/community/editPost/editPostContainer";
 import postDetailContainer from "../pages/community/postDetail/postDetailContainer";
+import CommunityReportContainer from "../pages/community/communityReport/communityReportContainer";
 import UserEdit from "../pages/user/UserEdit";
 import UserDelete from "../pages/user/UserDelete";
 import LandlordRooms from "../pages/landlord/LandlordRooms";
 import RoomReport from "../pages/room/roomDetail/RoomReport";
 import UserFavorite from "../pages/user/UserFavorite";
+import AdminHomeContainer from "../pages/admin/adminHome/adminHomeContainer";
+import AdminCoomunityReportContainer from "../pages/admin/adminCommunityReport/adminCommunityReportContainer";
+import AdminRoomPermissionContainer from "../pages/admin/adminRoomPermission/adminRoomPermissionContainer";
+import adminRoomReportContainer from "../pages/admin/adminRoomReport/adminRoomReportContainer";
 
 const Routes: React.FunctionComponent = () => {
   return (
@@ -44,6 +49,11 @@ const Routes: React.FunctionComponent = () => {
         <Route path={communityUrl.newCommunityPost} exact component={NewPostContainer} />
         <Route path={communityUrl.editCommunityPost} exact component={EditPostContainer} />
         <Route path={communityUrl.communityDetail} exact component={postDetailContainer} />
+        <Route path={communityUrl.communityReport} exact component={CommunityReportContainer} />
+        <Route path={adminUrl.adminHome} exact component={AdminHomeContainer} />
+        <Route path={adminUrl.adminCommunityReport} exact component={AdminCoomunityReportContainer} />
+        <Route path={adminUrl.adminRoomPermission} exact component={AdminRoomPermissionContainer} />
+        <Route path={adminUrl.adminRoomReport} exact component={adminRoomReportContainer} />
       </Switch>
     </Router>
   );

@@ -74,3 +74,32 @@ export const reportType = {
   destroy : 3,
   etc : 4
 }
+
+export interface IRoomFilter {
+  layout: number;
+  monthlyLease: {
+    min: number;
+    max: number;
+  };
+  adminExpenses: {
+    min: number;
+    max: number;
+  };
+  deposit: {
+    min: number;
+    max: number;
+  };
+  scale: {
+    min: number;
+    max: number;
+  };
+  grade: {
+    min: number;
+    max: number;
+  };
+  distance: {
+    min: number;
+    max: number;
+  };
+  floor: number;
+}
