@@ -22,6 +22,9 @@ export const postRoomThumbnail = (roomId: number) =>
         return "error";
   });  
 
+export const getFavoriteRooms = () =>
+  baseApi.get(`/user/favorites`);
+
 export const getRoomImage = async(roomId:number, imgId:number) =>{
   const response = await baseApi.get(
     `/rooms/${roomId}/images/${imgId}`, 
