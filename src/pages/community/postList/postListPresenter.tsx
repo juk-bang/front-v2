@@ -7,20 +7,55 @@ import {communityUrl} from "../../../components/urls"
 
 interface IProps{
     postList:any;
+    role:any;
+    setRole:any;
 }
 
-const PostListPresenter:React.FC<IProps> = ({postList}) => {
+const PostListPresenter:React.FC<IProps> = ({postList, role, setRole}) => {
 
     let newPostUrl = "";
     const currentUnivid = localStorage.getItem("univid");
     if(currentUnivid)
-        newPostUrl = communityUrl.getNewCommunityPost(parseInt(currentUnivid));
+        if(role == "student")
+            newPostUrl = communityUrl.getNewCommunityPostStudent(parseInt(currentUnivid));
+        else if (role=="all")
+            newPostUrl = communityUrl.getNewCommunityPostAll(parseInt(currentUnivid));
+
+    const handleChangeStudentRole = (e:any) => {
+        setRole("student");
+        localStorage.setItem("role", "student");
+    }
+
+    const handleChangeAllRole = (e:any) => {
+        setRole("all");
+        localStorage.setItem("role", "all");
+    }
 
 
     return <>
         <NavBar></NavBar>
         <div className="pt-20 flex items-center justify-center flex-col">
-            <div className="w-2/3 h-16 mt-8 flex items-center justify-end">
+            <div className="w-2/3 h-16 mt-8 flex items-center justify-between">
+                <div className="flex">
+                    {role=="student" ?
+                        <div className="w-24 h-12 bg-blue-400 flex items-center justify-center mr-8" onClick={handleChangeStudentRole}>
+                            학생 전용
+                        </div>
+                        :
+                        <div className="w-24 h-12 bg-blue-200 flex items-center justify-center mr-8" onClick={handleChangeStudentRole}>
+                            학생 전용
+                        </div>
+                    }
+                    {role=="all" ?
+                        <div className="w-24 h-12 bg-blue-400 flex items-center justify-center mr-8" onClick={handleChangeAllRole}>
+                            모든 회원
+                        </div>
+                        :
+                        <div className="w-24 h-12 bg-blue-200 flex items-center justify-center mr-8" onClick={handleChangeAllRole}>
+                            모든 회원
+                        </div>
+                    }
+                </div>
                 <Link to={newPostUrl} className="w-24 h-12 bg-blue-200 flex items-center justify-center">
                     글쓰기
                 </Link>
@@ -45,7 +80,7 @@ const PostListPresenter:React.FC<IProps> = ({postList}) => {
             <div className="w-2/3 h-screen mt-8 flex items-center justify-start flex-col">
                 {
                     postList ?
-                    postList.map((post:any) => <PostCard id={post.postId} post={post}/>) : ""
+                    postList.map((post:any) => <PostCard id={post.postId} post={post} role={role}/> ) : ""
                 }
             </div>
         </div>

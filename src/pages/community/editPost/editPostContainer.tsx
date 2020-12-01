@@ -8,7 +8,8 @@ import { getCommunityPostDetail } from "../../../API/community";
 interface MatchParams {
     univId: string;
     postId: string;
-  }
+    role:any;
+}
 
 
 
@@ -17,7 +18,7 @@ const EditPostContainer:React.FC<RouteComponentProps<MatchParams>> = ({history, 
     const [body, setBody] = useState("");
 
     const getPostData = async () => {
-        const serverPostData = await getCommunityPostDetail(parseInt(params.postId), parseInt(params.univId));
+        const serverPostData = await getCommunityPostDetail(parseInt(params.postId), parseInt(params.univId), params.role);
         setTitle(serverPostData.data.title);
         setBody(serverPostData.data.body);
     }
@@ -34,7 +35,7 @@ const EditPostContainer:React.FC<RouteComponentProps<MatchParams>> = ({history, 
     const onSubmit = () => {
         const currentUnivid = localStorage.getItem("univid");
         if(currentUnivid){
-            putCommunityPost(parseInt(params.univId), parseInt(params.postId), title, body);
+            putCommunityPost(parseInt(params.univId), parseInt(params.postId), title, body, params.role);
             history.goBack();
         }
     }

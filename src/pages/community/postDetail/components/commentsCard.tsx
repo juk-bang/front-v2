@@ -6,15 +6,17 @@ import {putCommunityPostComment,deleteCommunityPostComment} from "../../../../AP
 interface IParmas{
     postId:string;
     univId:string;
+    role:any;
 }
 
 interface IProps extends RouteComponentProps<IParmas> {
     commentData:any;
     key:number;
     getCommentsData:any;
+    role:any;
 }
 
-const CommentsCard:React.FC<IProps> = ({commentData, key, getCommentsData, match:{params:{univId, postId}}}) => {
+const CommentsCard:React.FC<IProps> = ({commentData, key, getCommentsData, match:{params:{univId, postId, role}}}) => {
 
     const [openEditComment, SetOpenEditComment] =  useState(false);
 
@@ -30,7 +32,7 @@ const CommentsCard:React.FC<IProps> = ({commentData, key, getCommentsData, match
         const textarea = e.target.parentElement.parentElement.children[4];
         const buttonList = e.target.parentElement.parentElement.children[5];
         const body = textarea.value;    
-        putCommunityPostComment(parseInt(univId), parseInt(postId), commentData.commentsId, body);
+        putCommunityPostComment(parseInt(univId), parseInt(postId), commentData.commentsId, body, role);
         textarea.remove();
         buttonList.remove();
         SetOpenEditComment(false);
@@ -38,7 +40,7 @@ const CommentsCard:React.FC<IProps> = ({commentData, key, getCommentsData, match
     }
 
     const handleClickRemoveComment = (e:any)=>{
-        deleteCommunityPostComment(parseInt(univId), parseInt(postId), commentData.commentsId);
+        deleteCommunityPostComment(parseInt(univId), parseInt(postId), commentData.commentsId, role);
         getCommentsData();
     }
 

@@ -12,12 +12,19 @@ export const roomUrl = {
 
 // admin
 const adminHome = "/admin";
-const adminReport = "/admin/report";
+const adminRoomReport = "/admin/room/report";
+const adminRoomPermission = "/admin/room/permission";
+const adminCommunityReport = "/admin/community/report/:role";
+const getAdminCommunityReport = (role:any) => `/admin/community/report/${role}`;
 
 export const adminUrl = {
   adminHome,
-  adminReport,
+  adminRoomReport,
+  adminRoomPermission,
+  adminCommunityReport,
+  getAdminCommunityReport,
 };
+
 
 //auth
 const signIn = "/auth/signin";
@@ -63,22 +70,26 @@ export const mainHome = "/";
 // community
 const communityPostList = "/community/:univId"
 const getCommunityPostList = (univId:number) => `/community/${univId}`
-const communityDetail = "/community/detail/:univId/:postId"
-const getCommunityDetail = (univId:number, postId:number) => `/community/detail/${univId}/${postId}`
-const editCommunityPost = "/community/edit/:univId/:postId"
-const getEditCommunityPost = (univId:string, postId:string) => `/community/edit/${univId}/${postId}`
-const newCommunityPost = "/community/new/:univId"
-const getNewCommunityPost = (univId:number) => `/community/new/${univId}`
-const communityReport = "/community/report/:univId/:postId"
-const getCommunityReport = (univId:string, postId:string) => `/community/report/${univId}/${postId}`
+const communityDetail = "/community/detail/:role/:univId/:postId"
+const getCommunityDetailAll = (univId:number, postId:number) => `/community/detail/all/${univId}/${postId}`
+const getCommunityDetailStudent = (univId:number, postId:number) => `/community/detail/student/${univId}/${postId}`
+const editCommunityPost = "/community/edit/:role/:univId/:postId"
+const getEditCommunityPost = (univId:string, postId:string, role:string) => `/community/edit/${role}/${univId}/${postId}`
+const newCommunityPost = "/community/new/:role/:univId"
+const getNewCommunityPostAll = (univId:number) => `/community/new/all/${univId}`
+const getNewCommunityPostStudent = (univId:number) => `/community/new/student/${univId}`
+const communityReport = "/community/report/:role/:univId/:postId"
+const getCommunityReport = (univId:string, postId:string, role:string) => `/community/report/${role}/${univId}/${postId}`
 
 export const communityUrl = {
   communityPostList,
   getCommunityPostList,
   communityDetail,
-  getCommunityDetail,
+  getCommunityDetailAll,
+  getCommunityDetailStudent,
   newCommunityPost,
-  getNewCommunityPost,
+  getNewCommunityPostAll,
+  getNewCommunityPostStudent,
   editCommunityPost,
   getEditCommunityPost,
   communityReport,

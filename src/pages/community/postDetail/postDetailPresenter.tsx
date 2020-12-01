@@ -8,6 +8,7 @@ import {get_id} from ".././../../API/auth"
 interface MatchParams {
     univId: string;
     postId: string;
+    role:string;
   }
 
 interface IProps extends RouteComponentProps<MatchParams>{
@@ -18,6 +19,7 @@ interface IProps extends RouteComponentProps<MatchParams>{
     commentsData:any;
     deletePost():void;
     getCommentsData:any;
+    role:any;
 }
 
 const PostDetailPresenter:React.FC<IProps> = ({newComment, handleClickSubmitComment, postData, handleChangeComment, commentsData, deletePost, getCommentsData, match:{params}}) => {
@@ -28,7 +30,7 @@ const PostDetailPresenter:React.FC<IProps> = ({newComment, handleClickSubmitComm
             <div className="flex items-center justify-between w-2/3">
                 <div className="flex items-center justify-center">
                     {
-                        postData ? get_id() == postData.writer ? <><Link to={communityUrl.getEditCommunityPost(params.univId, params.postId)} className="w-24 h-12 bg-blue-200 flex items-center justify-center mr-8">
+                        postData ? get_id() == postData.writer ? <><Link to={communityUrl.getEditCommunityPost(params.univId, params.postId, params.role)} className="w-24 h-12 bg-blue-200 flex items-center justify-center mr-8">
                         수정
                     </Link>
                     <div className="w-24 h-12 bg-blue-200 flex items-center justify-center" onClick={deletePost}>
@@ -41,7 +43,7 @@ const PostDetailPresenter:React.FC<IProps> = ({newComment, handleClickSubmitComm
                     <Link to={communityUrl.getCommunityPostList(parseInt(params.univId))} className="w-24 h-12 bg-blue-200 flex items-center justify-center mr-8">
                         글목록
                     </Link>
-                    <Link className="w-24 h-12 bg-blue-200 flex items-center justify-center" to={communityUrl.getCommunityReport(params.univId, params.postId)}>
+                    <Link className="w-24 h-12 bg-blue-200 flex items-center justify-center" to={communityUrl.getCommunityReport(params.univId, params.postId, params.role)}>
                         신고
                     </Link>
                 </div>
@@ -97,7 +99,7 @@ const PostDetailPresenter:React.FC<IProps> = ({newComment, handleClickSubmitComm
                     </div>
                     {
                         commentsData ? commentsData.map((commentData:any) => {
-                            return <CommentsCard commentData={commentData} key={parseInt(commentsData.commentsId)} getCommentsData={getCommentsData}/>;
+                            return <CommentsCard commentData={commentData} key={parseInt(commentsData.commentsId)} getCommentsData={getCommentsData} role={params.role}/>;
                         }) : ""
                     }
                 </div>

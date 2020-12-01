@@ -1,32 +1,32 @@
 import baseApi from "./baseApi";
 
-export const getCommunityPostList = (univId: number) =>
-  baseApi.get(`/community/all/${univId}`);
+export const getCommunityPostList = (univId: number, role:string) =>
+  baseApi.get(`/community/${role}/${univId}`);
 
-export const postCommunityPost = (univId:number, title:string, body:string) =>
-  baseApi.post(`/community/all/${univId}`, {title, body});
+export const postCommunityPost = (univId:number, title:string, body:string, role:any) =>
+  baseApi.post(`/community/${role}/${univId}`, {title, body});
 
-export const getCommunityPostDetail = (univId: number, postId:number) =>
-  baseApi.get(`/community/all/${univId}/${postId}`);
+export const getCommunityPostDetail = (univId: number, postId:number, role:string) =>
+  baseApi.get(`/community/${role}/${univId}/${postId}`);
 
-export const getCommunityPostComments = (univId: number, postId:number) =>
-baseApi.get(`/community/all/${univId}/${postId}/comments`);
+export const getCommunityPostComments = (univId: number, postId:number, role:string) =>
+baseApi.get(`/community/${role}/${univId}/${postId}/comments`);
 
-export const postCommunityPostComments = (univId: number, postId:number, body:string) =>
-baseApi.post(`/community/all/${univId}/${postId}/comments`, {body});
+export const postCommunityPostComments = (univId: number, postId:number, body:string, role:string) =>
+baseApi.post(`/community/${role}/${univId}/${postId}/comments`, {body});
 
-export const putCommunityPostComment = (univId: number, postId:number, commentId:number, body:string) =>
-baseApi.put(`/community/all/${univId}/${postId}/comments/${commentId}`, {body});
+export const putCommunityPostComment = (univId: number, postId:number, commentId:number, body:string, role:string) =>
+baseApi.put(`/community/${role}/${univId}/${postId}/comments/${commentId}`, {body});
 
-export const deleteCommunityPostComment = (univId: number, postId:number, commentId:number) =>
-baseApi.delete(`/community/all/${univId}/${postId}/comments/${commentId}`);
+export const deleteCommunityPostComment = (univId: number, postId:number, commentId:number, role:string) =>
+baseApi.delete(`/community/${role}/${univId}/${postId}/comments/${commentId}`);
 
-export const deleteCommunityPost = (univId: number, postId:number) =>
-baseApi.delete(`/community/all/${univId}/${postId}`);
+export const deleteCommunityPost = (univId: number, postId:number, role:any) =>
+baseApi.delete(`/community/${role}/${univId}/${postId}`);
 
-export const putCommunityPost = (univId: number, postId:number, title:string, body:string) =>
-  baseApi.put(`/community/all/${univId}/${postId}`, {title, body});
+export const putCommunityPost = (univId: number, postId:number, title:string, body:string, role:string) =>
+  baseApi.put(`/community/${role}/${univId}/${postId}`, {title, body});
 
-export const postReportCommunityPost = (univId: number, postId:number, type:number, detail:string) =>
-  baseApi.post(`/community/${univId}/${postId}/report`, {type, detail});
+export const postReportCommunityPost = (univId: number, postId:number, type:number, detail:string, role:string) =>
+  baseApi.post(`/community/${role}/${univId}/${postId}/report`, {type, detail});
 
