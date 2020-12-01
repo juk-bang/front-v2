@@ -12,6 +12,7 @@ import { Link } from "react-router-dom";
 interface IProps {
   rooms: Array<IRoom>;
   markers: Array<IMarker>;
+  hanldeClickUserFavorites:any;
 }
 
 const RoomListPresenter: React.FunctionComponent<IProps> = (props) => {
@@ -23,7 +24,7 @@ const RoomListPresenter: React.FunctionComponent<IProps> = (props) => {
         <NavBar></NavBar>
         <div className="w-full h-full flex pt-16">
           <div className="w-full h-full">
-            {props.markers.length == props.rooms.length ? (
+            {props.markers ? props.rooms ? props.markers.length == props.rooms.length ? (
               <GoogleMap
                 APIKEY={String(process.env.REACT_APP_GOOGLE_MAP_KEY)}
                 width={"100%"}
@@ -35,14 +36,28 @@ const RoomListPresenter: React.FunctionComponent<IProps> = (props) => {
               ></GoogleMap>
             ) : (
               "error"
-            )}
+            ) : <GoogleMap
+            APIKEY={String(process.env.REACT_APP_GOOGLE_MAP_KEY)}
+            width={"100%"}
+            height={"100%"}
+            lat={37.496303}
+            lng={126.957266}
+            zoom={16}
+          ></GoogleMap> : <GoogleMap
+          APIKEY={String(process.env.REACT_APP_GOOGLE_MAP_KEY)}
+          width={"100%"}
+          height={"100%"}
+          lat={37.496303}
+          lng={126.957266}
+          zoom={16}
+        ></GoogleMap>}
           </div>
           <div className="container bg-green-200 max-w-3xl h-full relative">
             <div className="w-full absolute">
-              <Filter />
+              <Filter hanldeClickUserFavorites={props.hanldeClickUserFavorites}/>
             </div>
             <div className="flex flex-wrap mt-16">
-              {props.rooms.map((room) => {
+              {props.rooms ? props.rooms.map((room) => {
                 return (
                   <div className="w-1/3" key={room.roomId}>
                     <Link
@@ -53,7 +68,7 @@ const RoomListPresenter: React.FunctionComponent<IProps> = (props) => {
                     </Link>
                   </div>
                 );
-              })}
+              }): ""}
             </div>
           </div>
         </div>

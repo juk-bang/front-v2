@@ -2,7 +2,11 @@ import React, { useState } from "react";
 import "../../../../sass/tailwind.output.css";
 import { IRoomFilter } from "../../interface";
 
-const Filter: React.FunctionComponent = (props) => {
+interface IProps{
+  hanldeClickUserFavorites:any;
+}
+
+const Filter: React.FunctionComponent<IProps> = (props) => {
   const [clickElement, setClickElement] = useState<String>("");
   const [filterSelected, setfilterSelected] = useState<IRoomFilter>({
     layout: 0,
@@ -209,7 +213,7 @@ const Filter: React.FunctionComponent = (props) => {
   return (
     <>
       <div className="flex h-16 w-full bg-green-600">
-        <div className="h-full w-24 bg-blue-200 flex justify-center items-center mr-64">
+        <div className="h-full w-24 bg-blue-200 flex justify-center items-center mr-64" onClick={props.hanldeClickUserFavorites}>
           찜
         </div>
         <div
