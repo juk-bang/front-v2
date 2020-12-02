@@ -6,6 +6,7 @@ import { landlordUrl, roomUrl } from "../../../components/urls";
 import { IRoom } from "../../room/interface";
 import { deleteFvorite, getFavoriteList } from "../../../API/room";
 import RoomCard from "../../room/roomList/components/RoomCard";
+import { AxiosError } from "axios";
 
 interface IProps {
     page: number;
@@ -46,7 +47,7 @@ const FavoriteList= (props:IProps) => {
                     set_rooms(new Array<IRoom>());
                 } 
             });  
-        }).catch((err)=>{
+        }).catch((err :AxiosError)=>{
             alert('찜삭제에 실패했습니다.');
         })
     }

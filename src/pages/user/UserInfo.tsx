@@ -3,7 +3,7 @@ import NavBar from "../../components/NavBar";
 import icon from "../../img/person.png";
 import { Link, RouteComponentProps, withRouter } from "react-router-dom";
 import { get_id, get_login, get_role, position, setting_info} from "../../API/auth";
-import { roomUrl, userUrl } from "../../components/urls";
+import { adminUrl, landlordUrl, roomUrl, userUrl } from "../../components/urls";
 import "../../sass/tailwind.output.css"
 
 const UserInfo = ({history}:RouteComponentProps) => {
@@ -48,7 +48,7 @@ const UserInfo = ({history}:RouteComponentProps) => {
                   관리하기
                 </Link>
               ) : state.role === position.LANDLORD ? (
-                <Link className="text-center button-mint-white w-full" to={``}>
+                <Link className="text-center button-mint-white w-full" to={landlordUrl.landlordUpload}>
                   방올리기
                 </Link>
               ) : state.role === position.STUDENT ? (
@@ -56,7 +56,7 @@ const UserInfo = ({history}:RouteComponentProps) => {
                   찜리스트
                 </Link>
               ): undefined}
-              <Link className="text-center button-mint-white w-full" to={``}>
+              <Link className="text-center button-mint-white w-full" to={userUrl.userPost}>
                 내게시글
               </Link>
             </span>

@@ -42,8 +42,9 @@ const userInfo = "/userinfo";
 const userEdit = "/userinfo/edit";
 const userDelete = "/userinfo/delete";
 const userFavorite = "/userinfo/favorites";
+const userPost = "/posts";
 export const userUrl = {
-  userInfo, userEdit, userDelete, userFavorite
+  userInfo, userEdit, userDelete, userFavorite, userPost
 };
 
 //landlord

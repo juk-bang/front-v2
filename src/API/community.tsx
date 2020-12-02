@@ -30,3 +30,5 @@ export const putCommunityPost = (univId: number, postId:number, title:string, bo
 export const postReportCommunityPost = (univId: number, postId:number, type:number, detail:string, role:string) =>
   baseApi.post(`/community/${role}/${univId}/${postId}/report`, {type, detail});
 
+export const getMyPost = (userId : string) =>
+  baseApi.get(`/userinfo/posts/${userId}`);

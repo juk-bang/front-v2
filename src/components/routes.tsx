@@ -25,6 +25,7 @@ import AdminHomeContainer from "../pages/admin/adminHome/adminHomeContainer";
 import AdminCoomunityReportContainer from "../pages/admin/adminCommunityReport/adminCommunityReportContainer";
 import AdminRoomPermissionContainer from "../pages/admin/adminRoomPermission/adminRoomPermissionContainer";
 import adminRoomReportContainer from "../pages/admin/adminRoomReport/adminRoomReportContainer";
+import UserPost from "../pages/user/UserPost";
 
 const Routes: React.FunctionComponent = () => {
   return (
@@ -41,6 +42,7 @@ const Routes: React.FunctionComponent = () => {
         <Route path={userUrl.userEdit} exact component={UserEdit} />
         <Route path={userUrl.userDelete} exact component={UserDelete} />
         <Route path={userUrl.userFavorite} exact component={UserFavorite} />
+        <Route path={userUrl.userPost} exact component={UserPost} />
         <Route path={landlordUrl.landlordUpload} exact component={LandlordUpload} />
         <Route path={landlordUrl.landlordRooms} exact component={LandlordRooms} />
         <Route path={locationUrl.locationGet} exact component={LocPopup} />
