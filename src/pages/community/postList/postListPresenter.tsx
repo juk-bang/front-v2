@@ -21,7 +21,7 @@ const PostListPresenter:React.FC<IProps> = ({postList, role, setRole}) => {
             newPostUrl = communityUrl.getNewCommunityPostStudent(parseInt(currentUnivid));
         else if (role=="all")
             newPostUrl = communityUrl.getNewCommunityPostAll(parseInt(currentUnivid));
-
+            
     useEffect(()=>{
         const st = document.getElementById('student');
         const al = document.getElementById('all');
@@ -77,7 +77,7 @@ const PostListPresenter:React.FC<IProps> = ({postList, role, setRole}) => {
                 </div>                        
                 {
                     postList ?
-                    postList.map((post:any) => <PostCard id={post.postId} post={post} role={post.role}/>  ) : ""
+                    postList.map((post:any) => <PostCard id={post.postId} post={post} role={role}/>  ) : ""
                 }  
             </div>
         </div>
