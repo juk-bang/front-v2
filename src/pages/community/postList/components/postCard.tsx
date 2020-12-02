@@ -15,8 +15,8 @@ const PostCard: React.FC<IProps> = ({id, post, role}) => {
     return <Link to={currentUnivid ? role=="all" ? communityUrl.getCommunityDetailAll(parseInt(currentUnivid), post.postId) : communityUrl.getCommunityDetailStudent(parseInt(currentUnivid), post.postId) : ""}
         className="grid grid-cols-11">
             <div className="col-span-5 pl-5 py-3 border-b-2 border-gray-300 text-start text-sm leading-4 tracking-wider"> {post.title}</div>
-            <div className="col-span-1 py-3 border-b-2 border-gray-300 text-center text-sm leading-4 tracking-wider">  {post.comments}</div>
-            <div className="col-span-1 py-3 border-b-2 border-gray-300 text-center text-sm leading-4 tracking-wider"> {post.views}</div>
+            <div className="col-span-1 py-3 border-b-2 border-gray-300 text-center text-sm leading-4 tracking-wider">  {post.views}</div>
+            <div className="col-span-1 py-3 border-b-2 border-gray-300 text-center text-sm leading-4 tracking-wider"> {post.comments}</div>
             <div className="col-span-2 py-3 border-b-2 border-gray-300 text-center text-sm leading-4 tracking-wider">  {post.writer===undefined?get_id():post.writer}</div>
             <div className="col-span-2 py-3 border-b-2 border-gray-300 text-center text-sm leading-4 tracking-wider">
                 <span className="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
