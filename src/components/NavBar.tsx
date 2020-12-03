@@ -17,14 +17,17 @@ const NavBar = () => {
 
   const currentUnivid = localStorage.getItem("univid");
   let communityListUrl = "";
-  if(currentUnivid)
+  let roomListUrl = "";
+  if(currentUnivid){
    communityListUrl = communityUrl.getCommunityPostList(parseInt(currentUnivid));
+   roomListUrl = roomUrl.getHome(currentUnivid);
+  }
 
   return (
     <div>
         <nav className="navigation-bar">
           <div className="left-nav">
-            <Link className="logo" to={roomUrl.home}>
+            <Link className="logo" to={roomListUrl}>
               <img
                 className="padding-top-7px"
                 src={icon}
@@ -43,7 +46,7 @@ const NavBar = () => {
                 판매자페이지
               </Link>
             ) : undefined}
-            <Link className="nav-item" to={roomUrl.home}>
+            <Link className="nav-item" to={roomListUrl}>
               방 리스트
             </Link>
             <Link className="nav-item" to={communityListUrl}>

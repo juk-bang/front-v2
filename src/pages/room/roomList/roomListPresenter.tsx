@@ -13,12 +13,21 @@ interface IProps {
   rooms: Array<IRoom>;
   markers: Array<IMarker>;
   hanldeClickUserFavorites:any;
+  error:boolean;
 }
 
 const RoomListPresenter: React.FunctionComponent<IProps> = (props) => {
   dotenv.config();
-
-  return (
+  if(props.error === true){
+    return <div className="h-screen w-screen">
+    <NavBar></NavBar>
+    <div className="w-full h-full bg-green-200 flex justify-center items-center text-3xl">
+      방 로딩중 오류가 발생했습니다. (방이 하나도 없음)
+    </div>
+    </div>
+  }
+  else
+    return (
     <>
       <div className="h-screen w-screen">
         <NavBar></NavBar>
@@ -60,12 +69,7 @@ const RoomListPresenter: React.FunctionComponent<IProps> = (props) => {
               {props.rooms ? props.rooms.map((room) => {
                 return (
                   <div className="w-1/3" key={room.roomId}>
-                    <Link
-                      to={roomUrl.roomDetail(room.roomId)}
-                      className="w-full h-full"
-                    >
                       <RoomCard room={room} />
-                    </Link>
                   </div>
                 );
               }): ""}

@@ -1,10 +1,12 @@
 // room
 const home = "/home";
-const roomDetail = (roomId: number) => `/rooms/${roomId}`;
+const getHome = (univid:any) => `/home?univId=${univid}`
+const roomDetail = (roomId: any) => `/rooms/${roomId}`;
 const room ="/rooms/:roomid";
 const roomReport ="/rooms/:roomid/report"
 export const roomUrl = {
   home,
+  getHome,
   roomDetail,
   room,
   roomReport
@@ -16,6 +18,8 @@ const adminRoomReport = "/admin/room/report";
 const adminRoomPermission = "/admin/room/permission";
 const adminCommunityReport = "/admin/community/report/:role";
 const getAdminCommunityReport = (role:any) => `/admin/community/report/${role}`;
+const adminReportDetail = "/admin/report/:category/:detailid/:reportid"
+const getAdminReportDetail = (category:any, detailid:any, reportid:any) => `/admin/report/${category}/${detailid}/${reportid}`
 
 export const adminUrl = {
   adminHome,
@@ -23,6 +27,8 @@ export const adminUrl = {
   adminRoomPermission,
   adminCommunityReport,
   getAdminCommunityReport,
+  adminReportDetail,
+  getAdminReportDetail,
 };
 
 
@@ -72,8 +78,8 @@ export const mainHome = "/";
 const communityPostList = "/community/:univId"
 const getCommunityPostList = (univId:number) => `/community/${univId}`
 const communityDetail = "/community/detail/:role/:univId/:postId"
-const getCommunityDetailAll = (univId:number, postId:number) => `/community/detail/all/${univId}/${postId}`
-const getCommunityDetailStudent = (univId:number, postId:number) => `/community/detail/student/${univId}/${postId}`
+const getCommunityDetailAll = (univId:any, postId:any) => `/community/detail/all/${univId}/${postId}`
+const getCommunityDetailStudent = (univId:any, postId:any) => `/community/detail/student/${univId}/${postId}`
 const editCommunityPost = "/community/edit/:role/:univId/:postId"
 const getEditCommunityPost = (univId:string, postId:string, role:string) => `/community/edit/${role}/${univId}/${postId}`
 const newCommunityPost = "/community/new/:role/:univId"

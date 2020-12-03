@@ -10,14 +10,13 @@ const AdminRoomPermissionContainer:React.FC = () => {
 
     const getRoomList = async () => {
         const data = await getPermissionRoomList();
-        console.log(data);
-        setRoomList(roomList);
+        setRoomList(data.data.rooms);
     }
 
     useEffect(() => {
         getRoomList();
     }, []);
-    return <AdminRoomPermissionPresenter/>;
+    return <AdminRoomPermissionPresenter roomList={roomList}/>;
 }
 
 export default AdminRoomPermissionContainer;

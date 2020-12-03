@@ -7,3 +7,6 @@ export const editPassword = (password : string) =>
 
 export const deleteUser = () =>
   baseApi.delete(`/userinfo`); 
+
+export const postUserFavorites = (postId:any) =>
+  baseApi.post(`/user/favorites/${postId}`); 

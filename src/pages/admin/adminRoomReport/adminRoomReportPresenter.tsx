@@ -16,14 +16,14 @@ const AdminRoomReportPresenter:React.FC<IProps> = ({roomList}) => {
         <NavBar></NavBar>
         <div className="pt-20 flex items-center justify-center flex-col">
             <div className="w-2/3 h-12 bg-blue-200 flex items-center justify-around">
-                <div className="ml-64 mr-64">
-                    방
+                <div className="ml-8">
+                    방 번호
                 </div>
-                <div className="ml-32">
-                    잔류
+                <div className="">
+                    방 상세정보
                 </div>
-                <div>
-                    삭제
+                <div className="">
+                    신고 상세정보
                 </div>
             </div>
             <div className="w-2/3 h-screen flex items-center justify-start mt-8 flex-col">
