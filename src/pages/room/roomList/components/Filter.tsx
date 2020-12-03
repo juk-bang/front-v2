@@ -236,14 +236,14 @@ const Filter: React.FunctionComponent<IProps> = (props) => {
         }
       >
         <div>
+        <div className="border-solid border-2 border-green-400 flex justify-center items-center flex-col w-40 h-20">
           <div>방 형태</div>
           <select name="layout" onChange={handleChangeFilterLayout}>
-            <option value="0">원룸</option>
-            <option value="1">투룸</option>
+            <option value="1">원룸</option>
+            <option value="2">투쓰리룸</option>
           </select>
-          <div>선택값 : {filterSelected.layout}</div>
         </div>
-        <div>
+        <div className="border-solid border-2 border-green-400 flex justify-center items-center flex-col w-40 h-32">
           <div>월세</div>
           <div>최소값</div>
           <input
@@ -270,7 +270,7 @@ const Filter: React.FunctionComponent<IProps> = (props) => {
             {filterSelected.monthlyLease.max}
           </div>
         </div>
-        <div>
+        <div  className="border-solid border-2 border-green-400 flex justify-center items-center flex-col w-40 h-32">
           <div>관리비</div>
           <input
             type="range"
@@ -297,7 +297,7 @@ const Filter: React.FunctionComponent<IProps> = (props) => {
             {filterSelected.adminExpenses.max}
           </div>
         </div>
-        <div>
+        <div  className="border-solid border-2 border-green-400 flex justify-center items-center flex-col w-40 h-32">
           <div>보증금</div>
           <input
             type="range"
@@ -323,7 +323,9 @@ const Filter: React.FunctionComponent<IProps> = (props) => {
             선택값 : {filterSelected.deposit.min} ~ {filterSelected.deposit.max}
           </div>
         </div>
+        </div>
         <div>
+        <div  className="border-solid border-2 border-green-400 flex justify-center items-center flex-col w-40 h-32">
           <div>평수</div>
           <input
             type="range"
@@ -349,7 +351,7 @@ const Filter: React.FunctionComponent<IProps> = (props) => {
             선택값 : {filterSelected.scale.min} ~ {filterSelected.scale.max}
           </div>
         </div>
-        <div>
+        <div  className="border-solid border-2 border-green-400 flex justify-center items-center flex-col w-40 h-32">
           <div>평점</div>
           <input
             type="range"
@@ -375,7 +377,7 @@ const Filter: React.FunctionComponent<IProps> = (props) => {
             선택값 : {filterSelected.grade.min} ~ {filterSelected.grade.max}
           </div>
         </div>
-        <div>
+        <div  className="border-solid border-2 border-green-400 flex justify-center items-center flex-col w-40 h-32">
           <div>거리</div>
           <input
             type="range"
@@ -402,7 +404,7 @@ const Filter: React.FunctionComponent<IProps> = (props) => {
             {filterSelected.distance.max}
           </div>
         </div>
-        <div>
+        <div  className="border-solid border-2 border-green-400 flex justify-center items-center flex-col w-40 h-32">
           <div>층수</div>
           <input
             type="range"
@@ -414,6 +416,7 @@ const Filter: React.FunctionComponent<IProps> = (props) => {
             onChange={handleChangeFilterFloor}
           ></input>
           <div>선택값 : {filterSelected.floor}</div>
+        </div>
         </div>
         <div className="w-10 h-10 bg-blue-200" onClick={handleClickSubmit}>
           검색

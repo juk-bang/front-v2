@@ -21,7 +21,7 @@ const AdminRoomReportContainer:React.FC<IProps> = ({match:{params:{role}}}) => {
     useEffect(() => {
         getRoomList();
     }, []);
-
+    console.log(roomList);
     return <AdminRoomReportPresenter roomList={roomList}/>;
 }
 

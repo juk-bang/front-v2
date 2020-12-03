@@ -26,6 +26,7 @@ import AdminCoomunityReportContainer from "../pages/admin/adminCommunityReport/a
 import AdminRoomPermissionContainer from "../pages/admin/adminRoomPermission/adminRoomPermissionContainer";
 import adminRoomReportContainer from "../pages/admin/adminRoomReport/adminRoomReportContainer";
 import UserPost from "../pages/user/UserPost";
+import ReportDetailContainer from "../pages/admin/reportDetail/reportDetailContainer";
 
 const Routes: React.FunctionComponent = () => {
   return (
@@ -56,6 +57,7 @@ const Routes: React.FunctionComponent = () => {
         <Route path={adminUrl.adminCommunityReport} exact component={AdminCoomunityReportContainer} />
         <Route path={adminUrl.adminRoomPermission} exact component={AdminRoomPermissionContainer} />
         <Route path={adminUrl.adminRoomReport} exact component={adminRoomReportContainer} />
+        <Route path={adminUrl.adminReportDetail} exact component={ReportDetailContainer} />
       </Switch>
     </Router>
   );

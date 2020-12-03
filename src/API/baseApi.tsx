@@ -2,7 +2,7 @@ import axios, { AxiosInstance, AxiosRequestConfig, AxiosError } from "axios";
 import { get_cookie } from "./cookie";
 
 const baseApi: AxiosInstance = axios.create({
-  baseURL: "https://jukbang.herokuapp.com/",
+  baseURL: "https://jukbangapi.paas-ta.org/",
   timeout: 3000,
 });
 

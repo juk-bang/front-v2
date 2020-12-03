@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
 import { Link } from "react-router-dom";
-import {communityUrl} from "../../../../components/urls";
+import {adminUrl, communityUrl, roomUrl} from "../../../../components/urls";
 import { getCommunityReportDetail } from "../../../../API/admin";
 
 interface IProps{
@@ -23,20 +23,19 @@ const PostCard: React.FC<IProps> = ({roomData}) => {
 
     useEffect(() => {
         getCommunityDetail();
-    }, [])
-    console.log(detail);
+    }, []);
 
-    return <Link to={communityDetailUrl} className="w-full h-20 bg-gray-200 flex items-center justify-around order-solid border-4 border-gray-600 mt-2">
-        <div className="h-full flex items-center justify-center ml-64 mr-64">
-            커뮤니티 게시글
+    return <div className="w-full h-20 bg-gray-200 flex items-center justify-around border-solid border-4 border-gray-600 mt-2">
+        <div className="h-16 flex items-center justify-center ml-40">
+            {roomData.roomId}
         </div>
-        <div className="h-full flex items-center justify-center ml-32">
-            잔류
-        </div>
-        <div>
-            삭제
-        </div>
-    </Link>
+        <Link to={roomUrl.roomDetail(roomData.roomId)} className="h-16 w-1/3 flex items-center justify-center ml-8 border-2 border-solid border-green-500">
+            방 상세정보로 이동
+        </Link>
+        <Link to={adminUrl.getAdminReportDetail("room", roomData.roomId, roomData.reportRoomId)} className="h-16 w-22 flex items-center justify-center border-2 border-solid border-blue-500 mr-10">
+            신고 상세정보로 이동
+        </Link>
+    </div>
 }
 
 export default PostCard;

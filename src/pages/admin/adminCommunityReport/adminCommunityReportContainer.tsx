@@ -17,10 +17,14 @@ const AdminCommunityReportContainer:React.FC<IProps> = ({match:{params:{role}}})
         const data = await getCommunityReportList(role);
         setRoomList(data.data);
     }
+    
+
+    console.log(roomList);
 
     useEffect(() => {
         getRoomList();
     }, []);
+
 
     return <AdminCommunityReportPresenter roomList={roomList}/>;
 }
