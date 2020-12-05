@@ -5,7 +5,6 @@ import NavBar from "../../components/NavBar";
 import { authUrl, roomUrl } from "../../components/urls";
 import { AxiosError } from "axios";
 import { get_login, log_in, setting_info, Token, type_check } from "../../API/auth";
-import "../../sass/tailwind.output.css"
 
 const SignIn = ({history} :RouteComponentProps) => {
   const [user, set_user] = useState({ userid: "", userpassword: "" });
@@ -34,7 +33,7 @@ const SignIn = ({history} :RouteComponentProps) => {
     request_auth(user.userid, user.userpassword)
       .then((response : Token) => {
         log_in(response);
-        history.push(roomUrl.home);
+        history.push(roomUrl.home+"?univId="+localStorage.getItem('univid'));
       })
       .catch((err :AxiosError) => {
         console.log(err.message);

@@ -5,7 +5,6 @@ import { get_login, log_in, setting_info, Token, type_check } from "../../API/au
 import { roomUrl } from "../../components/urls";
 import { AxiosError } from "axios";
 import { RouteComponentProps, withRouter } from "react-router-dom";
-import "../../sass/tailwind.output.css"
 
 const SignUp = ({history}:RouteComponentProps) => {
   const [user, set_user] = useState({
@@ -48,7 +47,7 @@ const SignUp = ({history}:RouteComponentProps) => {
     request_join(userid, userpassword, univ, userrole)
       .then((response: Token) => {
         log_in(response);
-        history.push(roomUrl.home);
+        history.push(roomUrl.home+"?univId="+localStorage.getItem('univid'));
       })
       .catch((err: AxiosError) => {
         alert("회원가입에 실패하였습니다");
@@ -189,7 +188,7 @@ const SignUp = ({history}:RouteComponentProps) => {
                   관리자
                 </label>
               </div>
-              <button className="button-white-deep-pink mid" type="submit">
+              <button className="button-white-deep-pink mid w-auto" type="submit">
                 회원가입
               </button>
             </div>
