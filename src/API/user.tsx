@@ -9,4 +9,7 @@ export const deleteUser = () =>
   baseApi.delete(`/userinfo`); 
 
 export const postUserFavorites = (postId:any) =>
-  baseApi.post(`/user/favorites/${postId}`); 
+  baseApi.post(`/user/favorites/${postId}`);
+
+export const getUserFilter = () =>
+baseApi.get("/user/filter");

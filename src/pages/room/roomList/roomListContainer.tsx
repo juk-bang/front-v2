@@ -26,7 +26,7 @@ class RoomListContainer extends React.Component<IProps, IState> {
   componentDidMount = async () => {
     const { univId } = queryString.parse(this.props.location.search);
     if (univId) {
-      const { data } = await getRoomList(parseInt(univId.toString()));
+      const { data } = await getRoomList(parseInt(univId.toString()), "");
       if(!data._embedded){
         this.setState({
           ...this.state,
@@ -54,6 +54,14 @@ class RoomListContainer extends React.Component<IProps, IState> {
   };
 
   render = () => {
+    const getFilterRoomData = async (url:any) => {
+      console.log(url);
+      const { univId } = queryString.parse(this.props.location.search);
+      if(univId){
+        const { data } = await getRoomList(parseInt(univId.toString()), url);
+      }
+    }
+
     const getFavoriteRoomData = async () =>{
       const { data } = await getFavoriteRooms();
       this.setState({
@@ -99,6 +107,7 @@ class RoomListContainer extends React.Component<IProps, IState> {
         markers={this.state.markers}
         hanldeClickUserFavorites={hanldeClickUserFavorites}
         error={this.state.error}
+        getFilterRoomData={getFilterRoomData}
       />
     );
   };

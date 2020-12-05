@@ -4,7 +4,7 @@ import {deleteRoomReport} from "../../.././API/admin"
 import { withRouter,RouteComponentProps } from "react-router-dom";
 import {adminUrl} from "../../../components/urls"
 import {landlord_delete} from "../../../API/landlord"
-import {deleteCommunityReportDetail} from "../../../API/admin"
+import {deleteCommunityReportDetail, postCommunityReportDetail, deleteRoomReportDetail, postRoomReportDetail} from "../../../API/admin"
 
 interface IParms{
     category:any;
@@ -21,18 +21,22 @@ const ReportDetailPresenter:React.FC<IProps> = ({data, history:{push}, match:{pa
 
     let reportType = ""
 
+    console.log(detailid, reportid);
     const handleClickDelete = async (e:any) => {
       e.preventDefault();
-      await landlord_delete(detailid);
+      if(category == "room")
+        await deleteCommunityReportDetail(detailid, reportid);
+      else
+        await deleteRoomReportDetail(detailid, reportid);
       push(adminUrl.adminRoomReport);
     }
 
     const handleClickReportDelete = async (e:any) => {
         e.preventDefault();
         if(category == "room")
-          await deleteRoomReport(detailid, reportid);
+          await postCommunityReportDetail(reportid);
         else
-          await deleteCommunityReportDetail(detailid, reportid);
+          await postRoomReportDetail(reportid);
         push(adminUrl.adminRoomReport);
     }
 
