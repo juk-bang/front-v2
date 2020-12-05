@@ -1,8 +1,8 @@
 import { AxiosResponse, AxiosError } from "axios";
 import baseApi from "./baseApi";
 
-export const getRoomList = (univId: number) =>
-  baseApi.get(`/rooms?univId=${univId}`);
+export const getRoomList = (univId: number, param:any) =>
+  baseApi.get(`/rooms?univId=${univId}${param}`);
 
 export const getRoomThumbnail = async(roomId: number)=>{
   const response = await baseApi.get(
@@ -102,3 +102,6 @@ export const getArr = (start : number, end : number): number[] => {
   }
   return floor;
 };
+
+export const getRecommandFilter = (univId:any) =>
+  baseApi.get(`/rooms/filter/${univId}`);

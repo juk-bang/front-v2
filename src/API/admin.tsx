@@ -24,7 +24,16 @@ export const getCommunityReportList = (role:any) =>
 export const getCommunityReportDetail = (role:any, postId:any, postReportId:any) =>
   baseApi.get(`/admin/report/community/${role}/${postId}/${postReportId}`);
 
+export const postCommunityReportDetail = (reportId:any) =>
+  baseApi.delete(`/admin/report/rooms/${reportId}`);
+
 export const deleteCommunityReportDetail = (postId:any, reportId:any) =>
-  baseApi.get(`/admin/report/community/${postId}/${reportId}`);
+  baseApi.delete(`/admin/report/rooms/${postId}/${reportId}`);
+
+  export const postRoomReportDetail = (reportId:any) =>
+  baseApi.delete(`/admin/report/community/${reportId}`);
+
+export const deleteRoomReportDetail = (postId:any, reportId:any) =>
+  baseApi.delete(`/admin/report/community/${postId}/${reportId}`);
 
 

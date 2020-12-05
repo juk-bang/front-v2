@@ -1,12 +1,22 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { withRouter, RouteComponentProps } from "react-router-dom";
+import { getRecommandFilter } from "../../../../API/room";
+import { getUserFilter } from "../../../../API/user";
+import "../../../../sass/tailwind.output.css";
 import { IRoomFilter } from "../../interface";
 
-interface IProps{
+interface IParams{
+  univId:any;
+}
+
+interface IProps extends RouteComponentProps<IParams>{
   hanldeClickUserFavorites:any;
+  getFilterRoomData:any;
 }
 
 const Filter: React.FunctionComponent<IProps> = (props) => {
   const [clickElement, setClickElement] = useState<String>("");
+  const [error, setError] = useState("");
   const [filterSelected, setfilterSelected] = useState<IRoomFilter>({
     layout: 0,
     monthlyLease: {
@@ -35,6 +45,86 @@ const Filter: React.FunctionComponent<IProps> = (props) => {
     },
     floor: 1,
   });
+
+  const getFilter = async () =>{
+    let data:any = await getUserFilter();
+    console.log(data.data);
+    data = data.data;
+    setfilterSelected({
+      layout: data.layout,
+    monthlyLease: {
+      min: data.monthlyLeaseL,
+      max: data.monthlyLeaseH,
+    },
+    adminExpenses: {
+      min: data.adminExpensesL,
+      max: data.adminExpensesH,
+    },
+    deposit: {
+      min: data.depositL,
+      max: data.depositH,
+    },
+    scale: {
+      min: data.scaleL,
+      max: data.scaleH,
+    },
+    grade: {
+      min: data.gradeL,
+      max: data.gradeH,
+    },
+    distance: {
+      min: data.distanceL,
+      max: data.distanceH,
+    },
+    floor: data.floor,
+    })
+  }
+
+  const getRecommand = async () =>{
+    const univid = localStorage.getItem("univid");
+    let data:any = await getRecommandFilter(univid);
+    data = data.data;
+    if(!data.gradeH)
+      setError("true");
+    else{
+      setfilterSelected({
+        layout: data.layout,
+      monthlyLease: {
+        min: data.monthlyLeaseL,
+        max: data.monthlyLeaseH,
+      },
+      adminExpenses: {
+        min: data.adminExpensesL,
+        max: data.adminExpensesH,
+      },
+      deposit: {
+        min: data.depositL,
+        max: data.depositH,
+      },
+      scale: {
+        min: data.scaleL,
+        max: data.scaleH,
+      },
+      grade: {
+        min: data.gradeL,
+        max: data.gradeH,
+      },
+      distance: {
+        min: data.distanceL,
+        max: data.distanceH,
+      },
+      floor: data.floor,
+      });
+    }
+  }
+
+  const handleClickRecommandFilter = (e:any) => {
+    getRecommand();
+  }
+
+  const handleClickMyFilter = (e:any) => {
+    getFilter();
+  }
 
   const handleChangeFilterMonthlyLeaseMin: React.EventHandler<React.SyntheticEvent> = (
     e: React.ChangeEvent<HTMLInputElement>
@@ -207,8 +297,23 @@ const Filter: React.FunctionComponent<IProps> = (props) => {
 
   const handleClickSubmit: React.EventHandler<React.SyntheticEvent> = (
     e: React.MouseEvent<HTMLElement>
-  ) => {};
+  ) => {
+    let filterUrl = "";
+    filterUrl += `&layout=${filterSelected.layout}`;
+    filterUrl += `&floor=${filterSelected.floor}`;
+    filterUrl += `&monthlyLease=${filterSelected.monthlyLease.min}-${filterSelected.monthlyLease.max}`;
+    filterUrl += `&adminExpenses=${filterSelected.adminExpenses.min}-${filterSelected.adminExpenses.max}`;
+    filterUrl += `&deposit=${filterSelected.deposit.min}-${filterSelected.deposit.max}`;
+    filterUrl += `&scale=${filterSelected.scale.min}-${filterSelected.scale.max}`;
+    filterUrl += `&grade=${filterSelected.grade.min}-${filterSelected.grade.max}`;
+    filterUrl += `&distance=${filterSelected.distance.min}-${filterSelected.distance.max}`;
+    props.getFilterRoomData(filterUrl);
+  };
 
+  if(error=="true"){
+    return <div>예상치 못한 오류가 발생했습니다.</div>;
+  }
+  else
   return (
     <div className = "fixed w-full">
       <div className="sm:w-full lg:w-1/2 flex h-16 bg-pink-200 opacity-90">
@@ -222,10 +327,10 @@ const Filter: React.FunctionComponent<IProps> = (props) => {
           >
             필터
           </div>
-          <div className="w-auto hover:bg-purple-500 cursor-pointer bg-purple-200 p-5">
+          <div className="w-auto hover:bg-purple-500 cursor-pointer bg-purple-200 p-5"  onClick={handleClickMyFilter}>
             마이필터
           </div>
-          <div className="w-auto hover:bg-purple-500 cursor-pointer bg-purple-200 p-5">
+          <div className="w-auto hover:bg-purple-500 cursor-pointer bg-purple-200 p-5" onClick={handleClickRecommandFilter}>
             추천필터
           </div>
         </div>
@@ -427,4 +532,4 @@ const Filter: React.FunctionComponent<IProps> = (props) => {
   );
 };
 
-export default Filter;
+export default withRouter(Filter);

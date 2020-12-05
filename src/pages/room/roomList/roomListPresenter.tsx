@@ -12,6 +12,7 @@ interface IProps {
   markers: Array<IMarker>;
   hanldeClickUserFavorites:any;
   error:boolean;
+  getFilterRoomData:any;
 }
 
 const RoomListPresenter: React.FunctionComponent<IProps> = (props) => {
@@ -42,7 +43,14 @@ const RoomListPresenter: React.FunctionComponent<IProps> = (props) => {
                 marker_list={props.markers}
               ></GoogleMap>
             ) : (
-              "error"
+              <GoogleMap
+              APIKEY={String(process.env.REACT_APP_GOOGLE_MAP_KEY)}
+              width={"100%"}
+              height={"100%"}
+              lat={37.496303}
+              lng={126.957266}
+              zoom={16}
+            ></GoogleMap>
             ) : <GoogleMap
             APIKEY={String(process.env.REACT_APP_GOOGLE_MAP_KEY)}
             width={"100%"}
@@ -60,7 +68,7 @@ const RoomListPresenter: React.FunctionComponent<IProps> = (props) => {
         ></GoogleMap>}
           </div>
           <div className="sm:w-full lg:w-2/3 bg-green-200 overflow-y-scroll overflow-x-hidden">
-            <Filter hanldeClickUserFavorites={props.hanldeClickUserFavorites}/>
+          <Filter hanldeClickUserFavorites={props.hanldeClickUserFavorites} getFilterRoomData={props.getFilterRoomData}/>
             <div className="flex flex-wrap mt-16">
               {props.rooms ? props.rooms.map((room) => {
                 return (
