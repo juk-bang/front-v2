@@ -13,7 +13,7 @@ interface Ipage {
 function LocPopup({ inputYn }: any) {
   let form_comp: any = React.createRef();
   const [loc, set_loc] = useState({
-    confmKey: "devU01TX0FVVEgyMDIwMTAwOTIzMjY0NjExMDI3Mzk=",
+    confmKey: "devU01TX0FVVEgyMDIwMTIwNTIyNDMxMjExMDUwODM=",
     currentPage: 1,
     countPerPage: 5,
     keyword: "",

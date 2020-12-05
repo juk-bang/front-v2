@@ -7,7 +7,7 @@ import proj4 from "proj4";
 function LocInput({ onChange, address }: any) {
   //좌표API기본 state설정
   const [loc_xy] = useState({
-    confmKey: "devU01TX0FVVEgyMDIwMTAwOTIzMzMyODExMDI3NDA=",
+    confmKey: "devU01TX0FVVEgyMDIwMTIwNTIyNDE0ODExMDUwODI=",
     admCd: "",
     rnMgtSn: "",
     udrtYn: "",
