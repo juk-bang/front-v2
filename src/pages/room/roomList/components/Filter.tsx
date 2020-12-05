@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import "../../../../sass/tailwind.output.css";
 import { IRoomFilter } from "../../interface";
 
 interface IProps{
@@ -211,39 +210,41 @@ const Filter: React.FunctionComponent<IProps> = (props) => {
   ) => {};
 
   return (
-    <>
-      <div className="flex h-16 w-full bg-green-600">
-        <div className="h-full w-24 bg-blue-200 flex justify-center items-center mr-64" onClick={props.hanldeClickUserFavorites}>
+    <div className = "absolute w-full">
+      <div className="sm:w-full lg:w-1/2 flex h-16 bg-pink-200 opacity-90">
+        <div className="cursor-pointer hover:bg-purple-500 bg-purple-300 p-5" onClick={props.hanldeClickUserFavorites}>
           찜
         </div>
-        <div
-          className="h-full w-24 bg-blue-200 flex justify-center items-center ml-64"
-          onClick={handleClickFilter}
-        >
-          필터
-        </div>
-        <div className="h-full w-24 bg-blue-200 flex justify-center items-center">
-          마이필터
-        </div>
-        <div className="h-full w-24 bg-blue-200 flex justify-center items-center">
-          추천필터
+        <div className="w-1/2 flex ">
+          <div
+            className="w-auto cursor-pointer hover:bg-purple-500 bg-purple-200 p-5"
+            onClick={handleClickFilter}
+          >
+            필터
+          </div>
+          <div className="w-auto hover:bg-purple-500 cursor-pointer bg-purple-200 p-5">
+            마이필터
+          </div>
+          <div className="w-auto hover:bg-purple-500 cursor-pointer bg-purple-200 p-5">
+            추천필터
+          </div>
         </div>
       </div>
       <div
         className={
-          "w-full h-auto bg-green-600 flex flex-wrap" +
+          "h-auto bg-purple-300 flex flex-wrap opacity-20" +
           (clickElement === "filter" ? " block" : " hidden")
         }
       >
         <div>
-        <div className="border-solid border-2 border-green-400 flex justify-center items-center flex-col w-40 h-20">
+        <div className="border-solid border-2 border-purple-400 flex justify-center items-center flex-col w-40 h-20">
           <div>방 형태</div>
           <select name="layout" onChange={handleChangeFilterLayout}>
             <option value="1">원룸</option>
             <option value="2">투쓰리룸</option>
           </select>
         </div>
-        <div className="border-solid border-2 border-green-400 flex justify-center items-center flex-col w-40 h-32">
+        <div className="border-solid border-2 border-purple-400 flex justify-center items-center flex-col w-40 h-32">
           <div>월세</div>
           <div>최소값</div>
           <input
@@ -270,7 +271,7 @@ const Filter: React.FunctionComponent<IProps> = (props) => {
             {filterSelected.monthlyLease.max}
           </div>
         </div>
-        <div  className="border-solid border-2 border-green-400 flex justify-center items-center flex-col w-40 h-32">
+        <div  className="border-solid border-2 border-purple-400 flex justify-center items-center flex-col w-40 h-32">
           <div>관리비</div>
           <input
             type="range"
@@ -297,7 +298,7 @@ const Filter: React.FunctionComponent<IProps> = (props) => {
             {filterSelected.adminExpenses.max}
           </div>
         </div>
-        <div  className="border-solid border-2 border-green-400 flex justify-center items-center flex-col w-40 h-32">
+        <div  className="border-solid border-2 border-purple-400 flex justify-center items-center flex-col w-40 h-32">
           <div>보증금</div>
           <input
             type="range"
@@ -325,7 +326,7 @@ const Filter: React.FunctionComponent<IProps> = (props) => {
         </div>
         </div>
         <div>
-        <div  className="border-solid border-2 border-green-400 flex justify-center items-center flex-col w-40 h-32">
+        <div  className="border-solid border-2 border-purple-400 flex justify-center items-center flex-col w-40 h-32">
           <div>평수</div>
           <input
             type="range"
@@ -351,7 +352,7 @@ const Filter: React.FunctionComponent<IProps> = (props) => {
             선택값 : {filterSelected.scale.min} ~ {filterSelected.scale.max}
           </div>
         </div>
-        <div  className="border-solid border-2 border-green-400 flex justify-center items-center flex-col w-40 h-32">
+        <div  className="border-solid border-2 border-purple-400 flex justify-center items-center flex-col w-40 h-32">
           <div>평점</div>
           <input
             type="range"
@@ -377,7 +378,7 @@ const Filter: React.FunctionComponent<IProps> = (props) => {
             선택값 : {filterSelected.grade.min} ~ {filterSelected.grade.max}
           </div>
         </div>
-        <div  className="border-solid border-2 border-green-400 flex justify-center items-center flex-col w-40 h-32">
+        <div  className="border-solid border-2 border-purple-400 flex justify-center items-center flex-col w-40 h-32">
           <div>거리</div>
           <input
             type="range"
@@ -404,7 +405,7 @@ const Filter: React.FunctionComponent<IProps> = (props) => {
             {filterSelected.distance.max}
           </div>
         </div>
-        <div  className="border-solid border-2 border-green-400 flex justify-center items-center flex-col w-40 h-32">
+        <div  className="border-solid border-2 border-purple-400 flex justify-center items-center flex-col w-40 h-32">
           <div>층수</div>
           <input
             type="range"
@@ -417,12 +418,12 @@ const Filter: React.FunctionComponent<IProps> = (props) => {
           ></input>
           <div>선택값 : {filterSelected.floor}</div>
         </div>
-        </div>
-        <div className="w-10 h-10 bg-blue-200" onClick={handleClickSubmit}>
+        <div className="cursor-pointer w-10 h-10 bg-pink-200 flex justify-center items-center" onClick={handleClickSubmit}>
           검색
         </div>
+        </div>
       </div>
-    </>
+    </div>
   );
 };
 

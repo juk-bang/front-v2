@@ -30,71 +30,48 @@ const PostDetailPresenter:React.FC<IProps> = ({newComment, handleClickSubmitComm
             <div className="flex items-center justify-between w-2/3">
                 <div className="flex items-center justify-center">
                     {
-                        postData ? get_id() == postData.writer ? <><Link to={communityUrl.getEditCommunityPost(params.univId, params.postId, params.role)} className="w-24 h-12 bg-blue-200 flex items-center justify-center mr-8">
+                        postData ? get_id() == postData.writer ? <><Link to={communityUrl.getEditCommunityPost(params.univId, params.postId, params.role)} className="mt-10 focus:outline-none focus:shadow-outline bg-green-300 hover:bg-green-900 text-white py-2 px-4 mr-1 rounded">
                         수정
                     </Link>
-                    <div className="w-24 h-12 bg-blue-200 flex items-center justify-center" onClick={deletePost}>
+                    <div className="cursor-pointer mt-10 focus:outline-none focus:shadow-outline bg-green-300 hover:bg-green-900 text-white py-2 px-4 mr-1 rounded" onClick={deletePost}>
                         삭제
                     </div></> : "" : ""
                     }
                     
                 </div>
                 <div className="flex items-center justify-center">
-                    <Link to={communityUrl.getCommunityPostList(parseInt(params.univId))} className="w-24 h-12 bg-blue-200 flex items-center justify-center mr-8">
+                    <Link to={communityUrl.getCommunityPostList(parseInt(params.univId))} className="mt-10 focus:outline-none focus:shadow-outline bg-green-300 hover:bg-green-900 text-white py-2 px-4 mr-1 rounded">
                         글목록
                     </Link>
-                    <Link className="w-24 h-12 bg-blue-200 flex items-center justify-center" to={communityUrl.getCommunityReport(params.univId, params.postId, params.role)}>
+                    <Link className="mt-10 focus:outline-none focus:shadow-outline bg-green-300 hover:bg-green-900 text-white py-2 px-4 mr-1 rounded" to={communityUrl.getCommunityReport(params.univId, params.postId, params.role)}>
                         신고
                     </Link>
                 </div>
             </div>
             <div className="flex flex-col w-2/3 pt-8">
-                <div className="flex justify-center items-center bg-blue-500 h-16">
+                <div className="font-bold flex justify-center items-center border border-blue-300 rounded h-16 bg-blue-100">
                     <div>
                         {postData ? postData.title : ""}
                     </div>
                 </div>
-                <div className="flex justify-between items-center px-12 mt-4 bg-blue-400 h-12">
-                    <div className="flex justify-between items-center">
-                        <div className="flex justify-center items-center mr-24">
-                            수정날짜
-                        </div>
-                        <div className="flex justify-center items-center">
-                            조회수
-                        </div>
-                    </div>
-                    <div className="flex justify-between items-center">
-                        <div className="flex justify-center items-center mr-24">
-                            댓글수 
-                        </div>
-                        <div className="flex justify-center items-center">
-                            글쓴이
-                        </div>
-                    </div>
-                </div>
-                <div className="flex justify-between items-center px-12 bg-blue-300 h-12">
-                    <div className="flex justify-between items-center">
-                        <div className="flex justify-center items-center mr-24">
+                <div className="flex justify-end items-center px-12 bg-blue-200 h-12">
+                    <div className="text-green-700 flex justify-between items-center">
+                        <div className=" mr-10">
                             {postData ? postData.updatedDate.slice(0, 10) : ""}
                         </div>
-                        <div className="flex justify-center items-center">
-                            {postData ? postData.views : ""}
-                        </div>
-                    </div>
-                    <div className="flex justify-between items-center">
-                        <div className="flex justify-center items-center mr-24">
-                        {commentsData ? commentsData.length : ""} 
+                        <div className="mr-10 flex justify-center items-center">
+                          <b className = "mr-2">조회</b>  {postData ? postData.views : ""}
                         </div>
                         <div className="flex justify-center items-center">
-                        {postData ? postData.writer : ""} 
+                            <b className = "mr-2">작성자</b>   {postData ? postData.writer : ""} 
                         </div>
                     </div>
                 </div>
-                <div className="flex justify-center items-center bg-blue-100 h-64">
+                <div className="border border-green-700 opacity-70 h-64 p-5">
                     {postData ? postData.body : ""}
                 </div>
                 <div className="mt-10">
-                    <div>
+                    <div className = "font-bold text-2xl">
                         Comments
                     </div>
                     {
@@ -103,11 +80,10 @@ const PostDetailPresenter:React.FC<IProps> = ({newComment, handleClickSubmitComm
                         }) : ""
                     }
                 </div>
-                <div className="mt-10">
-                    <div>댓글 쓰기</div>
-                    <textarea onChange={handleChangeComment} name="" id="" cols={30} rows={10} value={newComment} className="outline-none border-2 border-solid border-green-300 w-full"></textarea>
-                    <div className="w-full flex justify-end items-center pr-32 ">
-                        <div onClick={handleClickSubmitComment} className="pl-full h-20 w-24 bg-green-300 flex justify-center items-center">댓글 제출</div>
+                <div className="mt-5">
+                    <textarea onChange={handleChangeComment} name="" id="" cols={30} rows={10} value={newComment} className="p-2 shadow-lg outline-none border-2 border-solid border-green-300 w-full h-32"></textarea>
+                    <div className="w-full flex justify-end items-center ">
+                        <div onClick={handleClickSubmitComment} className="cursor-pointer mt-10 focus:outline-none focus:shadow-outline bg-blue-300 hover:bg-blue-900 text-white py-2 px-4 mr-1 rounded">댓글 제출</div>
                     </div>
                     
                 </div>

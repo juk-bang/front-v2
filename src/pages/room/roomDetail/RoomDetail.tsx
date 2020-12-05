@@ -16,6 +16,7 @@ import RoomPicture from "./components/RoomPicture";
 import RoomReview from "./components/RoomReview";
 import ScoreItem from "./components/ScoreItem";
 import { AxiosError } from "axios";
+import { get_role, position } from "../../../API/auth";
 
 const RoomDetail = ({history}:RouteComponentProps) => {
   const [room_id, set_room_id] = useState(0);
@@ -88,16 +89,17 @@ const favorite = () => {
     <div>
       <NavBar></NavBar>
       <div className="min-h-screen flex flex-col items-center justify-center py-12 px-4 sm:px-8 lg:px-20">
-        <div className = "mt-20 flex justify-end space-x-2">        
-          <Link className="button-mint-white" to ={"/rooms/"+room_id+"/report"}>
-            신고하기
-          </Link>
-          <button className="button-light-green-white" >
-            문의하기
-          </button>
-          <button className="button-mint-white" onClick = {favorite}>
-            찜하기
-          </button>
+        <div className = "mt-20 flex justify-end space-x-2">  
+          {get_role() !== position.LANDLORD?      
+            <>
+            <Link className="button-mint-white" to ={"/rooms/"+room_id+"/report"}>
+              신고하기
+            </Link>
+            <button className="button-mint-white" onClick = {favorite}>
+              찜하기
+            </button>
+                </>
+          :undefined}
         </div>
 
         <div className = "mt-10 text-center font-bold text-3xl">{room.roomInfo.roomName}</div>     
@@ -118,7 +120,7 @@ const favorite = () => {
               <div> <b>{room.price.adminExpenses}</b>만원 </div>
             </div>
           </div>
-          <div className = "green-200 w-1/4 p-5">        
+          <div className = "bg-green-200 w-1/4 p-5">        
             <div className = "flex-col">
               <div className = "text-xl font-bold"> 방평수 </div>
                 <div> <b>{room.roomInfo.scale}</b>m<sup>2</sup> </div>

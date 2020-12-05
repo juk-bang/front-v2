@@ -1,13 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import dotenv from "dotenv";
 import GoogleMap, { IMarker } from "comfortable-google-map-react-types";
 import NavBar from "../../../components/NavBar";
-import "../../../sass/tailwind.output.css";
 import RoomCard from "./components/RoomCard";
 import { IRoom } from "../interface";
-import { roomUrl } from "../../../components/urls";
 import Filter from "./components/Filter";
-import { Link } from "react-router-dom";
+
 
 interface IProps {
   rooms: Array<IRoom>;
@@ -29,10 +27,10 @@ const RoomListPresenter: React.FunctionComponent<IProps> = (props) => {
   else
     return (
     <>
-      <div className="h-screen w-screen">
+      <div className=" h-100vh overflow-y-hidden h-screen w-screen">
         <NavBar></NavBar>
-        <div className="w-full h-full flex pt-16">
-          <div className="w-full h-full">
+        <div className="w-full h-full flex pt-16 ">
+          <div className="w-full h-full sm:w-0 lg:w-full">
             {props.markers ? props.rooms ? props.markers.length == props.rooms.length ? (
               <GoogleMap
                 APIKEY={String(process.env.REACT_APP_GOOGLE_MAP_KEY)}
@@ -61,10 +59,8 @@ const RoomListPresenter: React.FunctionComponent<IProps> = (props) => {
           zoom={16}
         ></GoogleMap>}
           </div>
-          <div className="container bg-green-200 max-w-3xl h-full relative">
-            <div className="w-full absolute">
-              <Filter hanldeClickUserFavorites={props.hanldeClickUserFavorites}/>
-            </div>
+          <div className="sm:w-full lg:w-2/3 bg-green-200 overflow-y-scroll overflow-x-hidden">
+            <Filter hanldeClickUserFavorites={props.hanldeClickUserFavorites}/>
             <div className="flex flex-wrap mt-16">
               {props.rooms ? props.rooms.map((room) => {
                 return (

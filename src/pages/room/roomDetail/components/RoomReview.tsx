@@ -214,7 +214,7 @@ const RoomReview = (props:{roomid:number}) => {
                         <span className = "text-gray-700">평점을 클릭하세요</span>
                     <textarea id = "inputText" className = "mt-3 w-full" onChange = {handle_textarea} value= {reviewText}></textarea>
                         <div className = "flex justify-end">
-                            <button className = "mt-1 w-12 button-mint-white" onClick = {upload_review}>작성</button>
+                            <button className = "mt-1 w-12 button-mint-white w-auto" onClick = {upload_review}>작성</button>
                         </div>
                     </form>
                     </div>        
