@@ -44,10 +44,6 @@ const RoomPicture = (props: iProps) => {
         })  
     },[]);
 
-    useEffect(()=>{
-    }
-    ,[show, pic_i]);
-
     const right_move = () => {
         var i = pic_i;
         const len = pictures.length;

@@ -72,22 +72,22 @@ const CommentsCard:React.FC<IProps> = ({commentData, key, getCommentsData, match
         }
     }
 
-    return <div className="bg-green-100 mt-10">
+    return <div className="bg-green-100 mt-10 shadow-xl p-3">
         <div>
             {commentData.body}
         </div>
-        <div>
+        <div className = "mt-3 font-bold text-gray-700">
             {commentData.writer}
         </div>
-        <div>
+        <div className = "font-bold text-gray-700">
             {commentData.updatedDate.slice(0, 10)}
         </div>
         {
-            get_id() == commentData.writer ? <div className="flex">
-            <div className="w-24 h-8 bg-blue-100 flex justify-center items-center" onClick={handleClickEditComments}>
+            get_id() == commentData.writer ? <div className="flex mt-3">
+            <div className="hover:bg-blue-400 cursor-pointer w-24 h-8 bg-blue-200 flex justify-center items-center" onClick={handleClickEditComments}>
                 댓글 수정
             </div>
-            <div className="w-24 h-8 bg-blue-100 flex justify-center items-center" onClick={handleClickRemoveComment}>
+            <div className="hover:bg-blue-400 cursor-pointer ml-2 w-24 h-8 bg-blue-200 flex justify-center items-center" onClick={handleClickRemoveComment}>
                 댓글 삭제
             </div>
         </div>

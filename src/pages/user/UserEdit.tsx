@@ -4,7 +4,6 @@ import { get_login, setting_info, type_check } from "../../API/auth";
 import { editPassword } from "../../API/user";
 import NavBar from "../../components/NavBar";
 import { roomUrl, userUrl } from "../../components/urls";
-import "../../sass/tailwind.output.css"
 
 
 const UserEdit = ({history} :RouteComponentProps) => {

@@ -7,7 +7,6 @@ import LocInput from "./popup/LocInput"
 import { landlord_upload, room_info } from "../../API/landlord"
 import {getArr, getRoomDetail, getRoomImage, postRoomImage, deleteRoomImage} from "../../API/room"
 import {FiUpload} from "react-icons/fi"
-import "../../sass/tailwind.output.css"
 import { IRoomDetail } from "../room/interface"
 import {leaseOption, roomtype} from "./interface"
 import queryString from "query-string";
@@ -159,9 +158,6 @@ const LandlordUpload = (props: IProps) => {
       })} 
     }
   ,[]);
-
-  useEffect(() => {
-  },[room,optionArr,toggle,img, counter]);
 
 
   /**

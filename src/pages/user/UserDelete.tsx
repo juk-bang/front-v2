@@ -4,8 +4,6 @@ import { get_login, log_out, setting_info} from "../../API/auth";
 import { deleteUser } from "../../API/user";
 import NavBar from "../../components/NavBar";
 import { authUrl, roomUrl, userUrl } from "../../components/urls";
-import "../../sass/tailwind.output.css"
-
 
 const UserDelete = ({history} :RouteComponentProps) => {
 

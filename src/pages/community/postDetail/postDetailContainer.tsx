@@ -1,3 +1,4 @@
+import { AxiosError } from "axios";
 import React, { useEffect, useState } from "react";
 import { withRouter, RouteComponentProps } from "react-router-dom";
 import { getCommunityPostDetail, getCommunityPostComments, postCommunityPostComments, deleteCommunityPost } from "../../../API/community";
@@ -53,7 +54,9 @@ const PostDetailContainer:React.FC<RouteComponentProps<MatchParams>> = ({match:{
     }
 
     const handleClickSubmitComment = (e:React.MouseEvent<HTMLDivElement>) => {
-        postComments();
+        postComments().catch((err:AxiosError)=>{
+            alert(err.response?.data.message);
+        });
     }
 
     return <PostDetailPresenter newComment={newComment} handleClickSubmitComment={handleClickSubmitComment} handleChangeComment={handleChangeComment} postData={postData} commentsData={commentsData} deletePost={deletePost} getCommentsData={getCommentsData} role={params.role}/>;

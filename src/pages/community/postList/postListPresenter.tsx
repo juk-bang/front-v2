@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import NavBar from "../../../components/NavBar";
-import "../../../sass/tailwind.output.css";
 import PostCard from "./components/postCard";
 import {communityUrl} from "../../../components/urls"
 import { get_role, position } from "../../../API/auth";
