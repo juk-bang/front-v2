@@ -27,7 +27,7 @@ const RoomListPresenter: React.FunctionComponent<IProps> = (props) => {
   else
     return (
     <>
-      <div className=" h-100vh overflow-y-hidden h-screen w-screen">
+      <div className="h-screen w-screen">
         <NavBar></NavBar>
         <div className="w-full h-full flex pt-16 ">
           <div className="w-full h-full sm:w-0 lg:w-full">

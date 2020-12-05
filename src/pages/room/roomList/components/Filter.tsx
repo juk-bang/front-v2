@@ -210,7 +210,7 @@ const Filter: React.FunctionComponent<IProps> = (props) => {
   ) => {};
 
   return (
-    <div className = "absolute w-full">
+    <div className = "fixed w-full">
       <div className="sm:w-full lg:w-1/2 flex h-16 bg-pink-200 opacity-90">
         <div className="cursor-pointer hover:bg-purple-500 bg-purple-300 p-5" onClick={props.hanldeClickUserFavorites}>
           찜
