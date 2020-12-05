@@ -21,11 +21,13 @@ const NewPostContainer:React.FunctionComponent<IProps> = ({history, match:{param
     const onSubmit = () => {
         const currentUnivid = localStorage.getItem("univid");
         if(currentUnivid){
-            postCommunityPost(parseInt(currentUnivid), title, body, role);
+            postCommunityPost(parseInt(currentUnivid), title, body, role).then(()=>{
             let communityListUrl = "";
-            if(currentUnivid)
+            if(currentUnivid){
                 communityListUrl = communityUrl.getCommunityPostList(parseInt(currentUnivid));
-            history.push(communityListUrl);
+                history.push(communityListUrl);
+            }
+            });
         }
     }
 
