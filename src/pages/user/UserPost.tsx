@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { Link, RouteComponentProps } from "react-router-dom";
+import { RouteComponentProps } from "react-router-dom";
 import { get_id, get_login, setting_info } from "../../API/auth";
 import { getMyPost } from "../../API/community";
 import NavBar from "../../components/NavBar";

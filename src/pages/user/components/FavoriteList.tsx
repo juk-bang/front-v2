@@ -1,8 +1,4 @@
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
-import "../../../sass/tailwind.output.css";
-import { Link } from "react-router-dom";
-import { landlord_delete, landlord_list } from "../../../API/landlord";
-import { landlordUrl, roomUrl } from "../../../components/urls";
 import { IRoom } from "../../room/interface";
 import { deleteFvorite, getFavoriteList } from "../../../API/room";
 import RoomCard from "../../room/roomList/components/RoomCard";
@@ -58,9 +54,7 @@ const FavoriteList= (props:IProps) => {
                 rooms.map((room : IRoom) => {
                     return (
                         <div key={room.roomId}>
-                        <Link to={roomUrl.roomDetail(room.roomId)}>
                             <RoomCard room={room} />
-                        </Link>
                         <div className="mt-3 flex items-center justify-center">
                             <button onClick = {()=>favorite(room.roomId)} className="btn-primary transition duration-300 ease-in-out focus:outline-none focus:shadow-outline bg-purple-700 hover:bg-purple-900 text-white font-normal py-2 px-4 mr-1 rounded"
                             >삭제</button>

@@ -1,5 +1,4 @@
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
-import "../../../sass/tailwind.output.css";
 import { Link } from "react-router-dom";
 import { landlord_delete, landlord_list } from "../../../API/landlord";
 import { landlordUrl, roomUrl } from "../../../components/urls";

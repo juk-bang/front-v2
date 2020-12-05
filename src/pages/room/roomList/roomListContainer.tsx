@@ -4,7 +4,7 @@ import { getRoomList, getFavoriteRooms } from "../../../API/room";
 import { RouteComponentProps, withRouter } from "react-router-dom";
 import queryString from "query-string";
 import { IRoom } from "../interface";
-import GoogleMap, { IMarker } from "comfortable-google-map-react-types";
+import { IMarker } from "comfortable-google-map-react-types";
 
 interface IProps extends RouteComponentProps {}
 

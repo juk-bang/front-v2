@@ -4,7 +4,6 @@ import icon from "../../img/person.png";
 import { Link, RouteComponentProps, withRouter } from "react-router-dom";
 import { get_id, get_login, get_role, position, setting_info} from "../../API/auth";
 import { adminUrl, landlordUrl, roomUrl, userUrl } from "../../components/urls";
-import "../../sass/tailwind.output.css"
 
 const UserInfo = ({history}:RouteComponentProps) => {
   const [state, set_state] = useState({id:"", role:""});
@@ -33,18 +32,16 @@ const UserInfo = ({history}:RouteComponentProps) => {
           ></img>
           <h3 className="padding-top-5 text-center ">{state.id}</h3>
           <div className="mt-5 mb-10 flex-column-container ">
-            <span className="mid flex w-full rounded-md shadow-sm sm:w-auto">
-              <Link className="text-center button-mint-white w-full" to={userUrl.userEdit}>
-                정보수정
-              </Link>
-              <Link className="text-center button-mint-white w-full" to={``}>
-                채팅하기
-              </Link>
-            </span>
-
+            {state.role === position.STUDENT ?
+              <span className="mid flex w-full rounded-md shadow-sm sm:w-auto">
+                <Link className="text-center button-mint-white w-full" to={userUrl.userEdit}>
+                  정보수정
+                </Link>
+              </span>
+           :undefined}
             <span className="mid flex w-full rounded-md shadow-sm sm:ml-3 sm:w-auto">
               {state.role === position.ADMIN ? (
-                <Link className="text-center button-mint-white w-full" to={``}>
+                <Link className="text-center button-mint-white w-full" to={adminUrl.adminHome}>
                   관리하기
                 </Link>
               ) : state.role === position.LANDLORD ? (

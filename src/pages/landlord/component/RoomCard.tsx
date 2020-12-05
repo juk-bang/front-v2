@@ -1,12 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { AxiosPromise, AxiosResponse } from "axios";
 import defaultThumbnail from "../../../img/defaultThumbnail.jpg";
 import { getRoomThumbnail } from "../../../API/room";
-import { IRoom } from "../../room/interface";
 import { ILandlordRoom } from "../interface";
-import { Link } from "react-router-dom";
-import { roomUrl } from "../../../components/urls";
-import { orderedListCommand } from "@uiw/react-md-editor/lib/cjs/commands";
 
 interface IProps {
   room: ILandlordRoom;

@@ -2,7 +2,6 @@ import React, { ChangeEvent, useEffect, useState } from "react";
 import EditPostPresenter from "./editPostPresenter"
 import {putCommunityPost} from "../../../API/community"
 import { withRouter, RouteComponentProps } from "react-router-dom";
-import { communityUrl } from "../../../components/urls";
 import { getCommunityPostDetail } from "../../../API/community";
 
 interface MatchParams {
