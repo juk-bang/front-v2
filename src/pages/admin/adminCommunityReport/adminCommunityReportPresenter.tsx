@@ -4,6 +4,7 @@ import NavBar from "../../../components/NavBar";
 import "../../../sass/tailwind.output.css";
 import PostCard from "./components/postCard";
 import {communityUrl} from "../../../components/urls"
+import {Helmet} from "react-helmet"
 
 interface IProps{
     roomList:any;
@@ -17,6 +18,7 @@ const AdminCommunityReportPresenter:React.FC<IProps> = ({roomList}) => {
     return<>
 <NavBar></NavBar>
 <div className="pt-20 flex items-center justify-center flex-col">
+    <Helmet title="죽방 | 관리자 커뮤니티 신고관리" />
     <div className="w-2/3 h-12 bg-blue-200 flex items-center justify-around">
         <div className="ml-8">
             커뮤니티 게시글

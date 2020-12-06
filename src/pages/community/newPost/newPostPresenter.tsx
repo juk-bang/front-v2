@@ -1,7 +1,7 @@
 import React from "react";
 import MDEditor from '@uiw/react-md-editor';
 import NavBar from "../../../components/NavBar";
-
+import {Helmet} from "react-helmet"
 interface IProps{
     handleChangeTitle(e:React.ChangeEvent) : void;
     onSubmit() : void;
@@ -12,6 +12,7 @@ interface IProps{
 const NewPostPresenter:React.FunctionComponent<IProps> = ({body, setBody,handleChangeTitle, onSubmit }) => {
 
     return <div>
+        <Helmet title="죽방 | 커뮤니티 새 글 작성" />
         <NavBar></NavBar>
         <div className="pt-20 w-full h-full flex items-center flex-col">
             <div className="text-center font-bold text-2xl w-2/3 mt-8 bg-green-100 py-2">

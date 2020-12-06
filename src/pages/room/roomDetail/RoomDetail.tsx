@@ -18,6 +18,7 @@ import ScoreItem from "./components/ScoreItem";
 import { AxiosError } from "axios";
 import { get_role, position } from "../../../API/auth";
 
+import {Helmet} from "react-helmet"
 const RoomDetail = ({history}:RouteComponentProps) => {
   const [room_id, set_room_id] = useState(0);
   const [room, set_room] = useState<IRoomDetail>({
@@ -87,6 +88,7 @@ const favorite = () => {
 
   return (
     <div>
+        <Helmet title={`죽방 | ${room.roomInfo.roomName}`} />
       <NavBar></NavBar>
       <div className="min-h-screen flex flex-col items-center justify-center py-12 px-4 sm:px-8 lg:px-20">
         <div className = "mt-20 flex justify-end space-x-2">  

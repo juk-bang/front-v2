@@ -4,7 +4,7 @@ import { get_login, setting_info, type_check } from "../../API/auth";
 import { editPassword } from "../../API/user";
 import NavBar from "../../components/NavBar";
 import { roomUrl, userUrl } from "../../components/urls";
-
+import {Helmet} from "react-helmet"
 
 const UserEdit = ({history} :RouteComponentProps) => {
   const [user, set_user] = useState({ passCheck: "", userpassword: "" });
@@ -62,6 +62,7 @@ const UserEdit = ({history} :RouteComponentProps) => {
 
   return (
     <div>
+                  <Helmet title="죽방 | 회원 정보수정" />
       <NavBar></NavBar>
       <div className="min-h-screen px-4 py-12 flex items-center justify-center sm:px-6 lg:px-8">
         <div className="max-w-md w-full border-deep-pink">

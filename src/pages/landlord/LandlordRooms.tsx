@@ -4,7 +4,7 @@ import { get_role, position } from "../../API/auth";
 import NavBar from "../../components/NavBar";
 import { landlordUrl, roomUrl } from "../../components/urls";
 import LandlordList from "./component/LandLordList";
-
+import {Helmet} from "react-helmet"
   
 const LandlordRooms = ({history}:RouteComponentProps)=>{
     const [page, set_page] = useState(0);
@@ -28,6 +28,7 @@ const LandlordRooms = ({history}:RouteComponentProps)=>{
 
     return (
         <div>
+            <Helmet title="죽방 | 판매자 페이지" />
             <NavBar></NavBar>
             <div className="min-h-screen flex flex-col py-12 px-4 sm:px-10 lg:px-12">
             <div  className="mt-8"> 

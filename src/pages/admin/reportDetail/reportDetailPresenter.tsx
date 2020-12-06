@@ -5,7 +5,7 @@ import { withRouter,RouteComponentProps } from "react-router-dom";
 import {adminUrl} from "../../../components/urls"
 import {landlord_delete} from "../../../API/landlord"
 import {deleteCommunityReportDetail, postCommunityReportDetail, deleteRoomReportDetail, postRoomReportDetail} from "../../../API/admin"
-
+import {Helmet} from "react-helmet"
 interface IParms{
     category:any;
     detailid:any;
@@ -21,7 +21,6 @@ const ReportDetailPresenter:React.FC<IProps> = ({data, history:{push}, match:{pa
 
     let reportType = ""
 
-    console.log(detailid, reportid);
     const handleClickDelete = async (e:any) => {
       e.preventDefault();
       if(category == "room")
@@ -49,6 +48,7 @@ const ReportDetailPresenter:React.FC<IProps> = ({data, history:{push}, match:{pa
             reportType="지속적인 부정행위";
 
     return <div>
+      <Helmet title="죽방 | 관리자 신고 사유" />
     <NavBar></NavBar>
     <div className="min-h-screen px-4 py-12 flex items-center justify-center sm:px-6 lg:px-8">
       <div className="max-w-md w-full shadow-lg mg-3">

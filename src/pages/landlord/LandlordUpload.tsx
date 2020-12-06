@@ -12,6 +12,7 @@ import {leaseOption, roomtype} from "./interface"
 import queryString from "query-string";
 import { AxiosError, AxiosResponse } from "axios"
 import {landlord_update} from "../../API/landlord"
+import {Helmet} from "react-helmet"
 
 export interface IProps extends RouteComponentProps{
 }
@@ -452,6 +453,7 @@ const LandlordUpload = (props: IProps) => {
 
   return (
     <div>
+      <Helmet title="죽방 | 방올리기" />
       <NavBar></NavBar>
       <div className="min-h-screen flex items-center justify-center py-12 px-4 sm:px-10 lg:px-12">
         <form className="mt-10 p-20 border-deep-pink">

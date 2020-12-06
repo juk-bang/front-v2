@@ -4,6 +4,7 @@ import { get_login, log_out, setting_info} from "../../API/auth";
 import { deleteUser } from "../../API/user";
 import NavBar from "../../components/NavBar";
 import { authUrl, roomUrl, userUrl } from "../../components/urls";
+import {Helmet} from "react-helmet"
 
 const UserDelete = ({history} :RouteComponentProps) => {
 
@@ -27,6 +28,7 @@ const UserDelete = ({history} :RouteComponentProps) => {
 
   return (
     <div>
+                  <Helmet title="죽방 | 탈퇴" />
       <NavBar></NavBar>
       <div className="min-h-screen px-4 py-12 flex items-center justify-center sm:px-6 lg:px-8">
         <div className="max-w-md w-full border-deep-pink">

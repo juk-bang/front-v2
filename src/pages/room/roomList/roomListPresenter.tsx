@@ -5,6 +5,7 @@ import NavBar from "../../../components/NavBar";
 import RoomCard from "./components/RoomCard";
 import { IRoom } from "../interface";
 import Filter from "./components/Filter";
+import {Helmet} from "react-helmet"
 
 
 interface IProps {
@@ -28,6 +29,7 @@ const RoomListPresenter: React.FunctionComponent<IProps> = (props) => {
   else
     return (
     <>
+            <Helmet title="죽방 | 방 리스트" />
       <div className="h-screen w-screen">
         <NavBar></NavBar>
         <div className="w-full h-full flex pt-16 ">

@@ -5,7 +5,7 @@ import NavBar from "../../components/NavBar";
 import { authUrl, roomUrl } from "../../components/urls";
 import { AxiosError } from "axios";
 import { get_login, log_in, setting_info, Token, type_check } from "../../API/auth";
-
+import {Helmet} from "react-helmet"
 const SignIn = ({history} :RouteComponentProps) => {
   const [user, set_user] = useState({ userid: "", userpassword: "" });
 
@@ -83,6 +83,7 @@ const SignIn = ({history} :RouteComponentProps) => {
 
   return (
     <div>
+      <Helmet title="죽방 | 로그인" />
       <NavBar></NavBar>
       <div className="min-h-screen px-4 py-12 flex items-center justify-center sm:px-6 lg:px-8">
         <div className="max-w-md w-full border-deep-pink">

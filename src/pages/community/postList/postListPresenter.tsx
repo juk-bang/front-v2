@@ -4,6 +4,7 @@ import NavBar from "../../../components/NavBar";
 import PostCard from "./components/postCard";
 import {communityUrl} from "../../../components/urls"
 import { get_role, position } from "../../../API/auth";
+import {Helmet} from "react-helmet"
 
 interface IProps{
     postList:any;
@@ -49,6 +50,7 @@ const PostListPresenter:React.FC<IProps> = ({postList, role, setRole}) => {
 
 
     return <>
+            <Helmet title="죽방 | 커뮤니티 글 리스트" />
         <NavBar></NavBar>
         <div className="pt-20 flex items-center justify-center flex-col">
             <div className="mb-2 w-2/3 h-16 mt-8 flex items-center justify-between">

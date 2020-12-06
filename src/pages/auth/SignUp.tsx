@@ -5,7 +5,7 @@ import { get_login, log_in, setting_info, Token, type_check } from "../../API/au
 import { roomUrl } from "../../components/urls";
 import { AxiosError } from "axios";
 import { RouteComponentProps, withRouter } from "react-router-dom";
-
+import {Helmet} from "react-helmet"
 const SignUp = ({history}:RouteComponentProps) => {
   const [user, set_user] = useState({
     userid: "",
@@ -130,6 +130,7 @@ const SignUp = ({history}:RouteComponentProps) => {
 
   return (
     <div>
+      <Helmet title="죽방 | 회원가입" />
       <NavBar></NavBar>
       <div className="min-h-screen flex items-center justify-center sm:px-8 lg:px-12">
         <div className="max-w-md w-full border-deep-pink padding-5">

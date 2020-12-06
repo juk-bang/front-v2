@@ -1,6 +1,6 @@
 import React from "react";
 import NavBar from "../../../components/NavBar";
-
+import {Helmet} from "react-helmet"
 interface IProps{
     type:any;
     setType:any;
@@ -16,6 +16,7 @@ const CommunityReportPresenter:React.FC<IProps> = ({type, setType, detail, handl
     }
 
     return <div>
+        <Helmet title="죽방 | 커뮤니티 신고" />
         <NavBar />
         <div className="pt-20 flex flex-center items-center flex-col">
             <div>

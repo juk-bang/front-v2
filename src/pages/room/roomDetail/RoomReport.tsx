@@ -3,6 +3,7 @@ import { RouteComponentProps, withRouter } from "react-router-dom";
 import { reportRoom } from "../../../API/room";
 import NavBar from "../../../components/NavBar";
 import {reportType} from "../interface"
+import {Helmet} from "react-helmet"
 
 const RoomReport = ({history} :RouteComponentProps) => {
   const [report, set_report] = useState({ type : 0, detail : "" });
@@ -35,6 +36,7 @@ const RoomReport = ({history} :RouteComponentProps) => {
 
   return (
     <div>
+      <Helmet title="죽방 | 방 신고하기" />
       <NavBar></NavBar>
       <div className="min-h-screen px-4 py-12 flex items-center justify-center sm:px-6 lg:px-8">
         <div className="max-w-md w-full shadow-lg mg-3">

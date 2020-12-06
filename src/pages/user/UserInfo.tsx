@@ -4,6 +4,7 @@ import icon from "../../img/person.png";
 import { Link, RouteComponentProps, withRouter } from "react-router-dom";
 import { get_id, get_login, get_role, position, setting_info} from "../../API/auth";
 import { adminUrl, landlordUrl, roomUrl, userUrl } from "../../components/urls";
+import {Helmet} from "react-helmet"
 
 const UserInfo = ({history}:RouteComponentProps) => {
   const [state, set_state] = useState({id:"", role:""});
@@ -18,6 +19,7 @@ const UserInfo = ({history}:RouteComponentProps) => {
 
   return (
     <div>
+                  <Helmet title="죽방 | 프로필" />
       <NavBar></NavBar>
       <div className="min-h-screen flex items-center justify-center sm:px-6 lg:px-8">
         <div className="max-w-md w-full border-green">

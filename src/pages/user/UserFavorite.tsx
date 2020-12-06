@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { RouteComponentProps, withRouter } from "react-router-dom";
 import NavBar from "../../components/NavBar";
 import FavoriteList from "./components/FavoriteList";
+import {Helmet} from "react-helmet"
   
 const UserFavorite = ({history}:RouteComponentProps)=>{
   const [page, set_page] = useState(0);
@@ -19,6 +20,7 @@ const UserFavorite = ({history}:RouteComponentProps)=>{
 
     return (
         <div>
+                        <Helmet title="죽방 | 찜목록" />
             <NavBar></NavBar>
             <div className="min-h-screen flex flex-col py-12 px-4 sm:px-10 lg:px-12">
             <div className = "mt-5 mr-16 fixed right-0 flex">

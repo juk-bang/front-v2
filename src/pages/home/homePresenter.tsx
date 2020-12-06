@@ -1,5 +1,7 @@
 import React from "react";
 import icon from "../../img/logo_title.png";
+import {Helmet} from "react-helmet"
+
 interface IProps{
     handleChangeUnivValue(e:React.ChangeEvent<HTMLSelectElement>) : void;
 }
@@ -16,6 +18,7 @@ const HomePresenter:React.FC<IProps> = ({handleChangeUnivValue}) => {
 
 
     return <div className="bg-green-200 h-screen w-screen flex items-center justify-center flex-col">
+        <Helmet title="죽방 | 홈"/>
         <div className="flex items-center justify-center">
                 <div
                 style= {style}

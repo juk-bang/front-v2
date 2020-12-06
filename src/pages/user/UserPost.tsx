@@ -4,6 +4,7 @@ import { get_id, get_login, setting_info } from "../../API/auth";
 import { getMyPost } from "../../API/community";
 import NavBar from "../../components/NavBar";
 import PostCard from "../community/postList/components/postCard";
+import {Helmet} from "react-helmet"
 
 const UserPost = ({history}:RouteComponentProps) => {
     const [postList,set_post] = useState([]);
@@ -22,6 +23,7 @@ const UserPost = ({history}:RouteComponentProps) => {
     }
 
     return <>
+                <Helmet title="죽방 | 커뮤니티 글 작성 리스트" />
         <NavBar></NavBar>
         <div className="pt-20 flex items-center justify-center flex-col">
         <div className="w-2/3 shadow-lg overflow-hidden bg-white shadow-dashboard px-8 pt-3 rounded-bl-lg rounded-br-lg">

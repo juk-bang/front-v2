@@ -4,7 +4,7 @@ import NavBar from "../../../components/NavBar";
 import {communityUrl} from "../../../components/urls";
 import CommentsCard from "./components/commentsCard"
 import {get_id} from ".././../../API/auth"
-
+import {Helmet} from "react-helmet"
 interface MatchParams {
     univId: string;
     postId: string;
@@ -25,6 +25,7 @@ interface IProps extends RouteComponentProps<MatchParams>{
 const PostDetailPresenter:React.FC<IProps> = ({newComment, handleClickSubmitComment, postData, handleChangeComment, commentsData, deletePost, getCommentsData, match:{params}}) => {
 
     return <div>
+        <Helmet title={postData ? `죽방 | ${postData.title}` : "죽방 | 커뮤니티 글"} />
         <NavBar />
         <div className="pt-20 flex items-center justify-center flex-col">
             <div className="flex items-center justify-between w-2/3">
