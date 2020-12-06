@@ -80,8 +80,8 @@ const RoomCard: React.FunctionComponent<IProps> = (props) => {
               </div>
           }
     
-          <div className = "mt-4 text-purple-800 hover:underline font-bold">{props.room.location.address.substr(0,20)}   
-            {props.room.roomInfo.roomName.length > 20 ?"...":undefined}
+    <div className = "mt-4 text-purple-800 hover:underline font-bold">{props.room.location.address.substr(0,12)}   
+            {props.room.location.address.length > 12 ?"...":""}
           </div>
           <div className = "mt-1 text-purple-500"> 학교까지 
             <span className = "text-purple-700 ml-2 text-xl font-bold hover:underline">{props.room.distance.toFixed(2)}m</span>
