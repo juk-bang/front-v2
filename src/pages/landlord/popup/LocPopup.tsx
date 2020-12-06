@@ -65,7 +65,7 @@ function LocPopup({ inputYn }: any) {
   const get_addr = () => {
     if (check_keyword(loc.keyword)) {
       const url =
-        "http://www.juso.go.kr/addrlink/addrLinkApi.do" + make_param();
+        "https://www.juso.go.kr/addrlink/addrLinkApi.do" + make_param();
 
       Axios.post(url).then((res) => {
         make_list(res.data.results);

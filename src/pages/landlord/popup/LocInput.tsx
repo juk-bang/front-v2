@@ -57,7 +57,7 @@ function LocInput({ onChange, address }: any) {
 
   //주소API서버에 x,y좌표 요청
   const get_addr = () => {
-    const url = "http://www.juso.go.kr/addrlink/addrCoordApi.do" + make_param();
+    const url = "https://www.juso.go.kr/addrlink/addrCoordApi.do" + make_param();
 
     axios.post(url).then((res) => {
       const juso = res.data.results.juso !== null ? res.data.results.juso[0] : null;
